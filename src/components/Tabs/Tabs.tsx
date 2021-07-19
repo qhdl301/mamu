@@ -1,8 +1,21 @@
 import { FC } from 'react';
-import { TabTypes } from './Tabs.stories';
 import '../../statics/win95.css';
 
-type TabsProps = {
+type TabTypes = {
+    tabs: {
+        id: string,
+        href: string,
+        value: string,
+        ariacontrols : string,
+    },
+    contents: {
+        id: string,
+        arialabelledby: string,
+        value: string,
+    }
+}
+
+export type TabsProps = {
     componentData: TabTypes[],
 }
 
@@ -15,8 +28,7 @@ const Tabs:FC<TabsProps> = (props) => {
         <>    
             <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item">
-                        <a className="nav-link active" id={ tabs.id } data-toggle="tab" href={ tabs.href }
-                            role="tab" aria-controls={ tabs.ariacontrols } aria-selected="true">{ tabs.value }</a>
+                        <a className="nav-link active" id={ tabs.id } data-toggle="tab" href={ tabs.href } role="tab" aria-controls={ tabs.ariacontrols } aria-selected="true">{ tabs.value }</a>
                         {/*
                             active : active클래스를 붙여, 활성화된 스타일로 변경한다.
                             aria-controls : 해당 Elemnet로 제어하는 대상을 식별한다. 연관 된 Element의 id 값을 이용
