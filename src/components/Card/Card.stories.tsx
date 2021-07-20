@@ -4,9 +4,12 @@ export default {
     title:'components/Card',
 }
 
-export const Default = ()=>{
+export const Card95 = ()=>{
 
     return (
-        <Card title={'This is Title'} description={'this is descriptions'}/>
+        <>
+            <Card title={'This is Title'} description={'this is descriptions'}/>
+        </>
+        
     )
 }

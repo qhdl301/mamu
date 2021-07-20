@@ -1,7 +1,7 @@
 import {FC} from 'react'
 import '../../statics/win95.css'
 
-export type CardProps = {
+type CardProps = {
     title:string;
     description:string;
 }
