@@ -24,15 +24,15 @@ export const Tabs95  = () => {
         },
         {
             tabs: {
-                id: 'dailyMovies-tab',
-                href: '../#dailyMovies',
-                ariacontrols: 'dailyMovies',
-                value: '일간 무비',
+                id: 'weekleyMovies-tab',
+                href: '../#weekleyMovies',
+                ariacontrols: 'weekleyMovies',
+                value: '주간 무비',
             },
             contents: {
-                id: 'dailyMovies',
-                arialabelledby : 'dailyMovies-tab',
-                value : '일간 무비 내용',
+                id: 'weekleyMovies',
+                arialabelledby : 'weekleyMovies-tab',
+                value : '주간 무비 내용',
             }
         }
     ]
