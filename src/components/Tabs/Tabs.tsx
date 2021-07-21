@@ -7,7 +7,8 @@ type TabTypes = {
         href: string,
         value: string,
         ariacontrols: string,
-        active : string
+        active: string,
+        isariaselected: boolean
     },
     contents: {
         id: string,
@@ -35,7 +36,7 @@ const Tabs:FC<TabsProps> = (props) => {
                 {tabs.map((items, idx) => {
                     return(
                         <li className="nav-item" key= {idx}>
-                            <a className={`nav-link ${items.active}`}id={ items.id } data-toggle="tab" href={ items.href } role="tab" aria-controls={ items.ariacontrols } aria-selected="true">
+                            <a className={`nav-link ${items.active}`} id={items.id} data-toggle="tab" href={items.href} role="tab" aria-controls={items.ariacontrols} aria-selected= {items.isariaselected}>
                                 { items.value }
                             </a>
                         </li>
