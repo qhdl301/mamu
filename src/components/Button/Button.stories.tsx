@@ -8,7 +8,11 @@ export default {
 export const Button95 = ()=>{
 
     return (
-        <Button componentValue ='아아'>가나다라바사</Button>
+        // border-dark, border-dark-lg
+        <>
+          <Button color='primary' size='' border=''>Primary</Button>
+          <Button color='secondary' size='' border=''>Secondary</Button>
+        </>
     )
 }
 
