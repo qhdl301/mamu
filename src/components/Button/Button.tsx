@@ -12,7 +12,9 @@ const Button:FC<ButtonProps> = (props)=>{
     const { children, size, color, border } = props; // children : 부모 노드의 컴포넌트 값
                                          
     return (
-        <button className= {`btn mr-2 mb-2 ${size} btn-${color} ${border}`}>{children}</button>
+        <button className={`btn mr-2 mb-2 ${size} btn-${color} ${border}`}>
+            <span className="btn-text">{children}</span>
+        </button>
     )
 }
 
