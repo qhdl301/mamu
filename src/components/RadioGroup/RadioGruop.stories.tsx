@@ -20,7 +20,9 @@ export const Default = ()=>{
         <RadioGroup 
             value={radioValue}
             onChange={handleChange}
-            itemsClassName={'mb-2'}
+            classes={{
+                item:'mb-2'
+            }}
             options={[
                 {
                     label:'Here is 1',
