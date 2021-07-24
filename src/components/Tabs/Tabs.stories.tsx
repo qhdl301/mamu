@@ -15,24 +15,30 @@ export const Tabs95  = () => {
                 href: '../#dailyMovies',
                 ariacontrols: 'dailyMovies',
                 value: '일간 무비',
+                active: 'active',
+                isariaselected : true,
             },
             contents: {
                 id: 'dailyMovies',
                 arialabelledby : 'dailyMovies-tab',
-                value : '일간 무비 내용',
+                value: '일간 무비 내용',
+                active : 'active'
             }
         },
         {
             tabs: {
-                id: 'dailyMovies-tab',
-                href: '../#dailyMovies',
-                ariacontrols: 'dailyMovies',
-                value: '일간 무비',
+                id: 'weekleyMovies-tab',
+                href: '../#weekleyMovies',
+                ariacontrols: 'weekleyMovies',
+                value: '주간 무비',
+                active: '',
+                isariaselected : false,
             },
             contents: {
-                id: 'dailyMovies',
-                arialabelledby : 'dailyMovies-tab',
-                value : '일간 무비 내용',
+                id: 'weekleyMovies',
+                arialabelledby : 'weekleyMovies-tab',
+                value: '주간 무비 내용',
+                active : ''
             }
         }
     ]
