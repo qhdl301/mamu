@@ -6,8 +6,8 @@ export default {
 
 export const Form95 = ()=>{
    
-    return (
-        <Form option='success'>default::</Form>
-    )
+  return (
+    <Form option='disabled'/>
+  )
 }
 
