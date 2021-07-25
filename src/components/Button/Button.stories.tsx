@@ -1,5 +1,6 @@
+import { useCallback } from 'react';
 import Button from './Button';
-import * as CONFIGDATA from "./config";
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'components/Button',  // title을 사용하면 카테고리를 나눌 수 있다.
@@ -7,10 +8,13 @@ export default {
 };
 
 export const Button95 = () => {
-    const { COLOR, SIZE, BORDER } = CONFIGDATA.BUTTON;
 
-    return (
-      <Button color={COLOR} size={SIZE} border={BORDER}>BUTTON</Button>
-    )
+  const handleButtonClick = useCallback((e) => {    
+    action('clicked')(e.target);
+  },[]);
+  
+  return (
+      <Button label="Submit" onClick={handleButtonClick} />
+  )
 }
 
