@@ -3,12 +3,14 @@ import clsx from 'clsx';
 import type {FC, ChangeEventHandler} from 'react';
 
 export type TextFieldProps = {
-    variant?:'default'|'textarea';
-    disabled?:boolean;
-    option?: 'success'|'error'
-    className?:string;
-    value:string;
-    onChange?:ChangeEventHandler<HTMLInputElement>
+    variant?:'default'|'textarea',
+    disabled?:boolean,
+    option?: 'success'|'error',
+    className?: string,
+    inputSize?: string,
+    textAreaSize? : string,
+    value:string,
+    onChange?:ChangeEventHandler<HTMLInputElement>,
 }
 
 const TextField:FC<TextFieldProps> = (props)=>{
@@ -17,12 +19,25 @@ const TextField:FC<TextFieldProps> = (props)=>{
         onChange,
         disabled,
         option,
-        variant='default',
+        variant = 'default',
+        inputSize = 'w-75',
+        textAreaSize = 'w-75',
         className,
     } = props;
 
     if(variant==='textarea'){
-        return (<textarea id="textarea" className={clsx("form-control"," w-75")} cols={30} rows={10}/>)
+        return (
+            <textarea
+                id="textarea"
+                className={
+                    clsx(
+                        "form-control",
+                        { textAreaSize }
+                    )
+                }
+                cols={30}
+                rows={10}
+            />)
     }
 
     return (
@@ -35,7 +50,7 @@ const TextField:FC<TextFieldProps> = (props)=>{
                     'is-valid': option === 'success',
                     'is-invalid': option === 'error' 
                 }, 
-                "w-75",
+                {inputSize},
                 className
                 )
             } 

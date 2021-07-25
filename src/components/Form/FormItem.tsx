@@ -11,7 +11,7 @@ export type FormItemProps = {
 }
 
 const FormItem:FC<FormItemProps> = (props)=>{
-    const { classes, option, label, children} = props;
+    const { classes, option, label, children } = props;
     
     return (
         <div className={
