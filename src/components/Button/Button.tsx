@@ -2,12 +2,8 @@ import {MouseEventHandler, FC} from 'react';
 import clsx from 'clsx';
 
 type ButtonProps = {
-    label : string
     option? : 'secondary' | 'tertiary' | 'info' | 'success' | 'warning' | 'danger',
-    location?: {
-        xloc?: string,
-        yloc?: string,
-    }
+    className? : string,
     size? : 'btn-sm' | 'btn-lg',
     border?: 'border-dark' | 'border-dark-lg',
     onClick? : MouseEventHandler<HTMLButtonElement>
@@ -15,10 +11,8 @@ type ButtonProps = {
 
 const Button:FC<ButtonProps> = (props)=>{
     const {
-        label,
-        location = {
-            xloc : 'md-2'
-        },
+        children,
+        className,
         option = 'primary',
         size,
         border,
@@ -30,17 +24,16 @@ const Button:FC<ButtonProps> = (props)=>{
             className={
                 clsx(
                     "btn",
-                    location?.xloc,
-                    location?.yloc,
                     { size },
                     `btn-${option}`,
                     { border },
+                    {className}
                 )
             }
             type="button"
             onClick={onClick}
         >
-            <span className="btn-text">{label}</span>
+            <span className="btn-text">{children}</span>
         </button>
     )
 }

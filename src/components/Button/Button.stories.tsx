@@ -14,7 +14,7 @@ export const Button95 = () => {
   },[]);
   
   return (
-      <Button label="Submit" onClick={handleButtonClick} />
+      <Button onClick={handleButtonClick}>Submit</Button>
   )
 }
 
