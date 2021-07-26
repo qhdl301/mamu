@@ -32,6 +32,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'react/prop-types' : 'off',
+    'react/prop-types': 'off',
   },
 };

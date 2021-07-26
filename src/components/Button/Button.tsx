@@ -1,18 +1,40 @@
-import {FC} from 'react';
+import {MouseEventHandler, FC} from 'react';
+import clsx from 'clsx';
 
 type ButtonProps = {
-
-    border : string,
-    color : string,
-    size : string,
+    option? : 'secondary' | 'tertiary' | 'info' | 'success' | 'warning' | 'danger',
+    className? : string,
+    size? : 'btn-sm' | 'btn-lg',
+    border?: 'border-dark' | 'border-dark-lg',
+    onClick? : MouseEventHandler<HTMLButtonElement>
 }
 
 const Button:FC<ButtonProps> = (props)=>{
-    // rest는 props로 넘어오는 데이터를 객체/배열로 구성시켜주고, destructuring을 통해 rest 객체 중 children 프로퍼티를 별도로 빼서 사용 가능하다. 
-    const { children, ...rest } = props; // children : 부모 노드의 컴포넌트 값
+    const {
+        children,
+        className,
+        option = 'primary',
+        size,
+        border,
+        onClick,
+    } = props;
                                          
     return (
-        <button className= {`btn mr-2 mb-2 ${rest.size} btn-${rest.color} ${rest.border}`}>{children}</button>
+        <button
+            className={
+                clsx(
+                    "btn",
+                    { size },
+                    `btn-${option}`,
+                    { border },
+                    {className}
+                )
+            }
+            type="button"
+            onClick={onClick}
+        >
+            <span className="btn-text">{children}</span>
+        </button>
     )
 }
 
