@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import '../../statics/win95.css';
+import '../../../statics/win95.css';
 
 type TabTypes = {
     tabs: {
