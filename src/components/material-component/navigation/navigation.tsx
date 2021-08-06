@@ -1,41 +1,40 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
-import { makeStyles, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import {
+    BottomNavigation,
+    BottomNavigationAction
+} from '@material-ui/core';
 
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import {
+    Home as HomeIcon,
+    Favorite as FavoriteIcon,
+    ImportContacts as ImportContactsIcon
+} from '@material-ui/icons/';
 
 //import clsx from 'clsx';
 
-type NavigationProps = {
-
+export type NavigationProps = {
+    classes: {
+        root? : string
+    },
+    value : number,
+    onChange?: (event: React.ChangeEvent<any>, newValue: number) => void
 }
 
-const useStyles = makeStyles({
-  root: {
-    width: 500,
-  },
-});
-
-const Navigation:FC<NavigationProps> = ()=>{
-                                
-    const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+const Navigation:FC<NavigationProps> = (props) => {
     
+    const { classes, value, onChange } = props;
+                                
     return (
         <BottomNavigation
-            value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
-            showLabels
             className={classes.root}
+            value={value}
+            showLabels
+            onChange={onChange}
         >
-            <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-            <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-            
+            <BottomNavigationAction label="대쉬보드"   icon={<HomeIcon />}/>
+            <BottomNavigationAction label="개인성과"   icon={<ImportContactsIcon />}/>
+            <BottomNavigationAction label="Wishlist"  icon={<FavoriteIcon />}/>
         </BottomNavigation>
     )
 }
