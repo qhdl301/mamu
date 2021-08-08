@@ -1,9 +1,10 @@
 import FormItem from './FormItem';
 import TextField from '../TextField';
-import {useCallback} from 'react';
-import {useState} from 'react';
+import {useState, useCallback, Component} from 'react';
 import RadioGroup,{RadioGroupProps} from '../RadioGroup';
-import {action} from '@storybook/addon-actions';
+import {action as storybookaction} from '@storybook/addon-actions';
+import {observable, action, computed} from 'mobx';
+import {observer} from 'mobx-react';
 
 export default {
   title: 'components/Form',  
@@ -19,7 +20,7 @@ export const Form95 = ()=>{
   const handleChangeId = useCallback((e)=> setId(e.target.value),[])
   const handleChangePwd = useCallback((e)=> setPwd(e.target.value),[])
   const handleChange:RadioGroupProps['onChange']= useCallback((e) => {
-      action('RadioGroupProps["onChange"]')(e);
+      storybookaction('RadioGroupProps["onChange"]')(e);
       setRadioValue(e.target.value);
   },[]);
 
