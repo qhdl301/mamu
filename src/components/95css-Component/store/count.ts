@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from 'mobx'
+import { action, computed, makeObservable, observable } from 'mobx'
 
 class Count {
     
@@ -9,6 +9,7 @@ class Count {
             num: observable,
             increase: action,
             decrease: action,
+            double: computed
         });
     }
 
@@ -19,6 +20,11 @@ class Count {
     decrease = () => {
         this.num--
         //alert(this.num);
+    }
+
+    //computed : 자동으로 리턴하는 변수
+    get double() {
+        return this.num * 2
     }
 
 }

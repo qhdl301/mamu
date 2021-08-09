@@ -8,10 +8,10 @@ const Count:FC = observer((props)=>{
     
     const { countClass } = Store;
     const { children } = props;
-    
+
     return (
         <div>
-            <h1>{ children } : { countClass.num }</h1>
+            <h2>{ children } : { countClass.num } / Dobule { children } : {countClass.double}</h2>
             <Button onClick={countClass.increase}>+1</Button>
             <Button onClick={countClass.decrease}>-1</Button>
         </div>
