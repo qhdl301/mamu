@@ -9,7 +9,7 @@ export type TextFieldProps = {
     className?: string,
     inputSize?: string,
     textAreaSize? : string,
-    value:string,
+    value:string | number,
     onChange?:ChangeEventHandler<HTMLInputElement>,
 }
 
