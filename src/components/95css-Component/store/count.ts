@@ -29,5 +29,5 @@ class Count {
 
 }
 
-const countStore = new Count()
-export default countStore
+
+export const countStore = new Count()

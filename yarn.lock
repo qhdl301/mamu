@@ -9804,6 +9804,11 @@ mobx-react@^7.2.0:
   dependencies:
     mobx-react-lite "^3.2.0"
 
+mobx-store-provider@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/mobx-store-provider/-/mobx-store-provider-2.1.1.tgz#f08ab18b9810712942114c012920db7aa4eccdd3"
+  integrity sha512-CaC6JClStXte5OeT71nAG8F3AC6UwnOiqB/PtkCDiXV9iYorb0BYEOLZsrKo2/IBcqOXXOhj2BJUhv/pILrA1w==
+
 mobx@^6.3.2:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.3.2.tgz#125590961f702a572c139ab69392bea416d2e51b"
