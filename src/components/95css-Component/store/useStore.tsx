@@ -1,14 +1,16 @@
-import React, {FC} from 'react';
-import {countStore} from './count'
+import React, {FC, useContext} from 'react';
+import {Store} from './store'
 
-export const StoreContext = React.createContext({});
+const Ctx = React.createContext(Store);         // count 관련 하여 context 생성
 
-const CountProvider:FC<React.PropsWithChildren<{}>> = ({children}) => {
+export const useStore = () => useContext(Ctx);  // 함수를 호출 하는 시점에 context 정보를 가지고 오기때문
+
+const CountProvider:FC = ({children}) => {
      
     return (
-      <StoreContext.Provider value={countStore}>
+      <Ctx.Provider value={Store}>
         {children}
-      </StoreContext.Provider>
+      </Ctx.Provider>
     );
 };
 

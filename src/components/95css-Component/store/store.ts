@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx'
 
-class Count {
+class store {
     
     num = 0;
 
@@ -30,4 +30,4 @@ class Count {
 }
 
 
-export const countStore = new Count()
+export const Store = new store()
