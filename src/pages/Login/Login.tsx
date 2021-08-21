@@ -1,22 +1,22 @@
-import { useEffect } from "react";
-import { useCallback } from "react";
-import { useHistory } from "react-router-dom";
-import { useFireBase, useFireBaseState } from "../../contexts";
-import LoginView from "./LoginView";
+import { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useFireBase, useFireBaseState } from '../../contexts';
+import LoginView from './LoginView';
 
 const Login = () => {
   const history = useHistory();
   const { googleLogin } = useFireBase();
   const { isSignedIn } = useFireBaseState();
-  const handleGoogleLoginClick = useCallback(() => googleLogin(), [
-    googleLogin,
-  ]);
+  
+  const handleGoogleLoginClick = useCallback(() => {
+    googleLogin();
+  }, [googleLogin]);
 
   useEffect(() => {
     if (isSignedIn) {
-      history.push("./main");
+      history.push('/');
     }
-  }, [isSignedIn]);
+  },[isSignedIn])
 
   return <LoginView onGoogleLoginClick={handleGoogleLoginClick} />;
 };

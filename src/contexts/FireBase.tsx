@@ -1,11 +1,7 @@
-import firebase from "firebase";
-import {
-  FirebaseAuthProvider,
-  FirebaseAuthConsumer,
-} from "@react-firebase/auth";
-import { useCallback } from "react";
-import { createContext } from "react";
-import { useContext } from "react";
+import firebase from 'firebase';
+import { createContext, useCallback, useContext } from 'react';
+import { FirebaseAuthConsumer, FirebaseAuthProvider } from '@react-firebase/auth';
+
 import type { AuthEmission } from "@react-firebase/auth/dist/types";
 import type { FC } from "react";
 
@@ -27,7 +23,7 @@ export const useFireBase = () => {
   const googleLogin = useCallback(() => {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-    firebase.auth().signInWithPopup(googleAuthProvider);
+    return firebase.auth().signInWithPopup(googleAuthProvider)
   }, []);
 
   return {
@@ -35,7 +31,7 @@ export const useFireBase = () => {
   };
 };
 
-export const FireBaseProvider: FC = ({ children }) => {
+export const FireBaseProvider: FC = ({ children }) => {  
   return (
     <FirebaseAuthProvider firebase={firebase} {...config}>
       <FirebaseAuthConsumer>

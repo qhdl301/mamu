@@ -1,7 +1,7 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import Routes from "./Routes";
-import { BrowserRouter } from "react-router-dom";
-import { FireBaseProvider } from "./contexts";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter } from 'react-router-dom';
+import { FireBaseProvider } from './contexts';
+import Routes from './Routes';
 
 const App = () => {
   return (

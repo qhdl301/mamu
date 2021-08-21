@@ -1,17 +1,13 @@
-import { Avatar } from "@material-ui/core";
-import { useFireBaseState } from "../../contexts";
+
+import { useFireBaseState } from '../../contexts';
+import { Profile } from './components';
 
 const Main = () => {
   const loginState = useFireBaseState();
 
   return (
     <div>
-      <Avatar
-        alt={loginState.user.displayName}
-        src={loginState.user.photoURL}
-      />
-      <div>iam :{loginState.user.displayName}</div>
-      <div>email :{loginState.user.email}</div>
+      <Profile userImg={loginState.user.photoURL} userName={loginState.user.displayName}/>
     </div>
   );
 };
