@@ -5,7 +5,7 @@ import RadioGroup,{RadioGroupProps} from '../RadioGroup';
 import {action as storybookaction} from '@storybook/addon-actions';
 
 export default {
-  title: 'components/Form',  
+  title: '95css-components/Form',  
 };
 
 export const Form95 = ()=>{

@@ -1,7 +1,7 @@
 import Card from './Card'
 
 export default {
-    title:'components/Card',
+    title:'95css-components/Card',
 }
 
 export const Card95 = ()=>{

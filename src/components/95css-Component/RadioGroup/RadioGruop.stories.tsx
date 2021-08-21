@@ -6,7 +6,7 @@ import {action} from '@storybook/addon-actions';
 import type {RadioGroupProps} from './RadioGroup'
 
 export default {
-  title: 'components/RadioGroup',  // title을 사용하면 카테고리를 나눌 수 있다.
+  title: '95css-components/RadioGroup',  // title을 사용하면 카테고리를 나눌 수 있다.
 };
 
 export const Default = ()=>{
