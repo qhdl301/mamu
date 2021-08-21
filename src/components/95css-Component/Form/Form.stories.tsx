@@ -7,7 +7,7 @@ import {observable, action, computed} from 'mobx';
 import {observer} from 'mobx-react';
 
 export default {
-  title: 'components/Form',  
+  title: '95css-components/Form',  
 };
 
 export const Form95 = ()=>{

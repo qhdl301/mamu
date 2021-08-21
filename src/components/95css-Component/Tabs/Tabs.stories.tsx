@@ -2,7 +2,7 @@ import Tabs from './Tabs';
 import { TabsProps } from './Tabs';
 
 export default {
-    title: 'components/Tabs',  // title을 사용하면 카테고리를 나눌 수 있다.
+    title: '95css-components/Tabs',  // title을 사용하면 카테고리를 나눌 수 있다.
     component: Tabs,
 };
 
