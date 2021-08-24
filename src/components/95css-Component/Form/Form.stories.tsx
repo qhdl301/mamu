@@ -12,7 +12,7 @@ export const Form95 = ()=>{
   const [desc, setDesc] = useState('');
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
-  const [radioValue, setRadioValue] = useState();
+  const [radioValue, setRadioValue] = useState('');
 
   const handleChangeDesc = useCallback((e)=> setDesc(e.target.value),[])
   const handleChangeId = useCallback((e)=> setId(e.target.value),[])
