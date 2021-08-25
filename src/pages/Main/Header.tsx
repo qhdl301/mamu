@@ -6,7 +6,7 @@ const Header = () => {
   const loginState = useFireBaseState();
 
   return (
-      <Profile userImg={loginState.user.photoURL} userName={loginState.user.displayName}/>
+      <Profile userImg={loginState.user.photoURL} userName={loginState.user.displayName}/>  
   );
 };
 

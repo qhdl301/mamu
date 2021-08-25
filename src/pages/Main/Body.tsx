@@ -1,9 +1,13 @@
-import React from 'react';
+import { Box } from '@material-ui/core';
+import { Route } from 'react-router-dom';
+import Movielist from './components/List';
 
 const Body = () => {
     
   return (
-    <div/>
+    <Box component="span">
+        <Route exact path="/Detail" component={Movielist}></Route>
+    </Box>
   )
 }
 

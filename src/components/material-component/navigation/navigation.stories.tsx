@@ -10,7 +10,7 @@ export default {
 
 const useStyles = makeStyles({
   root: {
-    width: 500,
+    width: '100%',
   },
 });
 

@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Navigation, NavigationProps } from '../../components/material-component';
+
 const useStyles = makeStyles({
   root: {
-    width: 500,
+    width: '100%',
   },
 });
 
@@ -15,7 +16,7 @@ const Bottom = () => {
   }, []);
     
   return (
-    <Navigation classes={classes} value={value} onChange={handleChangeNav}/>
+      <Navigation classes={classes} value={value} onChange={handleChangeNav}/>
   )
 }
 
