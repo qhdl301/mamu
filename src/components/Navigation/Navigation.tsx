@@ -10,14 +10,14 @@ import {
     Home as HomeIcon,
     Favorite as FavoriteIcon,
     ImportContacts as ImportContactsIcon
-} from '@material-ui/icons/';
+} from '@material-ui/icons/'; 
 
 export type NavigationProps = {
-    classes: {
+    classes: { 
         root? : string,
     },
     value : number,
-    onChange?: (event: React.ChangeEvent<any>, newValue: number) => void
+    onChange?: (event: React.ChangeEvent<unknown>, newValue: number) => void
 }
 
 const Navigation:FC<NavigationProps> = (props) => {

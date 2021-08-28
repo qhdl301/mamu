@@ -1,11 +1,9 @@
 import firebase from 'firebase';
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import Bottom from './pages/Main/Bottom';
 
 const Login = lazy(() => import("./pages/Login"));
-const Header = lazy(() => import("./pages/Main/Header"));
-const Body = lazy(() => import("./pages/Main/Body"));
+const Main = lazy(() => import("./pages/Main/Main"));
 
 const Routes = () => {
   const history = useHistory();
@@ -21,15 +19,7 @@ const Routes = () => {
   return (
     <Suspense fallback={null}>
       <Switch>
-        <Route path="/" exact render=
-          {
-            () => 
-              <>
-                <Header />
-                  <Body/>
-                <Bottom />
-              </>  
-          } />
+        <Route path="/" render={() => <Main/>}/>
         <Route path="/login" render={() => <Login />} />
       </Switch>
     </Suspense>

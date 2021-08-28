@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Navigation, NavigationProps } from '../../components/material-component';
+import { Navigation, NavigationProps } from '../../../../components';
 
 const useStyles = makeStyles({
   root: {
@@ -10,13 +10,13 @@ const useStyles = makeStyles({
 
 const Bottom = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [navigationIndex, setNavigationIndex] = React.useState(0);
   const handleChangeNav:NavigationProps['onChange'] = useCallback((event, newValue)=> {
-    setValue(newValue);
+    setNavigationIndex(newValue);
   }, []);
     
   return (
-      <Navigation classes={classes} value={value} onChange={handleChangeNav}/>
+      <Navigation classes={classes} value={navigationIndex} onChange={handleChangeNav}/>
   )
 }
 

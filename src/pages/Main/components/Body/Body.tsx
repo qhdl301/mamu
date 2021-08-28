@@ -1,6 +1,6 @@
 import { Box } from '@material-ui/core';
 import { Route } from 'react-router-dom';
-import Movielist from './components/List';
+import Movielist from '../List';
 
 const Body = () => {
     
