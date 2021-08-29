@@ -15,4 +15,24 @@ export const MovieDataArr = [
         title : '상치',
         type : ''
     },
+    {
+        img : '',
+        title : '어벤져스',
+        type : ''
+    },
+    {
+        img : '',
+        title : '베트맨',
+        type : ''
+    },
+    {
+        img : '',
+        title : '수어사이드 스쿼드',
+        type : ''
+    },
+    {
+        img : '',
+        title : '터미네이터',
+        type : ''
+    },
 ];

@@ -5,7 +5,7 @@ const MovieDetail:FC = () => {
     
   return (
     <Box component="span">
-      왜 안될까?
+      상세 페이지입니다.
     </Box>
   )
 }

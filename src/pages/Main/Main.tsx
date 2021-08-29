@@ -1,21 +1,19 @@
-import { FC } from "react"
-import { Switch, Route, Link } from "react-router-dom";
+import { FC,lazy } from "react";
+import { Switch, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import MovieList from "./components/List"
+
+const MovieList = lazy(() => import("./components/List"));
+const MovieDetail = lazy(() => import("./components/Detail"));
 
 const Main:FC = () => {
 
     return (
-        <Layout>
-            <Switch>
-                <Route exact path="/" component={()=>
-                    <div>
-                        <Link to={"/detail"}>go Details</Link>
-                    </div>
-                }/>
-                <Route exact path="/detail" component={MovieList}/>
-            </Switch>
-        </Layout>    
+        <Switch>
+            <Layout>
+                <Route exact path="/" component={MovieList}/>
+                <Route exact path="/detail" component={MovieDetail}/>
+            </Layout>    
+        </Switch>
     )
 
 }
