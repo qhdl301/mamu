@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import {
+    makeStyles,
     AppBar,
     BottomNavigation,
     BottomNavigationAction,
@@ -13,21 +14,31 @@ import {
 } from '@material-ui/icons/'; 
 
 export type NavigationProps = {
-    classes: { 
-        root? : string,
+    classes? : { 
+        bottomNavigation : string,
     },
     value : number,
     onChange?: (event: React.ChangeEvent<unknown>, newValue: number) => void
 }
 
+const useStyles = makeStyles(() => ({
+  root: {
+    position: "fixed",
+    top: "auto",
+    bottom : 0,
+  },
+}));
+
 const Navigation:FC<NavigationProps> = (props) => {
     
-    const { classes, value, onChange } = props;
-                                
+    const { classes:overrideClasses, value, onChange } = props;
+
+    const classes = useStyles();                            
+
     return (
-        <AppBar style={{top: "auto", bottom: 0}} position = 'fixed'>
+        <AppBar className={classes.root}>
             <BottomNavigation
-                className={classes.root}
+                className={overrideClasses?.bottomNavigation}
                 value={value}
                 showLabels
                 onChange={onChange}

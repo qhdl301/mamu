@@ -34,7 +34,7 @@ const MoviesList:FC = () => {
 
     return (
       <div className={classes.root}>
-        <Typography>{'일간 박스오피스'}</Typography>
+        <Typography>'일간 박스오피스'</Typography>
         <ImageList className={classes.imageList} cols={3}>
           {MovieDataArr.map((item) => (
             <ImageListItem key={item.img}>
