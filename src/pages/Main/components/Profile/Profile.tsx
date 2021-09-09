@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor:theme.palette.primary.main,
         padding:theme.spacing(1),
-        margin:theme.spacing(2),
+        margin:theme.spacing(1),
         borderRadius:10
     },
     profileContents: {

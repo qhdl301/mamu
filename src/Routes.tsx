@@ -3,7 +3,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 const Login = lazy(() => import("./pages/Login"));
-const Main = lazy(() => import("./pages/Main"));
+const Main = lazy(() => import("./pages/Main/Main"));
 
 const Routes = () => {
   const history = useHistory();
@@ -19,8 +19,8 @@ const Routes = () => {
   return (
     <Suspense fallback={null}>
       <Switch>
-        <Route path="/" exact render={() => <Main />} />
-        <Route path="/login" render={() => <Login />} />
+        <Route path= "/" render={() => <Main/>}/>
+        <Route path= "/login" render={() => <Login />}/>
       </Switch>
     </Suspense>
   );

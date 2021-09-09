@@ -1,15 +1,21 @@
+import { FC,lazy } from "react";
+import { Switch, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 
-import { useFireBaseState } from '../../contexts';
-import { Profile } from './components';
+const MovieList = lazy(() => import("./components/List"));
+const MovieDetail = lazy(() => import("./components/Detail"));
 
-const Main = () => {
-  const loginState = useFireBaseState();
+const Main:FC = () => {
 
-  return (
-    <div>
-      <Profile userImg={loginState.user.photoURL} userName={loginState.user.displayName}/>
-    </div>
-  );
-};
+    return (
+        <Switch>
+            <Layout>
+                <Route exact path="/" component={MovieList}/>
+                <Route exact path="/detail" component={MovieDetail}/>
+            </Layout>    
+        </Switch>
+    )
+
+}
 
 export default Main;
