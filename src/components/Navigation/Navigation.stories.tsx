@@ -9,7 +9,7 @@ export default {
 };
 
 const useStyles = makeStyles({
-  root: {
+  bottomNavigation: {
     width: '100%',
   },
 });

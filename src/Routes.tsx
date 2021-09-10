@@ -19,8 +19,8 @@ const Routes = () => {
   return (
     <Suspense fallback={null}>
       <Switch>
-        <Route path= "/" render={() => <Main/>}/>
         <Route path= "/login" render={() => <Login />}/>
+        <Route path= "/" render={() => <Main/>}/>
       </Switch>
     </Suspense>
   );
