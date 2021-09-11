@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
     makeStyles,
@@ -32,7 +33,6 @@ const useStyles = makeStyles(() => ({
 const Navigation:FC<NavigationProps> = (props) => {
     
     const { classes:overrideClasses, value, onChange } = props;
-
     const classes = useStyles();                            
 
     return (
@@ -43,9 +43,9 @@ const Navigation:FC<NavigationProps> = (props) => {
                 showLabels
                 onChange={onChange}
             >
-                <BottomNavigationAction label="대쉬보드"   icon={<HomeIcon />}/>
-                <BottomNavigationAction label="개인성과"   icon={<ImportContactsIcon />}/>
-                <BottomNavigationAction label="Wishlist"  icon={<FavoriteIcon />}/>
+                <BottomNavigationAction label="대쉬보드" icon={<HomeIcon />} component={Link} to={'/'}/>
+                <BottomNavigationAction label="개인성과" icon={<ImportContactsIcon/>} component={Link} to={'/mission'}/>
+                <BottomNavigationAction label="Wishlist" icon={<FavoriteIcon />} component={Link} to={'/wishlist'}/>
             </BottomNavigation>
         </AppBar>    
     )
