@@ -69,10 +69,16 @@
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.30.0",
     "eslint-plugin-react": "^7.24.0"
   },
   "resolutions": {
     "babel-loader": "8.1.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

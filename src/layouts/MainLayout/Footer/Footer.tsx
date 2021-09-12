@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Navigation, NavigationProps } from '../../../../components';
+import { Navigation, NavigationProps } from './Navigation';
 
 const useStyles = makeStyles({
-  root: {
+  bottomNavigation: {
     width: '100%',
   },
 });

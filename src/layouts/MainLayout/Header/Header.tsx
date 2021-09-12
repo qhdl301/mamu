@@ -1,8 +1,8 @@
 
-import { AppBar, Typography } from '@material-ui/core';
-import { Profile } from '..';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useFireBaseState } from '../../../../contexts';
+import Profile from './Profile';
+import { useFireBaseState } from '../../../contexts';
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -17,11 +17,9 @@ const Header = () => {
 
   return (
     <header>
-      <AppBar position="static" color="inherit">
-        <Typography variant="h5" color="inherit" className={classes.title}>
-          이거 봄?
-        </Typography>
-      </AppBar>
+      <Typography variant="h5" className={classes.title}>
+        이거 봄?
+      </Typography>
       <Profile userImg={loginState.user.photoURL} userName={loginState.user.displayName} />
     </header>  
   );

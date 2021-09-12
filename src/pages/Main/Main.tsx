@@ -1,18 +1,22 @@
 import { FC,lazy } from "react";
 import { Switch, Route } from "react-router-dom";
-import Layout from "./components/Layout";
+import { MainLayout } from "../../layouts";
 
-const MovieList = lazy(() => import("./components/List"));
-const MovieDetail = lazy(() => import("./components/Detail"));
+const DashBoard = lazy(() => import("./pages/DashBoard"));
+const MovieDetail = lazy(() => import("./pages/Detail"));
+const WishList = lazy(() => import("./pages/WishList"));
+const Mission = lazy(() => import("./pages/Mission"));
 
 const Main:FC = () => {
 
     return (
         <Switch>
-            <Layout>
-                <Route exact path="/" component={MovieList}/>
+            <MainLayout>
+                <Route exact path="/" component={DashBoard}/>
                 <Route exact path="/detail" component={MovieDetail}/>
-            </Layout>    
+                <Route exact path="/mission" component={Mission}/>
+                <Route exact path="/wishlist" component={WishList}/>
+            </MainLayout>    
         </Switch>
     )
 
