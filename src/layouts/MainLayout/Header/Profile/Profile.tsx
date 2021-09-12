@@ -25,7 +25,7 @@ const Profile: FC<ProfileProps> = (props) => {
     
     return (
         <Paper className={classes.root}>
-            <Grid container justify='space-between' spacing={1} alignItems={'center'}>
+            <Grid container justifyContent='space-between' spacing={1} alignItems={'center'}>
                 <Grid item>
                     <Avatar src={userImg} alt={userName}/>
                 </Grid>

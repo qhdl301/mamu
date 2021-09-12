@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Navigation, NavigationProps } from './Navigation';
 
@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 
 const Bottom = () => {
   const classes = useStyles();
-  const [navigationIndex, setNavigationIndex] = React.useState(0);
+  const [navigationIndex, setNavigationIndex] = useState(0);
   const handleChangeNav:NavigationProps['onChange'] = useCallback((event, newValue)=> {
     setNavigationIndex(newValue);
   }, []);
