@@ -31,7 +31,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Navigation:FC<NavigationProps> = (props) => {
-    
     const { classes:overrideClasses, value, onChange } = props;
     const classes = useStyles();                            
 
