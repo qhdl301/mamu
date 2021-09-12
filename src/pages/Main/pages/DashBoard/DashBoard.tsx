@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { MovieList } from './components/List';
-import { MovieDataArr as MovieData } from '../DashBoard/MovieData';
+import { MovieDataArr as MovieData } from './MovieData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

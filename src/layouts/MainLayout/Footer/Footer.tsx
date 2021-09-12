@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Navigation, NavigationProps } from './components/Navigation';
+import { Navigation, NavigationProps } from './Navigation';
 
 const useStyles = makeStyles({
   bottomNavigation: {

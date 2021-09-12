@@ -1,7 +1,7 @@
 
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Profile } from '../page/components';
+import Profile from './Profile';
 import { useFireBaseState } from '../../../contexts';
 
 const useStyles = makeStyles(() => ({
