@@ -1,5 +1,11 @@
 
+## Commit Style Guide
+Git의 Commit 규칙은 commitizen 을 따릅니다.
+https://github.com/commitizen/cz-cli
 
+```bash
+npm install -g commitizen
+```
 
 ## CSS Style Guide
 
