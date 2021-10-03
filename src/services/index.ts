@@ -1,0 +1,1 @@
+export { getBoxOfficeListService } from './getBoxofficeService';

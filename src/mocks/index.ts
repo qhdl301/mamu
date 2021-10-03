@@ -1,0 +1,1 @@
+export {moviesData} from './getBoxOfficeList';
