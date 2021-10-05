@@ -3,6 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { MovieList, MovieListProps } from './components/List';
 import { getBoxOfficeListService } from '../../../../services';
+import { moviesData } from '../../../../mocks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,15 +24,16 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const DashBoard:FC = () => {
+const DashBoard: FC = () => {
   
-  const obj = {};
-  const [list, setList] = useState<MovieListProps | any>();
+  const [list, setList] = useState<MovieListProps>(moviesData);
 
   useEffect(()=>{
-    getBoxOfficeListService("",obj).then((response)=>{
-      console.log(response);
-      setList(response);     
+    getBoxOfficeListService("http://", { key: "", targetDt: "" }).then((response) => {
+      if (response) {
+        console.log(response);
+        setList(response);     
+      }
     })
   },[]);
 
