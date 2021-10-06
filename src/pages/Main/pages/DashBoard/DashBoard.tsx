@@ -40,7 +40,7 @@ const DashBoard: FC = () => {
 
     return (
       <div className={classes.root}>
-        <Typography variant="subtitle1">일간 박스오피스</Typography>
+        <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
           <MovieList moviesData={list.moviesData}/>
         </ImageList>
