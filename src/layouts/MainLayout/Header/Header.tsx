@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <header>
-      <Typography variant="h5" className={classes.title}>
+      <Typography variant="h4" color="textPrimary" className={classes.title}>
         이거 봄?
       </Typography>
       <Profile userImg={loginState.user.photoURL} userName={loginState.user.displayName} />

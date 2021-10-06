@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageListItem, ImageListItemBar, Typography } from '@material-ui/core/';
 import SubdirectoryArrowRightIcon from '@material-ui/icons/SubdirectoryArrowRight';
@@ -32,8 +31,8 @@ const MovieList : FC<MovieListProps> = (props) => {
     return (
         <>
             {
-                moviesData.map((item) => (
-                    <ImageListItem className={classes.listItem} component={Link} to='/detail' key={item.title}>
+                moviesData.map((item, index) => (
+                    <ImageListItem className={classes.listItem} component={Link} to='/detail' key={index}>
                         <img src={item.imgUrl} alt={item.title} />
                         <ImageListItemBar
                             title={item.title}

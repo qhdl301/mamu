@@ -1,1 +1,1 @@
-export {moviesData} from './getBoxOfficeList';
+export { mockData } from './getBoxOfficeList';

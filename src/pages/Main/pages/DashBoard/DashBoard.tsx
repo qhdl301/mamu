@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
-import { MovieList, MovieListProps } from './components/List';
+import { MovieList } from './components/List';
 import { getBoxOfficeListService } from '../../../../services';
-import { moviesData } from '../../../../mocks';
+import { mockData } from '../../../../mocks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,12 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const DashBoard: FC = () => {
   
-  const [list, setList] = useState<MovieListProps>(moviesData);
+  const [list, setList] = useState(mockData);
 
   useEffect(()=>{
-    getBoxOfficeListService("http://", { key: "", targetDt: "" }).then((response) => {
+    getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
       if (response) {
-        console.log(response);
         setList(response);     
       }
     })
@@ -41,9 +40,9 @@ const DashBoard: FC = () => {
 
     return (
       <div className={classes.root}>
-        <Typography>일간 박스오피스</Typography>
+        <Typography variant="subtitle1">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList moviesData={list}/>
+          <MovieList moviesData={list.moviesData}/>
         </ImageList>
       </div>
     );

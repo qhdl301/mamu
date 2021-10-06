@@ -1,6 +1,8 @@
-export const moviesData =
+import { MovieListProps } from "../pages/Main/pages/DashBoard/components/List";
+
+export const mockData : MovieListProps =
 {
-    "dailyMoviesData": [
+    "moviesData": [
         {
             imgUrl: 'https://image.news1.kr/system/photos/2021/7/1/4849903/article.jpg/dims/optimize',
             title: '블랙위도우',
