@@ -1,1 +1,1 @@
-export { mockData } from './getBoxOfficeList';
+export { boxOfficeListMock } from './getBoxOfficeList';

@@ -1,6 +1,7 @@
-import { MovieListProps } from "../pages/Main/pages/DashBoard/components/List";
+import { GetBoxOfficeListServiceResponseType } from "../services/getBoxofficeService";
 
-export const mockData : MovieListProps =
+
+export const boxOfficeListMock : GetBoxOfficeListServiceResponseType =
 {
     "moviesData": [
         {

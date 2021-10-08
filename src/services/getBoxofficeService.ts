@@ -1,6 +1,7 @@
+import { boxOfficeListMock } from "../mocks";
 import { httpFetcher } from "../utils";
 
-export type getBoxOfficeListServiceProps = {
+export type GetBoxOfficeListServiceRequestType = {
     key: string,
     targetDt: string,
     itemPerPage?: string,
@@ -9,6 +10,14 @@ export type getBoxOfficeListServiceProps = {
     wideAreaCd?: string
 }
 
-export const getBoxOfficeListService = (url: string, params: getBoxOfficeListServiceProps) => {
-    return httpFetcher(url, params);
+export type GetBoxOfficeListServiceResponseType = {
+    moviesData : {
+        imgUrl : string,
+        title : string,
+        type : string[]
+    }[]
+}
+
+export const getBoxOfficeListService = (url: string, params: GetBoxOfficeListServiceRequestType) => {
+    return httpFetcher(url, params, boxOfficeListMock);
 };

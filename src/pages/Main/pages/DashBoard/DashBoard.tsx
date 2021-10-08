@@ -3,7 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { MovieList } from './components/List';
 import { getBoxOfficeListService } from '../../../../services';
-import { mockData } from '../../../../mocks';
+import { GetBoxOfficeListServiceResponseType } from '../../../../services/getBoxofficeService';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,13 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const DashBoard: FC = () => {
-  
-  const [list, setList] = useState(mockData);
+  const [items, setItems] = useState<GetBoxOfficeListServiceResponseType['moviesData']>([]);
 
   useEffect(()=>{
     getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
       if (response) {
-        setList(response);     
+        setItems(response.moviesData);     
       }
     })
   },[]);
@@ -42,7 +41,7 @@ const DashBoard: FC = () => {
       <div className={classes.root}>
         <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList moviesData={list.moviesData}/>
+          <MovieList items={items}/>
         </ImageList>
       </div>
     );
