@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { MovieList } from './components/List';
-import { MovieDataArr as MovieData } from './MovieData';
+import { getBoxOfficeListService } from '../../../../services';
+import { GetBoxOfficeListServiceResponseType } from '../../../../services/getBoxofficeService';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,14 +24,24 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const DashBoard:FC = () => {
+const DashBoard: FC = () => {
+  const [items, setItems] = useState<GetBoxOfficeListServiceResponseType['moviesData']>([]);
+
+  useEffect(()=>{
+    getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
+      if (response) {
+        setItems(response.moviesData);     
+      }
+    })
+  },[]);
+
   const classes = useStyles();
 
     return (
       <div className={classes.root}>
-        <Typography>일간 박스오피스</Typography>
+        <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList moviesData={MovieData}/>
+          <MovieList items={items}/>
         </ImageList>
       </div>
     );
