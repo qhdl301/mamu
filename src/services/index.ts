@@ -1,2 +1,2 @@
-export { getBoxOfficeListService } from './getBoxofficeService';
-export type { getBoxOfficeListServiceProps } from './getBoxofficeService';
+export { default as getBoxOfficeListService } from './getBoxofficeService';
+export type { GetBoxOfficeListServiceRequestType, GetBoxOfficeListServiceResponseType } from './getBoxofficeService';

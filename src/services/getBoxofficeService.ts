@@ -18,6 +18,9 @@ export type GetBoxOfficeListServiceResponseType = {
     }[]
 }
 
-export const getBoxOfficeListService = (url: string, params: GetBoxOfficeListServiceRequestType) => {
+const getBoxOfficeListService = (url: string, params: GetBoxOfficeListServiceRequestType) => {
     return httpFetcher(url, params, boxOfficeListMock);
 };
+
+
+export default getBoxOfficeListService;

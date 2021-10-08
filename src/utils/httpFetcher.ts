@@ -5,7 +5,7 @@ export const httpFetcher = <RequestType, ResponseType>(
   params : RequestType,
   temporaryMock: ResponseType
   ) : Promise<ResponseType> => {
-  return new Promise<ResponseType>((resolve, reject) => {
+  return new Promise<ResponseType>((resolve) => {
     resolve(temporaryMock);
   });
 };
