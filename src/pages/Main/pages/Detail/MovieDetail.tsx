@@ -1,11 +1,25 @@
 import { FC } from 'react';
-import { Box } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
+import { MovieInfo, MovieReview } from './components';
+
+
+const useStyles = makeStyles({
+  root: {
+      width: '100%',
+      height: '100%',
+      margin : 4,
+      padding : 4,
+  }
+});
 
 const MovieDetail:FC = () => {
     
+  const clsses = useStyles();
+
   return (
-    <Box component="span">
-      상세 페이지입니다.
+    <Box className={clsses.root} component="div">
+      <MovieInfo/>
+      <MovieReview/>
     </Box>
   )
 }
