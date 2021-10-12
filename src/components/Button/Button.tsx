@@ -1,16 +1,17 @@
 import { FC } from "react";
 import { Button } from '@mui/material';
+import { ButtonProps as MuiButtonProps } from '@mui/material';
 
 export type ButtonProps = {
-    option : string
+    className : MuiButtonProps['className']
 }
 
 const MuiButton : FC<ButtonProps> = (props) => {
 
-    const { children, option } = props;
+    const { children, className } = props;
     
     return (
-        <Button className={option}>{children}</Button>
+        <Button className={className}>{children}</Button>
     )
 
 }

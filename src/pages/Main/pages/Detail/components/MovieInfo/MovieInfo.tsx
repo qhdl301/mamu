@@ -60,7 +60,7 @@ const MovieInfo : FC = () => {
                 <Typography noWrap gutterBottom variant="subtitle2" component="div">
                     목포 영화 수 {30}/{30}
                 </Typography>
-                <MuiButton option={classes.button}>본 영화로 등록하기</MuiButton>
+                <MuiButton className={classes.button}>본 영화로 등록하기</MuiButton>
             </CardContent>
         </Card>
 

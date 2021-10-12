@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { MovieList } from './components/List';
-import { getBoxOfficeListService } from '../../../../services';
 import { GetBoxOfficeListServiceResponseType } from '../../../../services/getBoxofficeService';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,11 +27,12 @@ const DashBoard: FC = () => {
   const [items, setItems] = useState<GetBoxOfficeListServiceResponseType['moviesData']>([]);
 
   useEffect(()=>{
-    getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
+    
+    /*getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
       if (response) {
         setItems(response.moviesData);     
       }
-    })
+    })*/
   },[]);
 
   const classes = useStyles();
