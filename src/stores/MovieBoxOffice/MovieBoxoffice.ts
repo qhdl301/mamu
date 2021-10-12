@@ -1,12 +1,12 @@
 import { action, makeObservable, observable } from 'mobx'
 import { getBoxOfficeListService, GetBoxOfficeListServiceResponseType } from '../../services';
 
-class MoviesDetail {
+export class MoviesDetail {
 
     movieList = null;
     movieDetail = null;
 
-    constructor(props: any) {
+    constructor(props:any) {
         this.movieList = props;
 
         makeObservable(this, {
@@ -30,7 +30,7 @@ class MoviesDetail {
 
 export class MovieBoxoffice {
     
-    items = {};
+    items : GetBoxOfficeListServiceResponseType['moviesData'] = [];
 
     constructor(){
         
@@ -47,6 +47,3 @@ export class MovieBoxoffice {
     }
 
 }
-
-
-export const BoxOfficeStore = new MovieBoxoffice();
