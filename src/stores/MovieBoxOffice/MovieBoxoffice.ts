@@ -1,5 +1,21 @@
 import { action, makeObservable, observable } from 'mobx'
-import { getBoxOfficeListService, GetBoxOfficeListServiceResponseType } from '../../services';
+import { getBoxOfficeListService, GetBoxOfficeListServiceRequestType, GetBoxOfficeListServiceResponseType} from '../../services'
+
+class MoviesBoxofficeService {
+   
+    BoxOfficeListService(url: string, params: GetBoxOfficeListServiceRequestType) {
+        
+        let moviesResopnseData: GetBoxOfficeListServiceResponseType['moviesData'] = [];
+        
+        getBoxOfficeListService(url, params).then((response) => {
+            moviesResopnseData = response.moviesData;
+        });
+        
+        return moviesResopnseData;
+    }   
+
+}
+
 
 export class MoviesDetail {
 
@@ -30,20 +46,21 @@ export class MoviesDetail {
 
 export class MovieBoxoffice {
     
-    items : GetBoxOfficeListServiceResponseType['moviesData'] = [];
+    movieitems : MoviesDetail[] = [];
 
     constructor(){
         
         makeObservable(this,{
-            items : observable,
+            movieitems : observable,
             getData : action,
         });
     }
 
-    getData = () => {
-        getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
-            this.items = response.moviesData.map((item) => { new MoviesDetail(item);})
-        });
+    getData() {
+
+        const response = new MoviesBoxofficeService().BoxOfficeListService("", { key: "", targetDt: "" });
+        this.movieitems = response.map((item) => { return new MoviesDetail(item); });
     }
 
+        
 }

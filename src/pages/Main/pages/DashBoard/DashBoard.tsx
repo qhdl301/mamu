@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
-import { MovieList } from './components/List';
-//import { GetBoxOfficeListServiceResponseType } from '../../../../services/getBoxofficeService';
+import { MovieList, MovieListProps } from './components/List';
 import { observer } from 'mobx-react-lite';
 import RootStore from '../../../../stores/MovieBoxOffice/RootStore';
+import { GetBoxOfficeListServiceResponseType } from '../../../../services';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,12 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
 const DashBoard: FC = observer(() => {
 
   const { MovieBoxoffice } = RootStore;
-  //const [items, setItems] = useState<GetBoxOfficeListServiceResponseType['moviesData']>([]);
+  const { getData, movieitems } = MovieBoxoffice;
+  const [items, setItems] = useState<GetBoxOfficeListServiceResponseType['moviesData']>([]);
 
   useEffect(()=>{
 
-    MovieBoxoffice.getData();
-    //setItems(MovieBoxoffice.items);     
+    getData();
+    const com : MovieListProps[]= movieitems.map(item => { item.movieList })
+    setItems(com);
      
   },[]);
 
@@ -43,7 +45,7 @@ const DashBoard: FC = observer(() => {
       <div className={classes.root}>
         <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList items={MovieBoxoffice.items}/>
+          <MovieList items={items}/>
         </ImageList>
       </div>
     );
