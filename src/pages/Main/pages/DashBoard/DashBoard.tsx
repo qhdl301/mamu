@@ -29,14 +29,9 @@ const DashBoard: FC = observer(() => {
 
   const { MovieBoxoffice } = RootStore;
   const { getData, movieitems } = MovieBoxoffice;
-  const [items, setItems] = useState<GetBoxOfficeListServiceResponseType['moviesData']>([]);
 
   useEffect(()=>{
-
     getData();
-    const com : MovieListProps[]= movieitems.map(item => { item.movieList })
-    setItems(com);
-     
   },[]);
 
   const classes = useStyles();
@@ -45,7 +40,7 @@ const DashBoard: FC = observer(() => {
       <div className={classes.root}>
         <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList items={items}/>
+          <MovieList items={movieitems}/>
         </ImageList>
       </div>
     );

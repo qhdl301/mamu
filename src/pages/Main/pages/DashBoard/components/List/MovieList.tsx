@@ -1,12 +1,12 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageListItem, ImageListItemBar, Typography } from '@material-ui/core/';
 import SubdirectoryArrowRightIcon from '@material-ui/icons/SubdirectoryArrowRight';
-import { GetBoxOfficeListServiceResponseType } from '../../../../../../services/getBoxofficeService';
+import { BasicInfoType, MoviesDetail } from '../../../../../../stores/MovieBoxOffice/MovieBoxoffice';
 
 export type MovieListProps = {
-    items:GetBoxOfficeListServiceResponseType['moviesData'];
+    items : MoviesDetail[];
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,11 +24,12 @@ const useStyles = makeStyles((theme: Theme) =>
 const MovieList : FC<MovieListProps> = (props) => {
     const classes = useStyles();
     const { items } = props;
+    const result = items.map(item => item.basicInfo);
 
     return (
         <>
             {
-                items.map((item, index) => (
+                result.map((item, index) => (
                     <ImageListItem className={classes.listItem} component={Link} to='/detail' key={index}>
                         <img src={item.imgUrl} alt={item.title} />
                         <ImageListItemBar

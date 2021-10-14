@@ -1,17 +1,30 @@
 import { action, makeObservable, observable } from 'mobx'
-import { getBoxOfficeListService, GetBoxOfficeListServiceRequestType, GetBoxOfficeListServiceResponseType} from '../../services'
+import { boxOfficeListMock } from '../../mocks';
+import { httpFetcher } from '../../utils';
+
+export type GetBoxOfficeListServiceRequestType = {
+    key: string,
+    targetDt: string,
+    itemPerPage?: string,
+    multiMovieYn?: string,
+    repNationCd?: string,
+    wideAreaCd?: string
+}
+
+export type BasicInfoType = {
+    imgUrl : string,
+    title : string,
+    type : string[]
+}
+
+export type DetailInfoType = {
+    
+}
 
 class MoviesBoxofficeService {
    
     BoxOfficeListService(url: string, params: GetBoxOfficeListServiceRequestType) {
-        
-        let moviesResopnseData: GetBoxOfficeListServiceResponseType['moviesData'] = [];
-        
-        getBoxOfficeListService(url, params).then((response) => {
-            moviesResopnseData = response.moviesData;
-        });
-        
-        return moviesResopnseData;
+        return httpFetcher(url, params, boxOfficeListMock);        
     }   
 
 }
@@ -19,15 +32,16 @@ class MoviesBoxofficeService {
 
 export class MoviesDetail {
 
-    movieList = null;
-    movieDetail = null;
+    basicInfo : BasicInfoType = {imgUrl : '', title : '', type : []};
+    detailInfo : DetailInfoType = [];
 
-    constructor(props:any) {
-        this.movieList = props;
+    constructor(props : any) {
+        
+        this.basicInfo = props;
 
         makeObservable(this, {
-            movieList: observable,
-            movieDetail: observable,
+            basicInfo: observable,
+            detailInfo: observable,
             getMoviesDetail : action,
         });
     }
@@ -35,7 +49,7 @@ export class MoviesDetail {
     getMoviesDetail() {
 
         /*getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
-            this.movieDetail = response.moviesDetailData; 
+            this.detailInfo = response.moviesDetailData; 
          });
         */
         
@@ -56,11 +70,9 @@ export class MovieBoxoffice {
         });
     }
 
-    getData() {
-
-        const response = new MoviesBoxofficeService().BoxOfficeListService("", { key: "", targetDt: "" });
-        this.movieitems = response.map((item) => { return new MoviesDetail(item); });
-    }
-
-        
+    async getData() {
+        const service = new MoviesBoxofficeService();
+        const response = await service.BoxOfficeListService("", { key: "", targetDt: "" });
+        this.movieitems = response.moviesData.map(item => new MoviesDetail(item));
+    }        
 }
