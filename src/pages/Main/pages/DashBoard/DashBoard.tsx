@@ -1,10 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
-import { MovieList, MovieListProps } from './components/List';
+import { MovieList } from './components/List';
 import { observer } from 'mobx-react-lite';
 import RootStore from '../../../../stores/MovieBoxOffice/RootStore';
-import { GetBoxOfficeListServiceResponseType } from '../../../../services';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,10 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const DashBoard: FC = observer(() => {
 
   const { MovieBoxoffice } = RootStore;
-  const { getData, movieitems } = MovieBoxoffice;
+  const { getMovieItemsData, movieItems } = MovieBoxoffice;
 
   useEffect(()=>{
-    getData();
+    getMovieItemsData();
   },[]);
 
   const classes = useStyles();
@@ -40,7 +39,7 @@ const DashBoard: FC = observer(() => {
       <div className={classes.root}>
         <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList items={movieitems}/>
+          <MovieList items={movieItems}/>
         </ImageList>
       </div>
     );

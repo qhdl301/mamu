@@ -7,7 +7,7 @@ class RootStore {
   
     constructor() {
       this.MovieBoxoffice = new MovieBoxoffice();
-      this.MoviesDetail = new MoviesDetail([]);
+      this.MoviesDetail = new MoviesDetail({imgUrl : '', title : '', type : []});
     }
 }
 

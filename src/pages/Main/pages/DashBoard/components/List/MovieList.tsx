@@ -1,9 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageListItem, ImageListItemBar, Typography } from '@material-ui/core/';
 import SubdirectoryArrowRightIcon from '@material-ui/icons/SubdirectoryArrowRight';
-import { BasicInfoType, MoviesDetail } from '../../../../../../stores/MovieBoxOffice/MovieBoxoffice';
+import { MoviesDetail } from '../../../../../../stores/MovieBoxOffice/MovieBoxoffice';
 
 export type MovieListProps = {
     items : MoviesDetail[];

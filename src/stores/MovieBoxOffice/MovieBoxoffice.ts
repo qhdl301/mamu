@@ -1,15 +1,5 @@
 import { action, makeObservable, observable } from 'mobx'
-import { boxOfficeListMock } from '../../mocks';
-import { httpFetcher } from '../../utils';
-
-export type GetBoxOfficeListServiceRequestType = {
-    key: string,
-    targetDt: string,
-    itemPerPage?: string,
-    multiMovieYn?: string,
-    repNationCd?: string,
-    wideAreaCd?: string
-}
+import { getBoxOfficeListService, GetBoxOfficeListServiceRequestType } from '../../services';
 
 export type BasicInfoType = {
     imgUrl : string,
@@ -23,8 +13,8 @@ export type DetailInfoType = {
 
 class MoviesBoxofficeService {
    
-    BoxOfficeListService(url: string, params: GetBoxOfficeListServiceRequestType) {
-        return httpFetcher(url, params, boxOfficeListMock);        
+    GetBoxOfficeList(url: string, params : GetBoxOfficeListServiceRequestType) {
+        return getBoxOfficeListService(url, params);        
     }   
 
 }
@@ -35,7 +25,7 @@ export class MoviesDetail {
     basicInfo : BasicInfoType = {imgUrl : '', title : '', type : []};
     detailInfo : DetailInfoType = [];
 
-    constructor(props : any) {
+    constructor(props : BasicInfoType) {
         
         this.basicInfo = props;
 
@@ -60,19 +50,18 @@ export class MoviesDetail {
 
 export class MovieBoxoffice {
     
-    movieitems : MoviesDetail[] = [];
+    movieItems : MoviesDetail[] = [];
 
     constructor(){
-        
         makeObservable(this,{
-            movieitems : observable,
-            getData : action,
+            movieItems : observable,
+            getMovieItemsData : action,
         });
     }
 
-    async getData() {
-        const service = new MoviesBoxofficeService();
-        const response = await service.BoxOfficeListService("", { key: "", targetDt: "" });
-        this.movieitems = response.moviesData.map(item => new MoviesDetail(item));
+    async getMovieItemsData() {
+        const boxOfficeService = new MoviesBoxofficeService();
+        const response = await boxOfficeService.GetBoxOfficeList("", { key: "", targetDt: "" });
+        this.movieItems = response.moviesData.map(item => new MoviesDetail(item));
     }        
 }
