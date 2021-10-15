@@ -6,6 +6,8 @@ export const httpFetcher = <RequestType, ResponseType>(
   temporaryMock: ResponseType
   ) : Promise<ResponseType> => {
   return new Promise<ResponseType>((resolve) => {
-    resolve(temporaryMock);
+    setTimeout(()=>{
+      resolve(temporaryMock);
+    },3000)
   });
 };

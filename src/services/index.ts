@@ -1,2 +1,5 @@
 export { default as getBoxOfficeListService } from './getBoxofficeService';
-export type { GetBoxOfficeListServiceRequestType, GetBoxOfficeListServiceResponseType } from './getBoxofficeService';
+export {default as getMovieDetailService} from './getMovieDetailService';
+
+export * from './getBoxofficeService'
+export * from './getMovieDetailService'

@@ -10,14 +10,14 @@ const Mission = lazy(() => import("./pages/Mission"));
 const Main:FC = () => {
 
     return (
-        <Switch>
-            <MainLayout>
+        <MainLayout>
+            <Switch>
                 <Route exact path="/" component={DashBoard}/>
-                <Route exact path="/detail" component={MovieDetail}/>
+                <Route exact path="/detail/:movieCd" component={MovieDetail}/>
                 <Route exact path="/mission" component={Mission}/>
                 <Route exact path="/wishlist" component={WishList}/>
-            </MainLayout>    
-        </Switch>
+            </Switch>
+        </MainLayout>    
     )
 
 }
