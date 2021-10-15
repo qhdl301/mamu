@@ -1,56 +1,9 @@
 import { action, makeObservable, observable } from 'mobx'
-import { getBoxOfficeListService, GetBoxOfficeListServiceRequestType } from '../../services';
+import { getBoxOfficeListService } from '../../services';
+import MovieDetail from './MovieDetail';
 
-export type BasicInfoType = {
-    imgUrl : string,
-    title : string,
-    type : string[]
-}
-
-export type DetailInfoType = {
-    
-}
-
-class MoviesBoxofficeService {
-   
-    GetBoxOfficeList(url: string, params : GetBoxOfficeListServiceRequestType) {
-        return getBoxOfficeListService(url, params);        
-    }   
-
-}
-
-
-export class MoviesDetail {
-
-    basicInfo : BasicInfoType = {imgUrl : '', title : '', type : []};
-    detailInfo : DetailInfoType = [];
-
-    constructor(props : BasicInfoType) {
-        
-        this.basicInfo = props;
-
-        makeObservable(this, {
-            basicInfo: observable,
-            detailInfo: observable,
-            getMoviesDetail : action,
-        });
-    }
-
-    getMoviesDetail() {
-
-        /*getBoxOfficeListService("", { key: "", targetDt: "" }).then((response) => {
-            this.detailInfo = response.moviesDetailData; 
-         });
-        */
-        
-    }
-
-}
-
-
-export class MovieBoxoffice {
-    
-    movieItems : MoviesDetail[] = [];
+export default class MovieBoxoffice {
+    movieItems : MovieDetail[] = [];
 
     constructor(){
         makeObservable(this,{
@@ -60,18 +13,12 @@ export class MovieBoxoffice {
     }
 
     async getMovieItemsData() {
-        const boxOfficeService = new MoviesBoxofficeService();
-        const response = await boxOfficeService.GetBoxOfficeList("", { key: "", targetDt: "" });
+        const response = await getBoxOfficeListService("", { key: "", targetDt: "" });
         
         try {
-            this.movieItems = response.moviesData.map(item => {
-                    console.log(item);
-                    return new MoviesDetail(item)
-                }
-            );
+            this.movieItems = response.moviesData.map(item => new MovieDetail(item));
         } catch (error) {
             return console.log(error);
         }
-
     }        
 }

@@ -1,7 +1,8 @@
 import { FC } from "react";
-import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
+import { Accordion, AccordionSummary, Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography } from "@material-ui/core";
 import { ArrowDropDown as ArrowDropDownIcon } from '@mui/icons-material';
 import { MuiButton } from "../../../../../../components/Button";
+import { CardMediaProps, TypographyProps } from "@mui/material";
 
 const useStyles = makeStyles({
     root: {
@@ -23,8 +24,15 @@ const useStyles = makeStyles({
     }
 });
 
-const MovieInfo : FC = () => {
-    
+export type MovieInfoProps = {
+    title: TypographyProps['children']
+    imgSrc:CardMediaProps['image']
+    description:TypographyProps['children']
+    isDetailInfoLoading:boolean;
+}
+
+const MovieInfo : FC<MovieInfoProps> = (props) => {
+    const {title, imgSrc, description, isDetailInfoLoading} = props;
     const classes = useStyles();
 
     return (
@@ -34,23 +42,27 @@ const MovieInfo : FC = () => {
                 className = {classes.img}
                 component = "img"
                 alt = "movie image"
-                image = {"https://image.news1.kr/system/photos/2021/7/1/4849903/article.jpg/dims/optimize"}
+                image = {imgSrc}
             />
             <CardContent
                 className = {classes.info}
             >
                 <Typography noWrap gutterBottom variant="h5" component="div">
-                    스파이더 맨 노 웨이 홈
+                    {title}
                 </Typography>
                 <Accordion>
                     <AccordionSummary
                         expandIcon={<ArrowDropDownIcon />}
                         id="panel1a-header"
                     >   
-                        <Typography variant="body2"> 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
+                        {isDetailInfoLoading ? (
+                            <CircularProgress/>
+                        )
+                        : (
+                            <Typography variant="body2"> 
+                                {description}
+                            </Typography>
+                        )}
                     </AccordionSummary>
                 </Accordion>
                 <br/>

@@ -12,6 +12,7 @@ export type GetBoxOfficeListServiceRequestType = {
 
 export type GetBoxOfficeListServiceResponseType = {
     moviesData : {
+        movieCd: string,
         imgUrl : string,
         title : string,
         type : string[]

@@ -3,7 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { MovieList } from './components/List';
 import { observer } from 'mobx-react-lite';
-import RootStore from '../../../../stores/MovieBoxOffice/RootStore';
+import { useRootStore } from '../../../../contexts';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,12 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const DashBoard: FC = observer(() => {
-
-  const { MovieBoxoffice } = RootStore;
-  const { getMovieItemsData, movieItems } = MovieBoxoffice;
+  const {movieBoxoffice} = useRootStore();
 
   useEffect(()=>{
-    getMovieItemsData();
+    movieBoxoffice.getMovieItemsData();
   },[]);
 
   const classes = useStyles();
@@ -39,7 +37,7 @@ const DashBoard: FC = observer(() => {
       <div className={classes.root}>
         <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList items={movieItems}/>
+          <MovieList items={movieBoxoffice.movieItems}/>
         </ImageList>
       </div>
     );
