@@ -62,6 +62,16 @@ export class MovieBoxoffice {
     async getMovieItemsData() {
         const boxOfficeService = new MoviesBoxofficeService();
         const response = await boxOfficeService.GetBoxOfficeList("", { key: "", targetDt: "" });
-        this.movieItems = response.moviesData.map(item => new MoviesDetail(item));
+        
+        try {
+            this.movieItems = response.moviesData.map(item => {
+                    console.log(item);
+                    return new MoviesDetail(item)
+                }
+            );
+        } catch (error) {
+            return console.log(error);
+        }
+
     }        
 }
