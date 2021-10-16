@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Accordion, AccordionSummary, Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography } from "@material-ui/core";
-import { ArrowDropDown as ArrowDropDownIcon } from '@mui/icons-material';
 import { MuiButton } from "../../../../../../components/Button";
-import { CardMediaProps, TypographyProps } from "@mui/material";
+import { CardMediaProps, TypographyProps } from "@material-ui/core/";
+import {ArrowDropDown as ArrowDropDownIcon} from '@material-ui/icons';
 
 const useStyles = makeStyles({
     root: {
