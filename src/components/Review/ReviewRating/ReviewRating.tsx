@@ -4,7 +4,7 @@ import { Rating, RatingProps } from '@material-ui/lab/';
 
 
 export type ReviewRatingProps = {
-    reviewTime : string;
+    reviewDate : string;
     ratingValue : RatingProps['value'];
 }
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
 
 const ReviewRating:FC<ReviewRatingProps> = (props)=>{
 
-    const { reviewTime, ratingValue } = props;
+    const { reviewDate, ratingValue } = props;
     const  classes  = useStyles();
 
     return (
@@ -35,7 +35,7 @@ const ReviewRating:FC<ReviewRatingProps> = (props)=>{
                                 setValue(newValue);
                             }}*/
                         />
-                        <Typography className={classes.rating}>{ reviewTime }</Typography>                    
+                        <Typography className={classes.rating}>{ reviewDate }</Typography>                    
                 </Grid>
             </Box>
         

@@ -6,14 +6,13 @@ import { useParams } from 'react-router';
 import { observer } from 'mobx-react-lite';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   root: {
       width: '100%',
-      height: '100%',
-      margin : 4,
-      padding : 4,
+      margin : theme.spacing(0.5),
+      padding : theme.spacing(0.5),
   }
-});
+}));
 
 const MovieDetail:FC = () => {
   const clsses = useStyles();
@@ -35,13 +34,18 @@ const MovieDetail:FC = () => {
 
   return (
     <Box className={clsses.root} component="div">
-      <MovieInfo 
-        isDetailInfoLoading={isDetailInfoLoading}
-        title={targetMovie?.basicInfo.title}
-        imgSrc={targetMovie?.basicInfo.imgUrl}
-        description={targetMovie?.detailInfo?.description}
-       />
-      <MovieReview/>
+      {targetMovie && 
+      (
+      <>
+        <MovieInfo 
+          isDetailInfoLoading={isDetailInfoLoading}
+          title={targetMovie.basicInfo.title}
+          imgSrc={targetMovie.basicInfo.imgUrl}
+          description={targetMovie.detailInfo?.description}
+        />
+        <MovieReview targetMovie={targetMovie}/>
+      </>
+      )}
     </Box>
   )
 }

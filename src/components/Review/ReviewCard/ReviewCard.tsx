@@ -1,22 +1,31 @@
-import { Card, CardHeader,Avatar, IconButton, CardContent } from '@material-ui/core';
+import { Card, CardHeader,Avatar, IconButton, CardContent, CardHeaderProps, createStyles, makeStyles } from '@material-ui/core';
 import {ThumbUp, ThumbDown} from '@material-ui/icons'
 import type {FC, ReactNode} from 'react'
-import ReviewContent, { ReviewContentProps } from '../ReviewContent/ReviewContent';
+import ReviewContent from '../ReviewContent/ReviewContent';
 import ReviewRating, { ReviewRatingProps } from '../ReviewRating/ReviewRating';
 
 export type ReviewCardProps = {
     isGood:boolean;
-    userName:string;
-    reviewsCount:string;
+    userName:CardHeaderProps['title'];
+    reviewsCount:CardHeaderProps['subheader'];
     ratingValue:ReviewRatingProps['ratingValue'];
+    reviewDate: ReviewRatingProps['reviewDate'];
     reviewContent: ReactNode
 }
 
+
+const useStyles = makeStyles((theme) => createStyles({
+    cardRoot: {
+        margin:theme.spacing(1, 0),
+    },
+}))
+
 const ReviewCard:FC<ReviewCardProps> = (props)=>{
-    const {isGood, userName, reviewsCount, ratingValue, reviewContent} = props;
+    const {isGood, userName, reviewsCount, ratingValue, reviewDate, reviewContent} = props;
+    const classes = useStyles();
 
     return (
-        <Card>
+        <Card elevation={1} className={classes.cardRoot}>
              <CardHeader
                 avatar={
                     <Avatar></Avatar>
@@ -32,9 +41,9 @@ const ReviewCard:FC<ReviewCardProps> = (props)=>{
                     </>
                 }
                 title={userName}
-                subheader={reviewsCount}
+                subheader={`${reviewsCount} reviews`}
             />
-            <ReviewRating reviewTime={`${3} days ago`} ratingValue={ratingValue}/>
+            <ReviewRating reviewDate ={`${reviewDate} days ago`} ratingValue={ratingValue}/>
             <CardContent>
                 <ReviewContent>{reviewContent}</ReviewContent>
             </CardContent>

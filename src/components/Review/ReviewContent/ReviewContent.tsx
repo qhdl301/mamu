@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core';
-import {Children, FC} from 'react'
+import { FC } from 'react'
 
 export type ReviewContentProps = {
 }

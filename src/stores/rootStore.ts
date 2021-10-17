@@ -1,10 +1,9 @@
-import MovieBoxoffice from './MovieBoxOffice/MovieBoxoffice';
+import { MovieBoxOffice } from './MovieBoxOffice/';
 
 export class RootStore {
-  movieBoxoffice : MovieBoxoffice;
-  
+  movieBoxoffice : MovieBoxOffice;
   constructor() {
-    this.movieBoxoffice = new MovieBoxoffice();
+    this.movieBoxoffice = new MovieBoxOffice();
   }
 }
 
