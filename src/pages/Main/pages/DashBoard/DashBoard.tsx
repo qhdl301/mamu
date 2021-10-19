@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { MovieList } from './components/List';
@@ -26,9 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const DashBoard: FC = observer(() => {
   const {movieBoxoffice} = useRootStore();
-
+  const [isMovieListIsLoading, setIsMovieListIsLoading] = useState(true);
   useEffect(()=>{
-    movieBoxoffice.getMovieItemsData();
+    movieBoxoffice.getMovieItemsData().then(()=>{
+      setIsMovieListIsLoading(false);
+    });
   },[]);
 
   const classes = useStyles();
@@ -37,7 +39,7 @@ const DashBoard: FC = observer(() => {
       <div className={classes.root}>
         <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList items={movieBoxoffice.movieItems}/>
+          <MovieList items={movieBoxoffice.movieItems} isMovieListIsLoading={isMovieListIsLoading}/>
         </ImageList>
       </div>
     );
