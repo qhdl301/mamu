@@ -1,11 +1,20 @@
 import {observable, action, makeObservable} from 'mobx';
-import {getMovieDetailService} from '../../services';
+import {getMovieDetailService, getReviewService} from '../../services';
 
 export type BasicInfoType = {
     movieCd: string;
     imgUrl : string;
     title : string;
     type : string[];
+}
+
+export type ReviewInfoType = {
+    isGood : boolean;
+    userName : string;
+    reviewsCount : string;
+    ratingValue : string;
+    reviewDate : string;
+    reviewContent: string;
 }
 
 export type DetailInfoType = {
@@ -16,6 +25,7 @@ export type DetailInfoType = {
 export default class MovieDetail {
     basicInfo : BasicInfoType
     detailInfo : DetailInfoType | null = null
+    reviewInfos : ReviewInfoType[] = []
 
     constructor(props : BasicInfoType) {
         this.basicInfo = props;
@@ -23,13 +33,23 @@ export default class MovieDetail {
         makeObservable(this, {
             basicInfo: observable,
             detailInfo: observable,
+            reviewInfos: observable,
             getDetail : action,
+            getReviewInfos : action,
         });
     }
 
     async getDetail() {
-        const res = await getMovieDetailService("", { movieCd:this.basicInfo.movieCd })
         
-        this.detailInfo = res;
+        this.detailInfo = await getMovieDetailService("", { movieCd:this.basicInfo.movieCd });
+
     }
+
+    async getReviewInfos() {
+        
+        this.reviewInfos = await getReviewService("", { movieCd:this.basicInfo.movieCd });
+
+    }
+
+
 }
