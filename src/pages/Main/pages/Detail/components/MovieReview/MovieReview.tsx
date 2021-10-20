@@ -1,7 +1,8 @@
 import { FC, useState, useEffect } from "react";
-import { Box, CircularProgress, makeStyles } from "@material-ui/core";
+import { Box, makeStyles } from "@material-ui/core";
 import { ReviewCard } from "../../../../../../components";
 import { MovieDetail } from "../../../../../../stores";
+import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
 
 const useStyles = makeStyles((theme)=>(
     {
@@ -34,7 +35,7 @@ const MovieReview : FC<MovieReviewProps> = (props) => {
        <Box className={classes.root}>
            {
             isMovieReviewInfosLoading ? (
-                <CircularProgress/>
+                <CustmomCircleProgress/>
             ) : (
                 targetMovie.reviewInfos.map((item, index) => (
                     <ReviewCard 

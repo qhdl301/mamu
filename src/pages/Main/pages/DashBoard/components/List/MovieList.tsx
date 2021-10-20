@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { CircularProgress, ImageListItem, ImageListItemBar, Typography } from '@material-ui/core/';
+import { ImageListItem, ImageListItemBar, Typography } from '@material-ui/core/';
 import SubdirectoryArrowRightIcon from '@material-ui/icons/SubdirectoryArrowRight';
 import { MovieDetail } from '../../../../../../stores';
+import { CustmomCircleProgress } from '../../../../../../components/Progress/Circle';
 
 export type MovieListProps = {
     items : MovieDetail[];
@@ -31,7 +32,7 @@ const MovieList : FC<MovieListProps> = (props) => {
         <>
             {
                 isMovieListIsLoading ? 
-                    <CircularProgress/> : 
+                    <CustmomCircleProgress/> : 
                     (
                         result.map((item, index) => (
                             <ImageListItem className={classes.listItem} component={Link} to={`/detail/${item.movieCd}`} key={index}>

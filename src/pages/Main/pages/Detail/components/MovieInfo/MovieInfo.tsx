@@ -1,8 +1,9 @@
 import { FC } from "react";
-import { Accordion, AccordionSummary, Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography } from "@material-ui/core";
-import { MuiButton } from "../../../../../../components/Button";
+import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
 import { CardMediaProps, TypographyProps } from "@material-ui/core/";
 import {ArrowDropDown as ArrowDropDownIcon} from '@material-ui/icons';
+import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
+import { MuiButton } from "../../../../../../components";
 
 const useStyles = makeStyles({
     root: {
@@ -56,7 +57,7 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                         id="panel1a-header"
                     >   
                         {isDetailInfoLoading ? (
-                            <CircularProgress/>
+                            <CustmomCircleProgress/>
                         )
                         : (
                             <Typography variant="body2"> 
