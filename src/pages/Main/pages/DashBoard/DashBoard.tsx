@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
-import { MovieList } from './components/List';
+import { DailyMovieBoxOfficeList } from './components/List';
 import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../../../../contexts';
 
@@ -39,7 +39,7 @@ const DashBoard: FC = observer(() => {
       <div className={classes.root}>
         <Typography variant="h6" gutterBottom component="div">일간 박스오피스</Typography>
         <ImageList className={classes.imageList} cols={3} gap={1}>
-          <MovieList items={movieBoxoffice.movieItems} isMovieListIsLoading={isMovieListIsLoading}/>
+          <DailyMovieBoxOfficeList items={movieBoxoffice.movieItems} isMovieListIsLoading={isMovieListIsLoading}/>
         </ImageList>
       </div>
     );

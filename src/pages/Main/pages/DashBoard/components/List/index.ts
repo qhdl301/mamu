@@ -1,2 +1,2 @@
-export { default as MovieList} from './MovieList';
-export type { MovieListProps } from './MovieList';
+export { default as DailyMovieBoxOfficeList } from './DailyMovieBoxOfficeList';
+export type { MovieListProps } from './DailyMovieBoxOfficeList';
