@@ -1,5 +1,5 @@
 import {observable, action, makeObservable} from 'mobx';
-import {getMovieDetailService, getReviewService} from '../../services';
+import {getMovieDetailService, getReviewService, createReviewService} from '../../services';
 
 export type BasicInfoType = {
     movieCd: string;
@@ -9,12 +9,12 @@ export type BasicInfoType = {
 }
 
 export type ReviewInfoType = {
-    isGood : boolean;
     userName : string;
-    reviewsCount : string;
-    ratingValue : string;
-    reviewDate : string;
-    reviewContent: string;
+    movieCd: string;
+    uid : string;
+    reviewRating : number;
+    timeStamp : number;
+    review: string;
 }
 
 export type DetailInfoType = {
@@ -36,20 +36,24 @@ export default class MovieDetail {
             reviewInfos: observable,
             getDetail : action,
             getReviewInfos : action,
+            insertReviewInfo : action
         });
     }
 
     async getDetail() {
-        
         this.detailInfo = await getMovieDetailService("", { movieCd:this.basicInfo.movieCd });
-
     }
 
     async getReviewInfos() {
-        
         this.reviewInfos = await getReviewService("", { movieCd:this.basicInfo.movieCd });
-
     }
 
-
+    insertReviewInfo(reviewInfoWithoutMoiveCd : Omit<ReviewInfoType, 'movieCd'>) {
+        createReviewService({
+            movieCd: this.basicInfo.movieCd,
+            ...reviewInfoWithoutMoiveCd
+        }).then(()=>{
+            this.getReviewInfos();
+        });
+    }
 }

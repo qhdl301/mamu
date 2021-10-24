@@ -10,10 +10,10 @@ export const Default = ()=>{
     return (
         <>
             <Typography>Good Case</Typography>
-            <ReviewCard isGood={true} userName={'김영수'} reviewsCount={133} reviewDate={'3'} ratingValue={2} reviewContent={'안녕하세요. 김영수입니다.'}/>
+            <ReviewCard userName={'김영수'} reviewDate={'3'} reviewRating={2} review={'안녕하세요. 김영수입니다.'}/>
 
             <Typography>Bad Case</Typography>
-            <ReviewCard isGood={false} userName={'마성민'} reviewsCount={133} reviewDate={'3'} ratingValue={2} reviewContent={'안녕하세요. 마성민입니다.'}/>
+            <ReviewCard userName={'마성민'} reviewDate={'3'} reviewRating={2} review={'안녕하세요. 마성민입니다.'}/>
         </>
     )
 }
