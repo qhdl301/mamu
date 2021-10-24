@@ -1,11 +1,12 @@
 import firebase from 'firebase';
 
 export type CreateReviewRequestType = {
-    uid: string;
+    userName : string;
     movieCd: string;
-    reviewRating: number;
+    uid : string;
+    reviewRating : number;
+    timeStamp : number;
     review: string;
-    timeStamp: number;
 }
 
 const createReviewService = (requestParam:CreateReviewRequestType)=>{

@@ -4,8 +4,8 @@ export default [
         reviewsCount : '0',
         isGood : true,
         ratingValue : '0',
-        reviewDate : '0',
-        reviewContent : '안녕하세요.오늘은 10월 15일 입니다.'
+        timeStamp : '0',
+        review : '안녕하세요.오늘은 10월 15일 입니다.'
     },
     {
         userName:'김영수 1',

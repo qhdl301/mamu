@@ -1,32 +1,32 @@
 import firebase from 'firebase';
-import { reviewInfoMock } from "../mocks";
-import { httpFetcher } from "../utils";
 
 export type GetReviewInfoServiceRequestType = {
     movieCd: string
 }
 
-export type GetReviewInfoServiceResponseType = {
-    isGood:boolean;
+export type ReviewInfo = {
     userName : string;
-    reviewsCount : string;
-    ratingValue : string;
-    reviewDate : string;
-    reviewContent: string;
+    movieCd: string;
+    uid : string;
+    reviewRating : number;
+    timeStamp : number;
+    review: string;
 }
 
-const getReviewService = (url: string, params: GetReviewInfoServiceRequestType) => {
+export type GetReviewInfoServiceResponseType = Array<ReviewInfo>
+
+const getReviewService:(url: string, params: GetReviewInfoServiceRequestType) => Promise<GetReviewInfoServiceResponseType> 
+ = (url, params) => {  
     const query = firebase.firestore()
     .collection('movie-review')
     .where('movieCd','==',params.movieCd);
 
-    query.get().then(res=>{
+    //return Promise
+    return query.get().then(res=>{
         // 요기서 실제 데이터가 넘어오네요!?
         console.log('real review',res.docs.map(doc=>doc.data()));
-    });
-
-    return httpFetcher(url, params, reviewInfoMock);
-};
-
+        return res.docs.map(doc=>doc.data()) as GetReviewInfoServiceResponseType;
+    })
+ }
 
 export default getReviewService;

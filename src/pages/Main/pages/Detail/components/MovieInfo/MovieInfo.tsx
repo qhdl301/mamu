@@ -1,10 +1,11 @@
 import { FC, useState } from "react";
 import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
-import { CardMediaProps, TypographyProps } from "@material-ui/core/";
 import {ArrowDropDown as ArrowDropDownIcon} from '@material-ui/icons';
 import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
 import { MuiButton } from "../../../../../../components";
 import { FormDialog, FormDialogProps } from "../../../../../../components/Dialog";
+import { MovieDetail } from "../../../../../../stores";
+import { useFireBaseState } from "../../../../../../contexts";
 
 const useStyles = makeStyles({
     root: {
@@ -29,16 +30,14 @@ const useStyles = makeStyles({
 });
 
 export type MovieInfoProps = {
-    title: TypographyProps['children']
-    imgSrc:CardMediaProps['image']
-    description:TypographyProps['children']
+    targetMovie : MovieDetail;
     isDetailInfoLoading:boolean;
 }
 
 const MovieInfo : FC<MovieInfoProps> = (props) => {
-    const {title, imgSrc, description, isDetailInfoLoading} = props;
+    const {isDetailInfoLoading, targetMovie} = props;
     const [open, setOpen] = useState(false);
-    
+    const firebaseState = useFireBaseState();
     const classes = useStyles();
 
     const handleFormDialogOpenClick = () => {
@@ -47,8 +46,15 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
 
     const handleSubmitButtonClick : FormDialogProps['onFormDialogSubmitClick'] = (submitObj) => {
 
-        alert(submitObj.rating);
-        alert(submitObj.reviewDescribe);
+        
+        targetMovie.insertReviewInfo({
+            userName:'***',            
+            review:submitObj.reviewDescribe,
+            reviewRating:submitObj.rating,
+            uid:firebaseState.user.uid,
+            // moment.js library
+            timeStamp:new Date().getTime(),
+        });
         setOpen(false);
         
     }
@@ -65,13 +71,13 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                 className = {classes.img}
                 component = "img"
                 alt = "movie image"
-                image = {imgSrc}
+                image = {targetMovie.basicInfo.imgUrl}
             />
             <CardContent
                 className = {classes.info}
             >
                 <Typography noWrap gutterBottom variant="h5" component="div">
-                    {title}
+                    {targetMovie.basicInfo.title}
                 </Typography>
                 <Accordion>
                     <AccordionSummary
@@ -83,7 +89,7 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                         )
                         : (
                             <Typography variant="body2"> 
-                                {description}
+                                {targetMovie.detailInfo?.description}
                             </Typography>
                         )}
                     </AccordionSummary>

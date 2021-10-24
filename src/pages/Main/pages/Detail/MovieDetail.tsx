@@ -39,9 +39,7 @@ const MovieDetail:FC = () => {
       <>
         <MovieInfo 
           isDetailInfoLoading={isDetailInfoLoading}
-          title={targetMovie.basicInfo.title}
-          imgSrc={targetMovie.basicInfo.imgUrl}
-          description={targetMovie.detailInfo?.description}
+          targetMovie={targetMovie}
         />
         <MovieReview targetMovie={targetMovie}/>
       </>

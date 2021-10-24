@@ -3,6 +3,11 @@ import { Box, makeStyles } from "@material-ui/core";
 import { ReviewCard } from "../../../../../../components";
 import { MovieDetail } from "../../../../../../stores";
 import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
+import { observer } from "mobx-react-lite";
+
+export type MaskingData = {
+    userName : string;
+}
 
 const useStyles = makeStyles((theme)=>(
     {
@@ -14,6 +19,7 @@ const useStyles = makeStyles((theme)=>(
         },
       }
 ));
+
 
 export type MovieReviewProps = {
     targetMovie : MovieDetail
@@ -41,11 +47,9 @@ const MovieReview : FC<MovieReviewProps> = (props) => {
                     <ReviewCard 
                         key = {index}
                         userName = {item.userName}
-                        isGood = {item.isGood}
-                        reviewsCount = {item.reviewsCount}
-                        ratingValue = {Number(item.ratingValue)}
-                        reviewDate = {item.reviewDate}
-                        reviewContent = {item.reviewContent}
+                        reviewRating = {Number(item.reviewRating)}
+                        reviewDate = {String(item.timeStamp)}
+                        review = {item.review}
                     />
                 ))
             )
@@ -55,4 +59,4 @@ const MovieReview : FC<MovieReviewProps> = (props) => {
 
 }
 
-export default MovieReview;
+export default observer(MovieReview);
