@@ -1,9 +1,10 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
 import { CardMediaProps, TypographyProps } from "@material-ui/core/";
 import {ArrowDropDown as ArrowDropDownIcon} from '@material-ui/icons';
 import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
 import { MuiButton } from "../../../../../../components";
+import { FormDialog, FormDialogProps } from "../../../../../../components/Dialog";
 
 const useStyles = makeStyles({
     root: {
@@ -18,10 +19,12 @@ const useStyles = makeStyles({
         width: '70%',
     },
     button:{
-        width: '100%',
+        width: '30%',
+        border : 1,
         borderRadius : 3,
+        borderColor : 'primary.main',
         variant : 'outlined',
-        size : 'large'
+        size : 'large',
     }
 });
 
@@ -34,7 +37,26 @@ export type MovieInfoProps = {
 
 const MovieInfo : FC<MovieInfoProps> = (props) => {
     const {title, imgSrc, description, isDetailInfoLoading} = props;
+    const [open, setOpen] = useState(false);
+    
     const classes = useStyles();
+
+    const handleFormDialogOpenClick = () => {
+        setOpen(true);
+    };
+
+    const handleSubmitButtonClick : FormDialogProps['onFormDialogSubmitClick'] = (submitObj) => {
+
+        alert(submitObj.rating);
+        alert(submitObj.reviewDescribe);
+        setOpen(false);
+        
+    }
+    
+    const handleCloseButtonClick = () => {
+        setOpen(false);
+    };
+
 
     return (
 
@@ -73,7 +95,10 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                 <Typography noWrap gutterBottom variant="subtitle2" component="div">
                     목포 영화 수 {30}/{30}
                 </Typography>
-                <MuiButton className={classes.button}>본 영화로 등록하기</MuiButton>
+                <div>
+                    <MuiButton className={classes.button} onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
+                    <FormDialog open={open} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
+                </div>
             </CardContent>
         </Card>
 

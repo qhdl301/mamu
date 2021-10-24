@@ -2,15 +2,16 @@ import { FC } from "react";
 import { Button, ButtonProps as MuiButtonProps } from '@material-ui/core/';
 
 export type ButtonProps = {
-    className : MuiButtonProps['className']
+    className : MuiButtonProps['className'];
+    onClick : () => void;
 }
 
 const MuiButton : FC<ButtonProps> = (props) => {
 
-    const { children, className } = props;
+    const { children, className, onClick } = props;
     
     return (
-        <Button className={className}>{children}</Button>
+        <Button className={className} onClick={onClick}>{children}</Button>
     )
 
 }
