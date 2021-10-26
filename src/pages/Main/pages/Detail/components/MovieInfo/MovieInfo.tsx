@@ -14,18 +14,16 @@ const useStyles = makeStyles({
         height: '60%',
     },
     img: {
+        position: 'relative',
         width: '30%',
     },
     info: {
+        position: 'relative',
         width: '70%',
     },
     button:{
+        position: 'relative',
         width: '30%',
-        border : 1,
-        borderRadius : 3,
-        borderColor : 'primary.main',
-        variant : 'outlined',
-        size : 'large',
     }
 });
 
