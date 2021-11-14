@@ -11,7 +11,7 @@ const MuiButton : FC<ButtonProps> = (props) => {
     const { children, className, onClick } = props;
     
     return (
-        <Button className={className} onClick={onClick}>{children}</Button>
+        <Button className={className} variant="contained" color="primary" onClick={onClick}>{children}</Button>
     )
 
 }

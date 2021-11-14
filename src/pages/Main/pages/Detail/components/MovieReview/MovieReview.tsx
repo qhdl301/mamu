@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme)=>(
         root: {
             marginTop: theme.spacing(1),
             width : '100%',
-            height: '400px',
+            height: '40%',
             overflowY : 'scroll',
         },
       }
