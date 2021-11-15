@@ -44,7 +44,7 @@ const Navigation:FC<NavigationProps> = (props) => {
             >
                 <BottomNavigationAction label="대쉬보드" icon={<HomeIcon />} component={Link} to={'/'}/>
                 <BottomNavigationAction label="개인성과" icon={<ImportContactsIcon/>} component={Link} to={'/mission'}/>
-                <BottomNavigationAction label="Wishlist" icon={<FavoriteIcon />} component={Link} to={'/wishlist'}/>
+                <BottomNavigationAction label="Feed" icon={<FavoriteIcon />} component={Link} to={'/Feed'}/>
             </BottomNavigation>
         </AppBar>    
     )

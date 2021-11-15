@@ -5,7 +5,7 @@ const WishList:FC = () => {
     
   return (
     <Box component="span">
-      위시리스트 페이지입니다.
+      피드 페이지입니다.
     </Box>
   )
 }

@@ -45,7 +45,7 @@ export default class MovieDetail {
     }
 
     async getReviewInfos() {
-        this.reviewInfos = await getReviewService("", { movieCd:this.basicInfo.movieCd });
+        this.reviewInfos = await getReviewService({ movieCd:this.basicInfo.movieCd });
     }
 
     insertReviewInfo(reviewInfoWithoutMoiveCd : Omit<ReviewInfoType, 'movieCd'>) {
