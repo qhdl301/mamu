@@ -12,8 +12,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap',
       justifyContent: 'space-left',
       overflow: 'hidden',
-      margin : 1,
       backgroundColor: theme.palette.background.paper,
+      margin: theme.spacing(1),
+      padding: theme.spacing(1),
     },
     imageList: {
       width : '100%',
@@ -25,15 +26,15 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const DashBoard: FC = observer(() => {
+  const classes = useStyles();
   const {movieBoxoffice} = useRootStore();
   const [isMovieListIsLoading, setIsMovieListIsLoading] = useState(true);
+  
   useEffect(()=>{
     movieBoxoffice.getMovieItemsData().then(()=>{
       setIsMovieListIsLoading(false);
     });
   },[]);
-
-  const classes = useStyles();
 
     return (
       <div className={classes.root}>

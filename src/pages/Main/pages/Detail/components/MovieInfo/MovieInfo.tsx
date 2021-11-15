@@ -7,7 +7,7 @@ import { FormDialog, FormDialogProps } from "../../../../../../components/Dialog
 import { MovieDetail } from "../../../../../../stores";
 import { useFireBaseState } from "../../../../../../contexts";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         display : 'flex',
         width: '100%',
@@ -22,10 +22,11 @@ const useStyles = makeStyles({
         width: '70%',
     },
     button:{
-        position: 'relative',
-        width: '30%',
+        position: 'absolute',
+        bottom: theme.spacing(1),
+        width : '95%'
     }
-});
+}));
 
 export type MovieInfoProps = {
     targetMovie : MovieDetail;
@@ -43,18 +44,14 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
     };
 
     const handleSubmitButtonClick : FormDialogProps['onFormDialogSubmitClick'] = (submitObj) => {
-
-        
         targetMovie.insertReviewInfo({
             userName:'***',            
             review:submitObj.reviewDescribe,
             reviewRating:submitObj.rating,
             uid:firebaseState.user.uid,
-            // moment.js library
             timeStamp:new Date().getTime(),
         });
         setOpen(false);
-        
     }
     
     const handleCloseButtonClick = () => {

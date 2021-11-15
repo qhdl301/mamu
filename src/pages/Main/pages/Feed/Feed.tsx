@@ -5,10 +5,9 @@ import { Add as AddIcon }  from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '95%',
     height: '100%',
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
+    margin: theme.spacing(2.5),
   },
   fab: {
     position: 'absolute',
@@ -23,7 +22,9 @@ const Feed:FC = () => {
 
   return (
     <Box className={classes.root} component="div">
-      <FeedCard feedPostData={{ userName : '김영수', content: '이터널스 너무재밌어용' } } />
+    
+      <FeedCard feedPostData={{ userName : '김영수', content: '이터널스 너무재밌어용', writeTime : '1시간전' } } />
+      
       <Fab className={classes.fab} color="primary" aria-label="add">
         <AddIcon />
       </Fab>
