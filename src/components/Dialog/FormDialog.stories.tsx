@@ -8,6 +8,6 @@ export default {
 export const Default = ()=>{
 
     return (
-        <FormDialog open={true} onFormDialogSubmitClick={()=>{}} onFormDialogCloseClick={()=>{}}/>
+        <FormDialog type={''} open={true} onFormDialogSubmitClick={()=>{alert('')}} onFormDialogCloseClick={()=>{alert('sdsd')}}/>
     )
 }

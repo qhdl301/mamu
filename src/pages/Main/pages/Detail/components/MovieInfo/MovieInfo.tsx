@@ -98,7 +98,7 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                 </Typography>
                 <div>
                     <MuiButton className={classes.button} onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
-                    <FormDialog open={open} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
+                    <FormDialog type={'movieInfo'} open={open} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
                 </div>
             </CardContent>
         </Card>

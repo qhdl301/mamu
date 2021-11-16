@@ -8,6 +8,7 @@ export type FormDialogItem = {
 }
 
 export type FormDialogProps = {
+  type : string;
   open : boolean;
   onFormDialogSubmitClick : (reviewData:FormDialogItem) => void;
   onFormDialogCloseClick : () => void;
@@ -33,11 +34,18 @@ const useStyles = makeStyles({
 });
 
 const FormDialog : FC<FormDialogProps> = (props) => {
-  const { open, onFormDialogCloseClick, onFormDialogSubmitClick } = props;
+  const { type, open, onFormDialogCloseClick, onFormDialogSubmitClick } = props;
+  let typeName = '';
   const [rating, setRating] = useState<FormDialogItem['rating']>(0);
   const [reviewDescribe, setReviewDescribe] = useState<FormDialogItem['reviewDescribe']>("");
   const [hover, setHover] = useState(-1);
   const classes = useStyles();
+
+  if (type.indexOf('movieInfo') > -1) {
+    typeName = '리뷰';
+  } else {
+    typeName = '피드';
+  }
 
   const handleSubmitClick = useCallback(() => {
     onFormDialogSubmitClick(
@@ -54,7 +62,7 @@ const FormDialog : FC<FormDialogProps> = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={onFormDialogCloseClick} aria-labelledby="form-dialog-title" fullWidth> 
-        <DialogTitle>당신에 리뷰를 남겨주세요</DialogTitle>
+        <DialogTitle>당신에 {typeName}를 남겨주세요</DialogTitle>
         <DialogContent>
           <Box className={classes.rating}>
             <Rating  
@@ -69,7 +77,7 @@ const FormDialog : FC<FormDialogProps> = (props) => {
             autoFocus
             margin="dense"
             id="review_Dailog_textArea"
-            label="리뷰를 작성해주세요."
+            label="당신에 생각을 적어주세요."
             type="search"
             multiline
             fullWidth

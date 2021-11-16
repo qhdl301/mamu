@@ -4,7 +4,8 @@ import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon}
 
 export type FeedCardProps = {
     feedPostData: {
-        userName : CardHeaderProps['title'],
+        userName: CardHeaderProps['title'],
+        greatCount: number;
         content: string,
         writeTime : string,
     }
@@ -27,6 +28,9 @@ const FeedCard : FC<FeedCardProps> = (props) => {
                 title={feedPostData.userName}
             />
             <CardContent>
+                <Typography variant="subtitle1" color="textPrimary" component="p">
+                    {feedPostData.greatCount}
+                </Typography>
                 <Typography variant="body1" color="textSecondary" component="p">
                     {feedPostData.content}
                 </Typography>
