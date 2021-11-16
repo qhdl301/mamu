@@ -14,20 +14,15 @@ export type FormDialogProps = {
   onFormDialogCloseClick : () => void;
 }
   const labels: { [index: string]: string } = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
+    1: 'Hated it',
+    2: 'Disliked it',
+    3: 'It was Ok',
+    4: 'Liked it',
+    5: 'Loved it',
   };
 const useStyles = makeStyles({
   rating : {
-    width: 200,
+    width: 300,
     display: 'flex',
     alignItems: 'center',
   },
@@ -64,15 +59,18 @@ const FormDialog : FC<FormDialogProps> = (props) => {
       <Dialog open={open} onClose={onFormDialogCloseClick} aria-labelledby="form-dialog-title" fullWidth> 
         <DialogTitle>당신에 {typeName}를 남겨주세요</DialogTitle>
         <DialogContent>
-          <Box className={classes.rating}>
-            <Rating  
-              value={rating}
-              size='large'
-              onChange={(event, newValue) => {setRating(newValue ?? 0)}}
-              onChangeActive={(event, newHover) => {setHover(newHover)}}
-            />
-            {rating !== null && <Box ml={2}>{labels[hover !== -1 ? hover : rating]}</Box>}
-          </Box>
+          { typeName === '리뷰'? 
+            <Box className={classes.rating}>
+              <Rating 
+                value={rating}
+                size='large'
+                onChange={(event, newValue) => {setRating(newValue ?? 0)}}
+                onChangeActive={(event, newHover) => {setHover(newHover)}}
+              />
+              {rating !== null && <Box ml={2}>{labels[hover !== -1 ? hover : rating]}</Box>}
+            </Box>
+            : <></>
+          }
           <TextField
             autoFocus
             margin="dense"
