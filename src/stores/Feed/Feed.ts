@@ -1,25 +1,24 @@
 import { action, makeObservable, observable } from 'mobx';
-import { createFeedService, CreateFeedRequestType, getFeedService } from '../../services';
+import { createFeedService, FeedInfo, getFeedService } from '../../services';
 
 export default class Feed {
 
-    feedbasicInfo : CreateFeedRequestType;
+    feedInfos : FeedInfo[] = [];
 
-    constructor(props: CreateFeedRequestType) {
-        this.feedbasicInfo = props;
+    constructor() {
         
          makeObservable(this, {
-            feedbasicInfo: observable,
+            feedInfos: observable,
             getFeedInfos : action,
             insertFeedInfo: action,
          });
     }
 
     async getFeedInfos() {
-        //this.feedbasicInfo = await getFeedService();
+        this.feedInfos = await getFeedService();
     }
 
-    insertFeedInfo(FeedInfoData: CreateFeedRequestType) {
+    insertFeedInfo(FeedInfoData: FeedInfo) {
         createFeedService({
             ...FeedInfoData
         })

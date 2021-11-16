@@ -18,7 +18,6 @@ export type ReviewInfoType = {
 }
 
 export type DetailInfoType = {
-    //dummy
     description:string
 }
 

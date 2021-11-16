@@ -1,28 +1,24 @@
 import firebase from 'firebase';
 
-export type GetReviewInfoServiceRequestType = {
-    movieCd: string
-}
-
 export type FeedInfo = {
-    userName : string;
-    movieCd: string;
     uid : string;
-    reviewRating : number;
+    userName: string;
     timeStamp : number;
-    review: string;
+    movieCd: string;
+    movieName: string;
+    movieLink: string;
+    greatCount: number;
+    postfeed: string;
 }
 
-export type GetReviewInfoServiceResponseType = Array<FeedInfo>
+export type GetFeedInfoServiceResponseType = Array<FeedInfo>
 
-const getReviewService:(params: GetReviewInfoServiceRequestType) => Promise<GetReviewInfoServiceResponseType> 
- = (params) => {  
+const getReviewService = () => {  
     const query = firebase.firestore()
-    .collection('movie-review')
-    .where('movieCd','==',params.movieCd);
+    .collection('movie-review');
     
     return query.get().then(res=>{
-        return res.docs.map(doc=>doc.data()) as GetReviewInfoServiceResponseType;
+        return res.docs.map(doc=>doc.data()) as GetFeedInfoServiceResponseType;
     })
  }
 

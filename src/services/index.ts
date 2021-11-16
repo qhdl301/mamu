@@ -8,6 +8,6 @@ export { default as createFeedService } from './createFeedService';
 export * from './getBoxofficeService'
 export * from './getMovieDetailService'
 export * from './getReviewService'
-//export * from './getFeedService'
+export * from './getFeedService'
 export * from './createReviewService'
 export * from './createFeedService'
