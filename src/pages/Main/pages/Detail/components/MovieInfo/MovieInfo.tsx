@@ -65,7 +65,7 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
             review:reviewDescribe,
             reviewRating:rating,
             uid:firebaseState.user.uid,
-            timeStamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`,
+            timeStamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
         });
         setOpen(false);
     }

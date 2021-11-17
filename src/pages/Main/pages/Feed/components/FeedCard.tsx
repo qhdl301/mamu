@@ -1,21 +1,32 @@
 import { FC } from "react";
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, Typography } from "@material-ui/core";
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, makeStyles, Typography } from "@material-ui/core";
 import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon} from '@material-ui/icons/';
 
 export type FeedCardProps = {
     feedPostData: {
         userName: CardHeaderProps['title'],
+        movieName : string;
         greatCount: number;
         content: string,
-        writeTime : string,
+        writeTime : number,
     }
 }
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        position : 'relative',
+        width: '100%',
+        height: '100%',
+        marginTop : theme.spacing(1),
+    }
+  }));
+
 const FeedCard : FC<FeedCardProps> = (props) => {
     const { feedPostData } = props;
+    const classes = useStyles();
 
     return (
-        <Card elevation={1}>
+        <Card className={classes.root} elevation={1}>
              <CardHeader
                 avatar={
                     <Avatar aria-label="recipe"></Avatar>
@@ -29,13 +40,13 @@ const FeedCard : FC<FeedCardProps> = (props) => {
             />
             <CardContent>
                 <Typography variant="subtitle1" color="textPrimary" component="p">
-                    {feedPostData.greatCount}
+                    {feedPostData.movieName}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" component="p">
                     {feedPostData.content}
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary" component="p">
-                    {feedPostData.writeTime}
+                    {feedPostData.writeTime+'일 전'}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

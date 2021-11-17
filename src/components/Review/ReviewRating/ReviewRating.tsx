@@ -4,7 +4,7 @@ import { Rating, RatingProps } from '@material-ui/lab/';
 
 
 export type ReviewRatingProps = {
-    reviewDate : string;
+    reviewDate : number;
     ratingValue : RatingProps['value'];
 }
 
@@ -35,7 +35,7 @@ const ReviewRating:FC<ReviewRatingProps> = (props)=>{
                                 setValue(newValue);
                             }}*/
                         />
-                        <Typography className={classes.rating}>{ reviewDate }</Typography>                    
+                        <Typography className={classes.rating}>{ reviewDate + '일 전' }</Typography>                    
                 </Grid>
             </Box>
         

@@ -6,6 +6,7 @@ import { FormDialog, FormDialogProps } from "../../../../components/Dialog";
 import { useRootStore } from '../../../../contexts';
 import { useFireBaseState } from "../../../../contexts";
 import { observer } from 'mobx-react-lite';
+import { dateDiff } from '../../../../utils';
 
 export type FormDialogFeedItem = {
   movieName : string;
@@ -14,9 +15,11 @@ export type FormDialogFeedItem = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '60%',
     height: '100%',
-    margin: theme.spacing(1),
+    marginLeft : 'auto',
+    marginRight : 'auto',
+
   },
   fab: {
     position: 'absolute',
@@ -54,7 +57,7 @@ const Feed:FC = () => {
     feedPost.insertFeedInfo({
       userName: '***',
       uid: firebaseState.user.uid,   
-      timeStamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`,
+      timeStamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
       movieName : movieName,
       greatCount: Number(1),
       postfeed: postFeed,
@@ -69,7 +72,7 @@ const Feed:FC = () => {
   return (
     <Box className={classes.root} component="div">
       {feedPost.feedInfos.map((item, index) => 
-        <FeedCard key={index} feedPostData={{ userName: item.userName, content: item.postfeed, writeTime: item.timeStamp, greatCount: Number(item.greatCount)}} />
+        <FeedCard key={index} feedPostData={{ userName: item.userName, movieName: item.movieName, content: item.postfeed, writeTime: dateDiff(item.timeStamp), greatCount: Number(item.greatCount)}} />
       )}
       <div>
         <Fab className={classes.fab} color="primary" aria-label="add" onClick={handleFormDialogOpenClick}>

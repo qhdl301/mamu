@@ -29,7 +29,7 @@ const ReviewCard:FC<ReviewCardProps> = (props)=>{
                 }
                 title={userName}
             />
-            <ReviewRating reviewDate ={`${reviewDate} days ago`} ratingValue={reviewRating}/>
+            <ReviewRating reviewDate ={reviewDate} ratingValue={reviewRating}/>
             <CardContent>
                 <ReviewContent>{review}</ReviewContent>
             </CardContent>

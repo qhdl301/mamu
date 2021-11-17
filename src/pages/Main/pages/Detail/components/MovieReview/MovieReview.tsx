@@ -4,6 +4,7 @@ import { ReviewCard } from "../../../../../../components";
 import { MovieDetail } from "../../../../../../stores";
 import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
 import { observer } from "mobx-react-lite";
+import { dateDiff } from "../../../../../../utils";
 
 export type MaskingData = {
     userName : string;
@@ -48,7 +49,7 @@ const MovieReview : FC<MovieReviewProps> = (props) => {
                         key = {index}
                         userName = {item.userName}
                         reviewRating = {Number(item.reviewRating)}
-                        reviewDate = {item.timeStamp}
+                        reviewDate = {dateDiff(item.timeStamp)}
                         review = {item.review}
                     />
                 ))
