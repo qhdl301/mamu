@@ -36,15 +36,16 @@ const MovieDetail:FC = () => {
   return (
     <Box className={clsses.root} component="div">
       {targetMovie && 
-      (
-      <>
-        <MovieInfo 
-          isDetailInfoLoading={isDetailInfoLoading}
-          targetMovie={targetMovie}
-        />
-        <MovieReview targetMovie={targetMovie}/>
-      </>
-      )}
+        (
+          <>
+            <MovieInfo 
+              isDetailInfoLoading={isDetailInfoLoading}
+              targetMovie={targetMovie}
+            />
+            <MovieReview targetMovie={targetMovie}/>
+          </>
+        )
+      }
     </Box>
   )
 }

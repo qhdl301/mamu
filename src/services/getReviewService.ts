@@ -9,7 +9,7 @@ export type ReviewInfo = {
     movieCd: string;
     uid : string;
     reviewRating : number;
-    timeStamp : number;
+    timeStamp : string;
     review: string;
 }
 

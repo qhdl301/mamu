@@ -3,10 +3,8 @@ import firebase from 'firebase';
 export type CreateFeedRequestType = {
     uid : string;
     userName: string;
-    timeStamp : number;
-    movieCd: string;
+    timeStamp : string;
     movieName: string;
-    movieLink: string;
     greatCount: number;
     postfeed: string;
 }

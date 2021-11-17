@@ -1,15 +1,22 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Box, Fab, makeStyles } from '@material-ui/core';
-import FeedCard from './components/FeedCard';
 import { Add as AddIcon } from '@material-ui/icons';
-import { FormDialog } from "../../../../components/Dialog";
+import FeedCard from './components/FeedCard';
+import { FormDialog, FormDialogProps } from "../../../../components/Dialog";
 import { useRootStore } from '../../../../contexts';
+import { useFireBaseState } from "../../../../contexts";
+import { observer } from 'mobx-react-lite';
+
+export type FormDialogFeedItem = {
+  movieName : string;
+  postFeed : string;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '95%',
+    width: '100%',
     height: '100%',
-    margin: theme.spacing(2.5),
+    margin: theme.spacing(1),
   },
   fab: {
     position: 'absolute',
@@ -20,12 +27,40 @@ const useStyles = makeStyles((theme) => ({
 
 const Feed:FC = () => {
   const classes = useStyles();
+  const firebaseState = useFireBaseState();
   const [open, setOpen] = useState(false);
+  const [movieName, setMovieName] = useState<FormDialogFeedItem['movieName']>("");
+  const [postFeed, setPostFeed] = useState<FormDialogFeedItem['postFeed']>("");
   const { feedPost } = useRootStore();
+  const date = new Date();
+
+  useEffect(()=>{
+    feedPost.getFeedInfos();
+  }, []);
   
   const handleFormDialogOpenClick = () => {
-      setOpen(true);
+    setOpen(true);
   };
+
+  const changeMovieData = (movieData : FormDialogFeedItem['movieName']) => {
+    setMovieName(movieData);
+  }
+
+  const changePostFeedData = (feedData : FormDialogFeedItem['postFeed']) => {
+    setPostFeed(feedData);
+  }
+
+  const handleSubmitButtonClick: FormDialogProps['onFormDialogSubmitClick'] = () => {
+    feedPost.insertFeedInfo({
+      userName: '***',
+      uid: firebaseState.user.uid,   
+      timeStamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`,
+      movieName : movieName,
+      greatCount: Number(1),
+      postfeed: postFeed,
+    });
+    setOpen(false);
+  }
 
   const handleCloseButtonClick = () => {
       setOpen(false);
@@ -33,17 +68,17 @@ const Feed:FC = () => {
 
   return (
     <Box className={classes.root} component="div">
-        
-        <FeedCard feedPostData={{ userName : '김영수', content: '이터널스 너무재밌어용', writeTime : '1시간전', greatCount : 11 } } />
-        
+      {feedPost.feedInfos.map((item, index) => 
+        <FeedCard key={index} feedPostData={{ userName: item.userName, content: item.postfeed, writeTime: item.timeStamp, greatCount: Number(item.greatCount)}} />
+      )}
       <div>
         <Fab className={classes.fab} color="primary" aria-label="add" onClick={handleFormDialogOpenClick}>
           <AddIcon />
         </Fab>
-        <FormDialog type={'feed'} open={open} onFormDialogSubmitClick={() => { alert('submit')}} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
+        <FormDialog type={'feed'} open={open} movieName={movieName} postFeed={postFeed} changeMovieData={changeMovieData} changePostFeedData={changePostFeedData} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
       </div>  
     </Box>
   )
 }
 
-export default Feed;
+export default observer(Feed);

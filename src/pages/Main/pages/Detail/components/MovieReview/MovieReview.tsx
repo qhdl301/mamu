@@ -48,7 +48,7 @@ const MovieReview : FC<MovieReviewProps> = (props) => {
                         key = {index}
                         userName = {item.userName}
                         reviewRating = {Number(item.reviewRating)}
-                        reviewDate = {String(item.timeStamp)}
+                        reviewDate = {item.timeStamp}
                         review = {item.review}
                     />
                 ))

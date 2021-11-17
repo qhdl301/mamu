@@ -33,23 +33,39 @@ export type MovieInfoProps = {
     isDetailInfoLoading:boolean;
 }
 
+export type FormDialogReviewItem = {
+    rating : number;
+    reviewDescribe : string;
+}
+
 const MovieInfo : FC<MovieInfoProps> = (props) => {
     const {isDetailInfoLoading, targetMovie} = props;
     const [open, setOpen] = useState(false);
+    const [rating, setRating] = useState<FormDialogReviewItem['rating']>(0);
+    const [reviewDescribe, setReviewDescribe] = useState<FormDialogReviewItem['reviewDescribe']>("");
     const firebaseState = useFireBaseState();
     const classes = useStyles();
+    const date = new Date();
 
     const handleFormDialogOpenClick = () => {
         setOpen(true);
     };
 
-    const handleSubmitButtonClick : FormDialogProps['onFormDialogSubmitClick'] = (submitObj) => {
+    const changeRatingData = (ratingData : FormDialogReviewItem['rating']) => {
+        setRating(ratingData);
+    };
+    
+    const changeReviewDescribeData = (reviewData : FormDialogReviewItem['reviewDescribe']) => {
+        setReviewDescribe(reviewData);
+    };
+
+    const handleSubmitButtonClick : FormDialogProps['onFormDialogSubmitClick'] = () => {
         targetMovie.insertReviewInfo({
             userName:'***',            
-            review:submitObj.reviewDescribe,
-            reviewRating:submitObj.rating,
+            review:reviewDescribe,
+            reviewRating:rating,
             uid:firebaseState.user.uid,
-            timeStamp:new Date().getTime(),
+            timeStamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`,
         });
         setOpen(false);
     }
@@ -98,7 +114,7 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                 </Typography>
                 <div>
                     <MuiButton className={classes.button} onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
-                    <FormDialog type={'movieInfo'} open={open} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
+                    <FormDialog type={'movieInfo'} open={open} rating={rating} reviewDescribe={reviewDescribe} changeRatingData={changeRatingData} changeReviewDescribeData={changeReviewDescribeData} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
                 </div>
             </CardContent>
         </Card>
