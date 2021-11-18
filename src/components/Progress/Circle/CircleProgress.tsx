@@ -6,11 +6,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
       '& > * + *': {
         marginLeft: theme.spacing(2),
           },
-      justifyContent : "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems:'center',
     },
   }),
 );
