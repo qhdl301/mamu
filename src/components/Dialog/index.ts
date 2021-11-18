@@ -1,2 +1,2 @@
-export { default as FormDialog } from './FormDialog';
-export * from './FormDialog';
+export { default as FormDialogContainer } from './FormDialogContainer';
+export * from './FormDialogContainer';

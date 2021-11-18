@@ -1,4 +1,4 @@
-import FormDialog from "./FormDialog"
+import FormDialog from "./FormDialogContainer"
 
 
 export default {
@@ -8,6 +8,7 @@ export default {
 export const Default = ()=>{
 
     return (
-        <FormDialog type={''} open={true} onFormDialogSubmitClick={()=>{alert('')}} onFormDialogCloseClick={()=>{alert('sdsd')}}/>
+        <></>
+        //<FormDialog component={ <ReviewDialog ></ReviewDialog>}/>
     )
 }

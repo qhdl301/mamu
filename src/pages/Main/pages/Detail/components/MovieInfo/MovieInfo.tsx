@@ -3,9 +3,10 @@ import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, 
 import {ArrowDropDown as ArrowDropDownIcon} from '@material-ui/icons';
 import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
 import { MuiButton } from "../../../../../../components";
-import { FormDialog, FormDialogProps } from "../../../../../../components/Dialog";
+import { FormDialogContainer } from "../../../../../../components/Dialog";
 import { MovieDetail } from "../../../../../../stores";
 import { useFireBaseState } from "../../../../../../contexts";
+import { ReviewDialog, ReviewDialogProps } from "../MovieReview";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,15 +52,15 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
         setOpen(true);
     };
 
-    const changeRatingData = (ratingData : FormDialogReviewItem['rating']) => {
-        setRating(ratingData);
-    };
-    
-    const changeReviewDescribeData = (reviewData : FormDialogReviewItem['reviewDescribe']) => {
-        setReviewDescribe(reviewData);
-    };
+    const changeRatingData = (movieData : FormDialogReviewItem['rating']) => {
+        setRating(movieData);
+    }
 
-    const handleSubmitButtonClick : FormDialogProps['onFormDialogSubmitClick'] = () => {
+    const changeReviewData = (feedData : FormDialogReviewItem['reviewDescribe']) => {
+        setReviewDescribe(feedData);
+    }
+
+    const handleSubmitButtonClick : ReviewDialogProps['onFormDialogSubmitClick'] = () => {
         targetMovie.insertReviewInfo({
             userName:'***',            
             review:reviewDescribe,
@@ -114,7 +115,11 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                 </Typography>
                 <div>
                     <MuiButton className={classes.button} onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
-                    <FormDialog type={'movieInfo'} open={open} rating={rating} reviewDescribe={reviewDescribe} changeRatingData={changeRatingData} changeReviewDescribeData={changeReviewDescribeData} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
+                    <FormDialogContainer component=
+                        {
+                        <ReviewDialog open={open} changeRatingData={changeRatingData} changeReviewData={changeReviewData} rating={rating} reviewDescribe={reviewDescribe} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></ReviewDialog>
+                        }>
+                    </FormDialogContainer>
                 </div>
             </CardContent>
         </Card>

@@ -2,12 +2,13 @@ import { FC, useEffect, useState } from 'react';
 import { Box, Fab, makeStyles } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
 import FeedCard from './components/FeedCard';
-import { FormDialog, FormDialogProps } from "../../../../components/Dialog";
+import { FormDialogContainer } from "../../../../components/Dialog";
 import { useRootStore } from '../../../../contexts';
 import { useFireBaseState } from "../../../../contexts";
 import { observer } from 'mobx-react-lite';
 import { dateDiff } from '../../../../utils';
 import { CustmomCircleProgress } from '../../../../components/Progress/Circle';
+import { FeedDialog, FeedDialogProps } from './components';
 
 export type FormDialogFeedItem = {
   movieName : string;
@@ -57,7 +58,7 @@ const Feed:FC = () => {
     setPostFeed(feedData);
   }
 
-  const handleSubmitButtonClick: FormDialogProps['onFormDialogSubmitClick'] = () => {
+  const handleSubmitButtonClick: FeedDialogProps['onFormDialogSubmitClick'] = () => {
     feedPost.insertFeedInfo({
       userName: '***',
       uid: firebaseState.user.uid,   
@@ -87,7 +88,11 @@ const Feed:FC = () => {
               <Fab className={classes.fab} color="primary" aria-label="add" onClick={handleFormDialogOpenClick}>
                 <AddIcon />
               </Fab>
-              <FormDialog type={'feed'} open={open} movieName={movieName} postFeed={postFeed} changeMovieData={changeMovieData} changePostFeedData={changePostFeedData} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
+              <FormDialogContainer
+                component={
+                  <FeedDialog open={open} changeMovieData={changeMovieData} changePostFeedData={changePostFeedData} movieName={movieName} postFeed={postFeed} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FeedDialog>
+                }>  
+              </FormDialogContainer>
             </div>  
           </Box>
       }
