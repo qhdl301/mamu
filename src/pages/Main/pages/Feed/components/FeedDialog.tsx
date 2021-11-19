@@ -4,17 +4,23 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } 
 export type FeedDialogProps = {
   open: boolean;
   movieName: string;
-  postFeed: string;
-  changeMovieData: (param: FeedDialogProps['movieName']) => void;
-  changePostFeedData: (param: FeedDialogProps['postFeed']) => void;
+  feedData: string;
+  onMovieNameChange: (param: FeedDialogProps['movieName']) => void;
+  onFeedChange: (param: FeedDialogProps['feedData']) => void;
   onFormDialogSubmitClick : () => void;
   onFormDialogCloseClick : () => void;
 }
 
 const FeedDialog : FC<FeedDialogProps> = (props) => {
 
-    const { open, movieName, postFeed,
-            changeMovieData, changePostFeedData, onFormDialogSubmitClick, onFormDialogCloseClick} = props;
+    const {
+      open,
+      movieName,
+      feedData,
+      onMovieNameChange,
+      onFeedChange,
+      onFormDialogSubmitClick,
+      onFormDialogCloseClick } = props;
     
     return (
         <Dialog open={open} onClose={onFormDialogCloseClick} aria-labelledby="form-dialog-title" fullWidth> 
@@ -29,7 +35,7 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
                   multiline
                   fullWidth
                   value={movieName}
-                  onChange={(e) => (changeMovieData&&changeMovieData(e.target.value))}
+                  onChange={(e) => (onMovieNameChange&&onMovieNameChange(e.target.value))}
                 />
                 <TextField
                   autoFocus
@@ -39,8 +45,8 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
                   type="search"
                   multiline
                   fullWidth
-                  value={postFeed}
-                  onChange={(e) => (changePostFeedData&&changePostFeedData(e.target.value))}
+                  value={feedData}
+                  onChange={(e) => (onFeedChange&&onFeedChange(e.target.value))}
                 />
             </DialogContent>
             <DialogActions>

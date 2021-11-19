@@ -13,7 +13,7 @@ export type GetFeedInfoServiceResponseType = Array<FeedInfo>
 
 const getReviewService = () => {  
     const query = firebase.firestore()
-    .collection('movie-feed');
+    .collection('mamu-movie-feed');
     
     return query.get().then(res=>{
         return res.docs.map(doc=>doc.data()) as GetFeedInfoServiceResponseType;

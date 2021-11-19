@@ -10,7 +10,7 @@ export type CreateReviewRequestType = {
 }
 
 const createReviewService = (requestParam:CreateReviewRequestType)=>{
-    const collection = firebase.firestore().collection('movie-review');
+    const collection = firebase.firestore().collection('mamu-movie-review');
     
     return collection.add(requestParam);
   }

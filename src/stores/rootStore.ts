@@ -1,13 +1,13 @@
 import { MovieBoxOffice } from './MovieBoxOffice/';
-import Feed from './Feed/';
+import Feed from './Feed';
 
 export class RootStore {
   movieBoxoffice : MovieBoxOffice;
-  feedPost : Feed;
+  feed : Feed;
 
   constructor() {
     this.movieBoxoffice = new MovieBoxOffice();
-    this.feedPost = new Feed();
+    this.feed = new Feed();
   }
 }
 

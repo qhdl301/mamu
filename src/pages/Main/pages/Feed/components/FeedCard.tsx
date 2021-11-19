@@ -3,13 +3,11 @@ import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, Ic
 import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon} from '@material-ui/icons/';
 
 export type FeedCardProps = {
-    feedPostData: {
-        userName: CardHeaderProps['title'],
-        movieName : string;
-        greatCount: number;
-        content: string,
-        writeTime : number,
-    }
+    userName: CardHeaderProps['title'],
+    movieName : string;
+    greatCount: number;
+    content: string,
+    writeTime : number,
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -22,9 +20,13 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const FeedCard : FC<FeedCardProps> = (props) => {
-    const { feedPostData } = props;
     const classes = useStyles();
-
+    const {
+        userName,
+        movieName,
+        content,
+        writeTime } = props;
+    
     return (
         <Card className={classes.root} elevation={1}>
              <CardHeader
@@ -36,17 +38,17 @@ const FeedCard : FC<FeedCardProps> = (props) => {
                         <MoreVertIcon />
                     </IconButton>
                 }       
-                title={feedPostData.userName}
+                title={userName}
             />
             <CardContent>
                 <Typography variant="subtitle1" color="textPrimary" component="p">
-                    {feedPostData.movieName}
+                    {movieName}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" component="p">
-                    {feedPostData.content}
+                    {content}
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary" component="p">
-                    {feedPostData.writeTime+'일 전'}
+                    {writeTime+'일 전'}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

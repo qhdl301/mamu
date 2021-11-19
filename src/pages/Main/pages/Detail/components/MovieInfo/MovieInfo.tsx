@@ -1,14 +1,13 @@
-import { FC, useState } from "react";
+import { FC, useState, useCallback } from "react";
 import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
-import {ArrowDropDown as ArrowDropDownIcon} from '@material-ui/icons';
+import { ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
 import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
 import { MuiButton } from "../../../../../../components";
-import { FormDialogContainer } from "../../../../../../components/Dialog";
 import { MovieDetail } from "../../../../../../stores";
 import { useFireBaseState } from "../../../../../../contexts";
 import { ReviewDialog, ReviewDialogProps } from "../MovieReview";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         display : 'flex',
         width: '100%',
@@ -21,11 +20,6 @@ const useStyles = makeStyles((theme) => ({
     info: {
         position: 'relative',
         width: '70%',
-    },
-    button:{
-        position: 'absolute',
-        bottom: theme.spacing(1),
-        width : '95%'
     }
 }));
 
@@ -34,50 +28,32 @@ export type MovieInfoProps = {
     isDetailInfoLoading:boolean;
 }
 
-export type FormDialogReviewItem = {
-    rating : number;
-    reviewDescribe : string;
-}
-
-const MovieInfo : FC<MovieInfoProps> = (props) => {
-    const {isDetailInfoLoading, targetMovie} = props;
-    const [open, setOpen] = useState(false);
-    const [rating, setRating] = useState<FormDialogReviewItem['rating']>(0);
-    const [reviewDescribe, setReviewDescribe] = useState<FormDialogReviewItem['reviewDescribe']>("");
-    const firebaseState = useFireBaseState();
-    const classes = useStyles();
+const MovieInfo: FC<MovieInfoProps> = (props) => {
     const date = new Date();
-
-    const handleFormDialogOpenClick = () => {
-        setOpen(true);
-    };
-
-    const changeRatingData = (movieData : FormDialogReviewItem['rating']) => {
-        setRating(movieData);
-    }
-
-    const changeReviewData = (feedData : FormDialogReviewItem['reviewDescribe']) => {
-        setReviewDescribe(feedData);
-    }
-
-    const handleSubmitButtonClick : ReviewDialogProps['onFormDialogSubmitClick'] = () => {
+    const classes = useStyles();
+    const firebaseState = useFireBaseState();
+    const { isDetailInfoLoading, targetMovie } = props;
+    const [open, setOpen] = useState(false);
+    const [rating, setRating] = useState<ReviewDialogProps['rating']>(0);
+    const [reviewDescribe, setReviewDescribe] = useState<ReviewDialogProps['reviewDescribe']>("");
+    const handleFormDialogOpenClick = useCallback(() => { setOpen(true) }, []);
+    const handleCloseButtonClick = useCallback(() => { setOpen(false) }, []);
+    const onRatingDataChange = useCallback((ratingData: ReviewDialogProps['rating']) => {  console.log('ratingData :' + ratingData); setRating(ratingData) }, [rating]);
+    const onReviewDataChange = useCallback((reviewData: ReviewDialogProps['reviewDescribe']) => { console.log('reviewDescribe :' + reviewDescribe);  setReviewDescribe(reviewData) }, [reviewDescribe]);
+    const handleSubmitButtonClick: ReviewDialogProps['onFormDialogSubmitClick'] = useCallback(() => {
+        console.log('submit Click rating : ' + rating);
+        console.log('submit Click reviewDescribe : ' + reviewDescribe);
         targetMovie.insertReviewInfo({
-            userName:'***',            
-            review:reviewDescribe,
-            reviewRating:rating,
-            uid:firebaseState.user.uid,
-            timeStamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+            userName: '***',
+            uid: firebaseState.user.uid,
+            timeStamp: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+            reviewRating: rating,
+            review: reviewDescribe,
         });
         setOpen(false);
-    }
-    
-    const handleCloseButtonClick = () => {
-        setOpen(false);
-    };
-
-
+    }, [rating, reviewDescribe]);
+  
     return (
-
         <Card className={classes.root}>
             <CardMedia
                 className = {classes.img}
@@ -114,18 +90,14 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                     목포 영화 수 {30}/{30}
                 </Typography>
                 <div>
-                    <MuiButton className={classes.button} onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
-                    <FormDialogContainer component=
-                        {
-                        <ReviewDialog open={open} changeRatingData={changeRatingData} changeReviewData={changeReviewData} rating={rating} reviewDescribe={reviewDescribe} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></ReviewDialog>
-                        }>
-                    </FormDialogContainer>
+                    <MuiButton onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
+                    <div>
+                        <ReviewDialog open={open} onRatingDataChange={onRatingDataChange} onReviewDataChange={onReviewDataChange} rating={rating} reviewDescribe={reviewDescribe} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></ReviewDialog>
+                    </div>
                 </div>
             </CardContent>
         </Card>
-
     )
-
 }
 
 export default MovieInfo;

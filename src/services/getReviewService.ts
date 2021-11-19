@@ -18,7 +18,7 @@ export type GetReviewInfoServiceResponseType = Array<ReviewInfo>
 const getReviewService:(params: GetReviewInfoServiceRequestType) => Promise<GetReviewInfoServiceResponseType> 
  = (params) => {  
     const query = firebase.firestore()
-    .collection('movie-review')
+    .collection('mamu-movie-review')
     .where('movieCd','==',params.movieCd);
     
     return query.get().then(res=>{

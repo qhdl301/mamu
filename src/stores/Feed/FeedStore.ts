@@ -19,9 +19,7 @@ export default class Feed {
     }
 
     insertFeedInfo(FeedInfoData: FeedInfo) {
-        createFeedService({
-            ...FeedInfoData
-        }).then(() => {
+        createFeedService(FeedInfoData).then(() => {
             this.getFeedInfos();
         });
     }

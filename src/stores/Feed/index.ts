@@ -1,2 +1,2 @@
-export { default } from './Feed';
-export * from './Feed';
+export { default } from './FeedStore';
+export * from './FeedStore';

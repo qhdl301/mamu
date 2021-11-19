@@ -6,10 +6,10 @@ export type ReviewDialogProps = {
   open: boolean;
   rating: number;
   reviewDescribe: string;
-  changeRatingData: (param : ReviewDialogProps['rating']) => void;
-  changeReviewData: (param : ReviewDialogProps['reviewDescribe']) => void;
-  onFormDialogSubmitClick : () => void;
-  onFormDialogCloseClick : () => void;
+  onRatingDataChange: (param : ReviewDialogProps['rating']) => void;
+  onReviewDataChange: (param : ReviewDialogProps['reviewDescribe']) => void;
+  onFormDialogSubmitClick: () => void;
+  onFormDialogCloseClick: () => void;
 }
 
 const labels: { [index: string]: string } = {
@@ -29,11 +29,16 @@ const useStyles = makeStyles({
 });
 
 const ReviewDialog: FC<ReviewDialogProps> = (props) => {
-    
     const classes = useStyles();
     const [hover, setHover] = useState(-1);
-    const { open, rating, reviewDescribe,
-            changeRatingData, changeReviewData, onFormDialogSubmitClick, onFormDialogCloseClick} = props;
+    const {
+      open,
+      rating,
+      reviewDescribe,
+      onRatingDataChange,
+      onReviewDataChange,
+      onFormDialogSubmitClick,
+      onFormDialogCloseClick } = props;
     
     return (
         <Dialog open={open} onClose={onFormDialogCloseClick} aria-labelledby="form-dialog-title" fullWidth> 
@@ -43,7 +48,7 @@ const ReviewDialog: FC<ReviewDialogProps> = (props) => {
                   <Rating 
                     value={rating}
                     size='large'
-                    onChange={(event, newValue) => {changeRatingData&&changeRatingData(newValue ?? 0)}}
+                    onChange={(event, newValue) => {onRatingDataChange&&onRatingDataChange(newValue ?? 0)}}
                     onChangeActive={(event, newHover) => {setHover(newHover)}}
                   />
                   {rating !== null && <Box ml={2}>{labels[hover !== -1 ? hover : rating]}</Box>}
@@ -57,7 +62,7 @@ const ReviewDialog: FC<ReviewDialogProps> = (props) => {
                     multiline
                     fullWidth
                     value = {reviewDescribe}
-                    onChange={(e) => (changeReviewData&&changeReviewData(e.target.value))}
+                    onChange={(e) => (onReviewDataChange&&onReviewDataChange(e.target.value))}
                 />
              </DialogContent>
             <DialogActions>

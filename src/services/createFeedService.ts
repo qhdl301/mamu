@@ -10,7 +10,7 @@ export type CreateFeedRequestType = {
 }
 
 const createFeedService = (requestParam:CreateFeedRequestType)=>{
-    const collection = firebase.firestore().collection('movie-feed');
+    const collection = firebase.firestore().collection('mamu-movie-feed');
     
     return collection.add(requestParam);
   }
