@@ -1,7 +1,7 @@
 import { useMemo, FC, useEffect, useState } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import { MovieInfo, MovieReview } from './components';
-import { useRootStore } from '../../../../contexts';
+import { useRootStore } from 'contexts';
 import { useParams } from 'react-router';
 import { observer } from 'mobx-react-lite';
 
