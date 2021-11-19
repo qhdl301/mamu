@@ -5,12 +5,12 @@ export type CreateReviewRequestType = {
     movieCd: string;
     uid : string;
     reviewRating : number;
-    timeStamp : number;
+    timeStamp : string;
     review: string;
 }
 
 const createReviewService = (requestParam:CreateReviewRequestType)=>{
-    const collection = firebase.firestore().collection('movie-review');
+    const collection = firebase.firestore().collection('mamu-movie-review');
     
     return collection.add(requestParam);
   }

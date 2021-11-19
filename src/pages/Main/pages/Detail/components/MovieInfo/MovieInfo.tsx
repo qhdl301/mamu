@@ -1,13 +1,13 @@
-import { FC, useState } from "react";
+import { FC, useState, useCallback } from "react";
 import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
-import {ArrowDropDown as ArrowDropDownIcon} from '@material-ui/icons';
+import { ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
 import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
 import { MuiButton } from "../../../../../../components";
-import { FormDialog, FormDialogProps } from "../../../../../../components/Dialog";
 import { MovieDetail } from "../../../../../../stores";
 import { useFireBaseState } from "../../../../../../contexts";
+import { ReviewDialog, ReviewDialogProps } from "../MovieReview";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(() => ({
     root: {
         display : 'flex',
         width: '100%',
@@ -20,50 +20,40 @@ const useStyles = makeStyles({
     info: {
         position: 'relative',
         width: '70%',
-    },
-    button:{
-        position: 'relative',
-        width: '30%',
     }
-});
+}));
 
 export type MovieInfoProps = {
     targetMovie : MovieDetail;
     isDetailInfoLoading:boolean;
 }
 
-const MovieInfo : FC<MovieInfoProps> = (props) => {
-    const {isDetailInfoLoading, targetMovie} = props;
-    const [open, setOpen] = useState(false);
-    const firebaseState = useFireBaseState();
+const MovieInfo: FC<MovieInfoProps> = (props) => {
+    const date = new Date();
     const classes = useStyles();
-
-    const handleFormDialogOpenClick = () => {
-        setOpen(true);
-    };
-
-    const handleSubmitButtonClick : FormDialogProps['onFormDialogSubmitClick'] = (submitObj) => {
-
-        
+    const firebaseState = useFireBaseState();
+    const { isDetailInfoLoading, targetMovie } = props;
+    const [open, setOpen] = useState(false);
+    const [rating, setRating] = useState<ReviewDialogProps['rating']>(0);
+    const [reviewDescribe, setReviewDescribe] = useState<ReviewDialogProps['reviewDescribe']>("");
+    const handleFormDialogOpenClick = useCallback(() => { setOpen(true) }, []);
+    const handleCloseButtonClick = useCallback(() => { setOpen(false) }, []);
+    const onRatingDataChange = useCallback((ratingData: ReviewDialogProps['rating']) => {  console.log('ratingData :' + ratingData); setRating(ratingData) }, [rating]);
+    const onReviewDataChange = useCallback((reviewData: ReviewDialogProps['reviewDescribe']) => { console.log('reviewDescribe :' + reviewDescribe);  setReviewDescribe(reviewData) }, [reviewDescribe]);
+    const handleSubmitButtonClick: ReviewDialogProps['onFormDialogSubmitClick'] = useCallback(() => {
+        console.log('submit Click rating : ' + rating);
+        console.log('submit Click reviewDescribe : ' + reviewDescribe);
         targetMovie.insertReviewInfo({
-            userName:'***',            
-            review:submitObj.reviewDescribe,
-            reviewRating:submitObj.rating,
-            uid:firebaseState.user.uid,
-            // moment.js library
-            timeStamp:new Date().getTime(),
+            userName: '***',
+            uid: firebaseState.user.uid,
+            timeStamp: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+            reviewRating: rating,
+            review: reviewDescribe,
         });
         setOpen(false);
-        
-    }
-    
-    const handleCloseButtonClick = () => {
-        setOpen(false);
-    };
-
-
+    }, [rating, reviewDescribe]);
+  
     return (
-
         <Card className={classes.root}>
             <CardMedia
                 className = {classes.img}
@@ -100,14 +90,14 @@ const MovieInfo : FC<MovieInfoProps> = (props) => {
                     목포 영화 수 {30}/{30}
                 </Typography>
                 <div>
-                    <MuiButton className={classes.button} onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
-                    <FormDialog open={open} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></FormDialog>
+                    <MuiButton onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
+                    <div>
+                        <ReviewDialog open={open} onRatingDataChange={onRatingDataChange} onReviewDataChange={onReviewDataChange} rating={rating} reviewDescribe={reviewDescribe} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></ReviewDialog>
+                    </div>
                 </div>
             </CardContent>
         </Card>
-
     )
-
 }
 
 export default MovieInfo;

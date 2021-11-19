@@ -4,7 +4,7 @@ import { MainLayout } from "../../layouts";
 
 const DashBoard = lazy(() => import("./pages/DashBoard"));
 const MovieDetail = lazy(() => import("./pages/Detail"));
-const WishList = lazy(() => import("./pages/WishList"));
+const Feed = lazy(() => import("./pages/Feed"));
 const Mission = lazy(() => import("./pages/Mission"));
 
 const Main:FC = () => {
@@ -15,7 +15,7 @@ const Main:FC = () => {
                 <Route exact path="/" component={DashBoard}/>
                 <Route exact path="/detail/:movieCd" component={MovieDetail}/>
                 <Route exact path="/mission" component={Mission}/>
-                <Route exact path="/wishlist" component={WishList}/>
+                <Route exact path="/Feed" component={Feed}/>
             </Switch>
         </MainLayout>    
     )

@@ -12,4 +12,4 @@ export const RootStoreProvider:FC = ({children})=>{
     )
 }
 
-export const useRootStore = ()=> useContext(RootStoreContext);
+export const useRootStore = () => useContext(RootStoreContext);

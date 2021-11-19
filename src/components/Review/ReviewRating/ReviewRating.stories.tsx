@@ -7,6 +7,6 @@ export default {
 export const Default = ()=>{
 
     return (
-        <ReviewRating reviewDate={'3'} ratingValue={2}/>
+        <ReviewRating reviewDate={3} ratingValue={2}/>
     )
 }
