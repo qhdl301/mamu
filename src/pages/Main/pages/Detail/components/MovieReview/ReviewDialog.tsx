@@ -1,13 +1,13 @@
 import { FC, useState } from "react";
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Box, makeStyles } from "@material-ui/core";
-import { Rating } from '@material-ui/lab';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Box, makeStyles, TextFieldProps } from "@material-ui/core";
+import { Rating, RatingProps } from '@material-ui/lab';
 
 export type ReviewDialogProps = {
   open: boolean;
   rating: number;
   reviewDescribe: string;
-  onRatingDataChange: (param : ReviewDialogProps['rating']) => void;
-  onReviewDataChange: (param : ReviewDialogProps['reviewDescribe']) => void;
+  onRatingDataChange: RatingProps['onChange'];
+  onReviewDataChange: TextFieldProps['onChange'];
   onFormDialogSubmitClick: () => void;
   onFormDialogCloseClick: () => void;
 }
@@ -38,7 +38,8 @@ const ReviewDialog: FC<ReviewDialogProps> = (props) => {
       onRatingDataChange,
       onReviewDataChange,
       onFormDialogSubmitClick,
-      onFormDialogCloseClick } = props;
+      onFormDialogCloseClick 
+    } = props;
     
     return (
         <Dialog open={open} onClose={onFormDialogCloseClick} aria-labelledby="form-dialog-title" fullWidth> 
@@ -48,7 +49,7 @@ const ReviewDialog: FC<ReviewDialogProps> = (props) => {
                   <Rating 
                     value={rating}
                     size='large'
-                    onChange={(event, newValue) => {onRatingDataChange&&onRatingDataChange(newValue ?? 0)}}
+                    onChange={onRatingDataChange}
                     onChangeActive={(event, newHover) => {setHover(newHover)}}
                   />
                   {rating !== null && <Box ml={2}>{labels[hover !== -1 ? hover : rating]}</Box>}
@@ -56,13 +57,12 @@ const ReviewDialog: FC<ReviewDialogProps> = (props) => {
                 <TextField
                     autoFocus
                     margin="dense"
-                    id="review_Dailog_textArea"
                     label="당신에 리뷰를 적어주세요."
                     type="search"
                     multiline
                     fullWidth
                     value = {reviewDescribe}
-                    onChange={(e) => (onReviewDataChange&&onReviewDataChange(e.target.value))}
+                    onChange={onReviewDataChange}
                 />
              </DialogContent>
             <DialogActions>

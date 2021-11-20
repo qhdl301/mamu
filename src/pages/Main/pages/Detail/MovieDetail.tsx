@@ -5,7 +5,6 @@ import { useRootStore } from 'contexts';
 import { useParams } from 'react-router';
 import { observer } from 'mobx-react-lite';
 
-
 const useStyles = makeStyles((theme)=>({
   root: {
       width: '100%',

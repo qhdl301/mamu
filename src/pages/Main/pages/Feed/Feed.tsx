@@ -1,12 +1,12 @@
 import { FC, useEffect, useState, useCallback } from 'react';
 import { Box, Fab, makeStyles } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
-import FeedCard from './components/FeedCard';
-import { useRootStore } from '../../../../contexts';
-import { useFireBaseState } from "../../../../contexts";
+import { useRootStore } from 'contexts';
+import { useFireBaseState } from 'contexts';
 import { observer } from 'mobx-react-lite';
-import { dateDiff } from '../../../../utils';
-import { CustmomCircleProgress } from '../../../../components/Progress/Circle';
+import { dateDiff } from 'utils';
+import { CustmomCircleProgress } from 'components/Progress/Circle';
+import FeedCard from './components/FeedCard';
 import { FeedDialog, FeedDialogProps } from './components';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,15 +28,15 @@ const Feed:FC = () => {
   const classes = useStyles();
   const firebaseState = useFireBaseState();
   const { feed } = useRootStore();
-  const [open, setOpen] = useState(false);
   const [isFeedLoading, setFeedLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const handleFormDialogOpenClick = useCallback(() => setOpen(true) , []);
+  const handleCloseButtonClick = useCallback(() => setOpen(false) , []);
   const [movieName, setMovieName] = useState<FeedDialogProps['movieName']>("");
   const [feedContent, setFeedContent] = useState<FeedDialogProps['feedData']>("");
-  const handleFormDialogOpenClick = useCallback(() => { setOpen(true) }, []);
-  const handleCloseButtonClick = useCallback(() => { setOpen(false) }, []);
-  const onMovieNameChange = useCallback((movieData: FeedDialogProps['movieName']) => { setMovieName(movieData) }, [movieName]);
-  const onFeedChange = useCallback((feedData: FeedDialogProps['feedData']) => { setFeedContent(feedData) }, [feedContent]);
-  const handleSubmitButtonClick: FeedDialogProps['onFormDialogSubmitClick'] = useCallback(() => {
+  const handleMovieNameChange : FeedDialogProps['handleMovieNameChange'] = useCallback((e) => setMovieName(e.target.value), []);
+  const handleFeedContentChange : FeedDialogProps['handleFeedContentChange'] = useCallback((e) => setFeedContent(e.target.value) , []);
+  const handleSubmitButtonClick = useCallback(() => {
     feed.insertFeedInfo({
       userName: '***',
       uid: firebaseState.user.uid,
@@ -61,14 +61,34 @@ const Feed:FC = () => {
   return (
     <Box className={classes.root} component="div">
       {feed.feedInfos.map((item, index) =>
-        <FeedCard key={index} userName={item.userName} movieName={item.movieName} content={item.postfeed} writeTime={dateDiff(item.timeStamp)} greatCount={Number(item.greatCount)} />
+        <FeedCard 
+          key={index} 
+          userName={item.userName} 
+          movieName={item.movieName} 
+          content={item.postfeed} 
+          writeTime={dateDiff(item.timeStamp)} 
+          greatCount={Number(item.greatCount)} 
+        />
       )}
       <div>
-        <Fab className={classes.fab} color="primary" aria-label="add" onClick={handleFormDialogOpenClick}>
+        <Fab 
+          className={classes.fab} 
+          color="primary" 
+          aria-label="add" 
+          onClick={handleFormDialogOpenClick}
+        >
           <AddIcon />
         </Fab>
         <div>
-          <FeedDialog open={open} onMovieNameChange={onMovieNameChange} onFeedChange={onFeedChange} movieName={movieName} feedData={feedContent} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}/>
+          <FeedDialog 
+            open={open} 
+            movieName={movieName} 
+            feedData={feedContent} 
+            handleMovieNameChange={handleMovieNameChange} 
+            handleFeedContentChange={handleFeedContentChange} 
+            handleFormDialogSubmitClick={handleSubmitButtonClick} 
+            handleFormDialogCloseClick={handleCloseButtonClick}
+          />
         </div>
       </div>  
     </Box>
