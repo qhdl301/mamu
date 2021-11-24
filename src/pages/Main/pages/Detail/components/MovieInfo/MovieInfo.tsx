@@ -37,7 +37,12 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
     const [rating, setRating] = useState<ReviewDialogProps['rating']>(0);
     const [reviewDescribe, setReviewDescribe] = useState<ReviewDialogProps['reviewDescribe']>("");
     const handleFormDialogOpenClick = useCallback(() => setOpen(true), []);
-    const handleCloseButtonClick = useCallback(() => setOpen(false), []);
+    const handleCloseButtonClick = useCallback(() => 
+        {
+            setOpen(false);
+            setRating(0);
+            setReviewDescribe('');
+        }, []);
     const onRatingDataChange : ReviewDialogProps['onRatingDataChange'] = useCallback((target,newValue) => setRating(newValue && 0), []);
     const onReviewDataChange : ReviewDialogProps['onReviewDataChange'] = useCallback((e) =>  setReviewDescribe(e.target.value), []);
     const handleSubmitButtonClick: ReviewDialogProps['onFormDialogSubmitClick'] = useCallback(() => {
@@ -92,17 +97,15 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
                     >
                         본 영화로 등록하기
                     </MuiButton>
-                    <div>
-                        <ReviewDialog 
-                            open={open} 
-                            rating={rating} 
-                            reviewDescribe={reviewDescribe}
-                            onRatingDataChange={onRatingDataChange} 
-                            onReviewDataChange={onReviewDataChange} 
-                            onFormDialogSubmitClick={handleSubmitButtonClick} 
-                            onFormDialogCloseClick={handleCloseButtonClick}
-                        />
-                    </div>
+                    <ReviewDialog 
+                        open={open} 
+                        rating={rating} 
+                        reviewDescribe={reviewDescribe}
+                        onRatingDataChange={onRatingDataChange} 
+                        onReviewDataChange={onReviewDataChange} 
+                        onFormDialogSubmitClick={handleSubmitButtonClick} 
+                        onFormDialogCloseClick={handleCloseButtonClick}
+                    />
                 </div>
             </CardContent>
         </Card>

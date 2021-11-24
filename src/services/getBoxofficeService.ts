@@ -23,5 +23,4 @@ const getBoxOfficeListService = (url: string, params: GetBoxOfficeListServiceReq
     return httpFetcher(url, params, boxOfficeListMock);
 };
 
-
 export default getBoxOfficeListService;

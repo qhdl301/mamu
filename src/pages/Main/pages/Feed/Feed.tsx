@@ -6,8 +6,7 @@ import { useFireBaseState } from 'contexts';
 import { observer } from 'mobx-react-lite';
 import { dateDiff } from 'utils';
 import { CustmomCircleProgress } from 'components/Progress/Circle';
-import FeedCard from './components/FeedCard';
-import { FeedDialog, FeedDialogProps } from './components';
+import { FeedCard, FeedCardProps, FeedDialog, FeedDialogProps } from './components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,10 +29,23 @@ const Feed:FC = () => {
   const { feed } = useRootStore();
   const [isFeedLoading, setFeedLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const handleFormDialogOpenClick = useCallback(() => setOpen(true) , []);
-  const handleCloseButtonClick = useCallback(() => setOpen(false) , []);
+  const [isCheckFavorite, setIsCheckFavorite] = useState<FeedCardProps['greatYn']>(false);
   const [movieName, setMovieName] = useState<FeedDialogProps['movieName']>("");
   const [feedContent, setFeedContent] = useState<FeedDialogProps['feedData']>("");
+  const handleFormDialogOpenClick = useCallback(() => setOpen(true) , []);
+  const handleCloseButtonClick = useCallback(() => { 
+        setOpen(false); 
+        setMovieName(''); 
+        setFeedContent(''); 
+      }, []);
+  const handleFavoriteButtonClick : FeedCardProps['handleFavoriteButtonClick'] = useCallback((index)=>{ 
+      console.log(index);
+      if(isCheckFavorite === false){
+        setIsCheckFavorite(true);
+      }else {
+        setIsCheckFavorite(false);
+      }
+  },[isCheckFavorite]);
   const handleMovieNameChange : FeedDialogProps['handleMovieNameChange'] = useCallback((e) => setMovieName(e.target.value), []);
   const handleFeedContentChange : FeedDialogProps['handleFeedContentChange'] = useCallback((e) => setFeedContent(e.target.value) , []);
   const handleSubmitButtonClick = useCallback(() => {
@@ -42,7 +54,6 @@ const Feed:FC = () => {
       uid: firebaseState.user.uid,
       timeStamp: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
       movieName: movieName,
-      greatCount: Number(1),
       postfeed: feedContent,
     })
     setOpen(false);
@@ -67,29 +78,27 @@ const Feed:FC = () => {
           movieName={item.movieName} 
           content={item.postfeed} 
           writeTime={dateDiff(item.timeStamp)} 
-          greatCount={Number(item.greatCount)} 
+          greatYn={isCheckFavorite}
+          handleFavoriteButtonClick={handleFavoriteButtonClick}
         />
       )}
       <div>
         <Fab 
           className={classes.fab} 
           color="primary" 
-          aria-label="add" 
           onClick={handleFormDialogOpenClick}
         >
           <AddIcon />
         </Fab>
-        <div>
-          <FeedDialog 
-            open={open} 
-            movieName={movieName} 
-            feedData={feedContent} 
-            handleMovieNameChange={handleMovieNameChange} 
-            handleFeedContentChange={handleFeedContentChange} 
-            handleFormDialogSubmitClick={handleSubmitButtonClick} 
-            handleFormDialogCloseClick={handleCloseButtonClick}
-          />
-        </div>
+        <FeedDialog 
+          open={open} 
+          movieName={movieName} 
+          feedData={feedContent} 
+          handleMovieNameChange={handleMovieNameChange} 
+          handleFeedContentChange={handleFeedContentChange} 
+          handleFormDialogSubmitClick={handleSubmitButtonClick} 
+          handleFormDialogCloseClick={handleCloseButtonClick}
+        />
       </div>  
     </Box>
   )

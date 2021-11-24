@@ -5,7 +5,6 @@ export type FeedInfo = {
     userName: string;
     timeStamp : string;
     movieName: string;
-    greatCount: number;
     postfeed: string;
 }
 
