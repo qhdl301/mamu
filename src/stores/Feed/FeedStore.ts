@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
-import { createFeedService, FeedInfo, getFeedService } from '../../services';
+import { createFeedService, updateFeedService, FeedInfo, getFeedService, UpdateFeedGreateRequestType, CreateFeedRequestType } from 'services';
 
 export default class Feed {
 
@@ -8,9 +8,10 @@ export default class Feed {
     constructor() {
         
          makeObservable(this, {
-            feedInfos: observable,
+            feedInfos : observable,
             getFeedInfos : action,
-            insertFeedInfo: action,
+            insertFeedInfo : action,
+            updateFeedInfo : action,
          });
     }
 
@@ -18,10 +19,16 @@ export default class Feed {
         this.feedInfos = await getFeedService();
     }
 
-    insertFeedInfo(FeedInfoData: FeedInfo) {
+    insertFeedInfo(FeedInfoData: CreateFeedRequestType) {
         createFeedService(FeedInfoData).then(() => {
             this.getFeedInfos();
         });
+    }
+
+    updateFeedInfo(FeedInfoData : UpdateFeedGreateRequestType) {
+        updateFeedService(FeedInfoData).then(() => {
+            this.getFeedInfos();
+        });  
     }
 
 }

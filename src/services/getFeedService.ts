@@ -4,6 +4,7 @@ export type FeedInfo = {
     uid : string;
     userName: string;
     timeStamp : string;
+    greatYn : boolean;
     movieName: string;
     postfeed: string;
 }
@@ -12,7 +13,7 @@ export type GetFeedInfoServiceResponseType = Array<FeedInfo>
 
 const getReviewService = () => {  
     const query = firebase.firestore()
-    .collection('mamu-movie-feed')
+    .collection('movie-mamu-feed')
     .orderBy('timeStamp');
     
     return query.get().then(res=>{

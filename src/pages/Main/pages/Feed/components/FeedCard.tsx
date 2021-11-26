@@ -3,6 +3,7 @@ import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, Ic
 import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon} from '@material-ui/icons/';
 
 export type FeedCardProps = {
+    feedId : IconButtonProps['itemID'];
     userName: CardHeaderProps['title'],
     movieName : string;
     greatYn: boolean;
@@ -18,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         marginTop : theme.spacing(1),
     }
-  
 }));
 
 const FeedCard : FC<FeedCardProps> = (props) => {

@@ -4,9 +4,8 @@ import { Add as AddIcon } from '@material-ui/icons';
 import { useRootStore } from 'contexts';
 import { useFireBaseState } from 'contexts';
 import { observer } from 'mobx-react-lite';
-import { dateDiff } from 'utils';
 import { CustmomCircleProgress } from 'components/Progress/Circle';
-import { FeedCard, FeedCardProps, FeedDialog, FeedDialogProps } from './components';
+import { FeedContainer, FeedDialog, FeedDialogProps } from './components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +28,6 @@ const Feed:FC = () => {
   const { feed } = useRootStore();
   const [isFeedLoading, setFeedLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [isCheckFavorite, setIsCheckFavorite] = useState<FeedCardProps['greatYn']>(false);
   const [movieName, setMovieName] = useState<FeedDialogProps['movieName']>("");
   const [feedContent, setFeedContent] = useState<FeedDialogProps['feedData']>("");
   const handleFormDialogOpenClick = useCallback(() => setOpen(true) , []);
@@ -38,14 +36,6 @@ const Feed:FC = () => {
         setMovieName(''); 
         setFeedContent(''); 
       }, []);
-  const handleFavoriteButtonClick : FeedCardProps['handleFavoriteButtonClick'] = useCallback((index)=>{ 
-      console.log(index);
-      if(isCheckFavorite === false){
-        setIsCheckFavorite(true);
-      }else {
-        setIsCheckFavorite(false);
-      }
-  },[isCheckFavorite]);
   const handleMovieNameChange : FeedDialogProps['handleMovieNameChange'] = useCallback((e) => setMovieName(e.target.value), []);
   const handleFeedContentChange : FeedDialogProps['handleFeedContentChange'] = useCallback((e) => setFeedContent(e.target.value) , []);
   const handleSubmitButtonClick = useCallback(() => {
@@ -53,6 +43,7 @@ const Feed:FC = () => {
       userName: '***',
       uid: firebaseState.user.uid,
       timeStamp: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+      greatYn: false,
       movieName: movieName,
       postfeed: feedContent,
     })
@@ -72,14 +63,9 @@ const Feed:FC = () => {
   return (
     <Box className={classes.root} component="div">
       {feed.feedInfos.map((item, index) =>
-        <FeedCard 
+        <FeedContainer 
           key={index} 
-          userName={item.userName} 
-          movieName={item.movieName} 
-          content={item.postfeed} 
-          writeTime={dateDiff(item.timeStamp)} 
-          greatYn={isCheckFavorite}
-          handleFavoriteButtonClick={handleFavoriteButtonClick}
+          feedItem={item}
         />
       )}
       <div>
