@@ -2,15 +2,18 @@ import firebase from 'firebase';
 
 export type UpdateFeedGreateRequestType = {
     uid : string;
-    greatYn : boolean;
+    feedId : string;
 }
 
 const updateFeedService = (requestParam:UpdateFeedGreateRequestType)=>{
     const query = firebase.firestore()
-    .collection('movie-mamu-feed').doc(requestParam.uid);
+    .collection('movie-mamu-feed')
+    .doc(requestParam.feedId)
+    .collection('feed-like-users')
+    .doc(requestParam.uid)
 
     return query.update({
-        greatYn : requestParam.greatYn
+        
     })
   }
 

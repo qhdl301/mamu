@@ -2,18 +2,18 @@ import firebase from 'firebase';
 
 export type CreateFeedRequestType = {
     uid : string;
+    feedId : string;
     userName: string;
     timeStamp : string;
-    greatYn : boolean;
     movieName: string;
     postfeed: string;
 }
 
 const createFeedService = (requestParam:CreateFeedRequestType)=>{
     const collection = firebase.firestore()
-    .collection('movie-mamu-feed');
+    .collection('movie-mamu-feed').doc(requestParam.feedId);
     
-    return collection.add(requestParam);
+    return collection.set(requestParam);
   }
 
   export default createFeedService;

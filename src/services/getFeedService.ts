@@ -2,16 +2,22 @@ import firebase from 'firebase';
 
 export type FeedInfo = {
     uid : string;
+    feedId : string;
     userName: string;
     timeStamp : string;
-    greatYn : boolean;
     movieName: string;
     postfeed: string;
+} & FeedPersonalInfo
+
+export type FeedPersonalInfo = {
+    isLike:boolean;
 }
 
 export type GetFeedInfoServiceResponseType = Array<FeedInfo>
 
-const getReviewService = () => {  
+const tmpUid = 'mABdeIiWKXWx5OsbQaNpX0Q1mpd2';
+
+const getFeedService = () => {  
     const query = firebase.firestore()
     .collection('movie-mamu-feed')
     .orderBy('timeStamp');
@@ -21,4 +27,4 @@ const getReviewService = () => {
     })
  }
 
-export default getReviewService;
+export default getFeedService;

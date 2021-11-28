@@ -1,5 +1,5 @@
-import { useRootStore } from "contexts";
-import { FC, useState, useCallback} from "react";
+import { useFireBaseState, useRootStore } from "contexts";
+import { FC, useState, useCallback } from "react";
 import { FeedInfo } from "services";
 import { dateDiff } from "utils";
 import { FeedCard, FeedCardProps } from ".";
@@ -13,31 +13,32 @@ const FeedContainer : FC<FeedContainerProps> = (props) => {
         feedItem
     } = props;
     const { feed } = useRootStore();
-    const [isCheckFavorite, setIsCheckFavorite] = useState<FeedCardProps['greatYn']>(feedItem.greatYn);
+    const firebaseState = useFireBaseState();
+    const [isCheckFavorite, setIsCheckFavorite] = useState(false);
     const handleFavoriteButtonClick : FeedCardProps['handleFavoriteButtonClick'] = useCallback(()=>{ 
         if(isCheckFavorite === false){
             setIsCheckFavorite(true);
-            feed.updateFeedInfo({
-                uid : feedItem.uid,
-                greatYn : true
+            feed.insertLikeUserInfo({
+                feedId : feedItem.feedId,
+                clickUid : firebaseState.user.uid,
             });
         }else {
             setIsCheckFavorite(false);
-            feed.updateFeedInfo({
-                uid : feedItem.uid,
-                greatYn : false
+            feed.insertLikeUserInfo({
+                feedId : feedItem.feedId,
+                clickUid : firebaseState.user.uid,
             });
         }
     },[isCheckFavorite]);
     
+
     return (
         <FeedCard
-            feedId={feedItem.uid}
+            feedId={feedItem.feedId}
             userName={feedItem.userName} 
             movieName={feedItem.movieName} 
             content={feedItem.postfeed} 
             writeTime={dateDiff(feedItem.timeStamp)} 
-            greatYn={isCheckFavorite}
             handleFavoriteButtonClick={handleFavoriteButtonClick}
        />
     );

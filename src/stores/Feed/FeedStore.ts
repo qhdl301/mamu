@@ -1,5 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
-import { createFeedService, updateFeedService, FeedInfo, getFeedService, UpdateFeedGreateRequestType, CreateFeedRequestType } from 'services';
+import { createFeedService, updateFeedService, FeedInfo, getFeedService, getFeedAllCountService, UpdateFeedGreateRequestType, CreateFeedRequestType, CreateLikeUsersRequestType, GetFeedCountRequestType } from 'services';
+import createLikeUserService from 'services/createLikeUserService';
 
 export default class Feed {
 
@@ -9,14 +10,20 @@ export default class Feed {
         
          makeObservable(this, {
             feedInfos : observable,
+            getFeedCount : action,
             getFeedInfos : action,
             insertFeedInfo : action,
+            insertLikeUserInfo : action,
             updateFeedInfo : action,
-         });
+         }); 
     }
 
     async getFeedInfos() {
         this.feedInfos = await getFeedService();
+    }
+
+    async getFeedCount(requestParam : GetFeedCountRequestType) {
+        await getFeedAllCountService(requestParam);
     }
 
     insertFeedInfo(FeedInfoData: CreateFeedRequestType) {
@@ -25,10 +32,14 @@ export default class Feed {
         });
     }
 
+    insertLikeUserInfo(LikeUserInfoData: CreateLikeUsersRequestType) {
+        createLikeUserService(LikeUserInfoData);
+    }
+
     updateFeedInfo(FeedInfoData : UpdateFeedGreateRequestType) {
         updateFeedService(FeedInfoData).then(() => {
             this.getFeedInfos();
-        });  
+        });
     }
 
 }

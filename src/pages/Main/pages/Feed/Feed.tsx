@@ -42,8 +42,8 @@ const Feed:FC = () => {
     feed.insertFeedInfo({
       userName: '***',
       uid: firebaseState.user.uid,
+      feedId: `${firebaseState.user.uid}-${date.getTime()}`,
       timeStamp: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
-      greatYn: false,
       movieName: movieName,
       postfeed: feedContent,
     })

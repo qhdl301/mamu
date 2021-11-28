@@ -6,7 +6,6 @@ export type FeedCardProps = {
     feedId : IconButtonProps['itemID'];
     userName: CardHeaderProps['title'],
     movieName : string;
-    greatYn: boolean;
     content: string,
     writeTime : number,
     handleFavoriteButtonClick : IconButtonProps['onClick']
@@ -28,7 +27,6 @@ const FeedCard : FC<FeedCardProps> = (props) => {
         movieName,
         content,
         writeTime,
-        greatYn,
         handleFavoriteButtonClick,
     } = props;
     
@@ -75,12 +73,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
                 <IconButton
                     onClick={handleFavoriteButtonClick}
                 >
-                { 
-                    greatYn === false ? 
-                    <FavoriteIcon/> 
-                    : 
-                    <FavoriteIcon style={{color : 'red'}}/>
-                }
+                <FavoriteIcon/>
                 </IconButton>
                 <IconButton>
                     <ShareIcon/>
