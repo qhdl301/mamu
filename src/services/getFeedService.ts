@@ -15,16 +15,20 @@ export type FeedPersonalInfo = {
 
 export type GetFeedInfoServiceResponseType = Array<FeedInfo>
 
-const tmpUid = 'mABdeIiWKXWx5OsbQaNpX0Q1mpd2';
-
 const getFeedService = () => {  
     const query = firebase.firestore()
     .collection('movie-mamu-feed')
     .orderBy('timeStamp');
     
-    return query.get().then(res=>{
-        return res.docs.map(doc=>doc.data()) as GetFeedInfoServiceResponseType;
-    })
+    return (
+        
+        query.get().then(res => {        
+            return res.docs.map(
+                doc => doc.data()
+            ) as GetFeedInfoServiceResponseType;
+        
+        })
+    )
  }
 
 export default getFeedService;

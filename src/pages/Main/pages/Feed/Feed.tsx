@@ -9,10 +9,9 @@ import { FeedContainer, FeedDialog, FeedDialogProps } from './components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '60%',
     height: '100%',
-    marginLeft : 'auto',
-    marginRight : 'auto',
+    marginLeft : '32px',
+    marginRight : '32px',
   },
   fab: {
     position: 'fixed',
@@ -25,6 +24,7 @@ const Feed:FC = () => {
   const date = new Date();
   const classes = useStyles();
   const firebaseState = useFireBaseState();
+  const userUid = firebaseState.user.uid;
   const { feed } = useRootStore();
   const [isFeedLoading, setFeedLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -41,8 +41,8 @@ const Feed:FC = () => {
   const handleSubmitButtonClick = useCallback(() => {
     feed.insertFeedInfo({
       userName: '***',
-      uid: firebaseState.user.uid,
-      feedId: `${firebaseState.user.uid}-${date.getTime()}`,
+      uid: userUid,
+      feedId: `${userUid}-${date.getTime()}`,
       timeStamp: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
       movieName: movieName,
       postfeed: feedContent,
@@ -51,7 +51,7 @@ const Feed:FC = () => {
   }, [movieName, feedContent]);
   
   useEffect(()=>{
-    feed.getFeedInfos().then(() => {
+    feed.getFeedList(userUid).then(() => {
       setFeedLoading(false);
     });
   }, [feed]);
@@ -65,7 +65,7 @@ const Feed:FC = () => {
       {feed.feedInfos.map((item, index) =>
         <FeedContainer 
           key={index} 
-          feedItem={item}
+          feedItem ={item}
         />
       )}
       <div>

@@ -7,6 +7,7 @@ export type FeedCardProps = {
     userName: CardHeaderProps['title'],
     movieName : string;
     content: string,
+    isLike : boolean,
     writeTime : number,
     handleFavoriteButtonClick : IconButtonProps['onClick']
 }
@@ -26,6 +27,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
         userName,
         movieName,
         content,
+        isLike,
         writeTime,
         handleFavoriteButtonClick,
     } = props;
@@ -73,7 +75,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
                 <IconButton
                     onClick={handleFavoriteButtonClick}
                 >
-                <FavoriteIcon/>
+                <FavoriteIcon color={isLike ? 'primary' : 'inherit'}/>
                 </IconButton>
                 <IconButton>
                     <ShareIcon/>

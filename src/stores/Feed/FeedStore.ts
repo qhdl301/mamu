@@ -1,45 +1,43 @@
 import { action, makeObservable, observable } from 'mobx';
-import { createFeedService, updateFeedService, FeedInfo, getFeedService, getFeedAllCountService, UpdateFeedGreateRequestType, CreateFeedRequestType, CreateLikeUsersRequestType, GetFeedCountRequestType } from 'services';
-import createLikeUserService from 'services/createLikeUserService';
+import { FeedInfo } from 'services';
+import getIsLikeService from 'services/getIsLikeService';
 
-export default class Feed {
+export default class FeedStore {
+    isLike : boolean;
+    likeCount : number;
 
-    feedInfos : FeedInfo[] = [];
+    constructor(readonly feedInfo : FeedInfo, readonly currentUserId : string) {
+        this.isLike = false;
+        this.likeCount = 0;
 
-    constructor() {
-        
          makeObservable(this, {
-            feedInfos : observable,
-            getFeedCount : action,
-            getFeedInfos : action,
-            insertFeedInfo : action,
-            insertLikeUserInfo : action,
-            updateFeedInfo : action,
-         }); 
+            feedInfo : observable,
+            isLike: observable,
+            getIsLike : action,
+            putIsLike: action,
+         });
+
+         this.getIsLike();
     }
 
-    async getFeedInfos() {
-        this.feedInfos = await getFeedService();
+    async getIsLike() {
+        const data = await getIsLikeService(
+            {
+                feedId : this.feedInfo.feedId,
+                uid : this.currentUserId
+            }
+        );
+        
+        this.isLike = !!(data ?? false)
     }
 
-    async getFeedCount(requestParam : GetFeedCountRequestType) {
-        await getFeedAllCountService(requestParam);
+    // todo
+    async putIsLike(){
+        if(this.isLike){
+            // 현재는 클릭이 되어있던거니까 => 삭제하는 서비스 (await)
+        }else{
+            // 인서트하는 서비스 (await)
+        }
+        await this.getIsLike()
     }
-
-    insertFeedInfo(FeedInfoData: CreateFeedRequestType) {
-        createFeedService(FeedInfoData).then(() => {
-            this.getFeedInfos();
-        });
-    }
-
-    insertLikeUserInfo(LikeUserInfoData: CreateLikeUsersRequestType) {
-        createLikeUserService(LikeUserInfoData);
-    }
-
-    updateFeedInfo(FeedInfoData : UpdateFeedGreateRequestType) {
-        updateFeedService(FeedInfoData).then(() => {
-            this.getFeedInfos();
-        });
-    }
-
 }

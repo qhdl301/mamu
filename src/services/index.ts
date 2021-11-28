@@ -5,7 +5,7 @@ export { default as getFeedService } from './getFeedService';
 export { default as createReviewService } from './createReviewService';
 export { default as createFeedService } from './createFeedService';
 export { default as updateFeedService } from './updateFeedService';
-export { default as getFeedAllCountService } from './getFeedAllCountService';
+export { default as getIsLikeCountService } from './getIsLikeCountService';
 export { default as createLikeUserService } from './createLikeUserService';
 
 export * from './getBoxofficeService'
@@ -15,5 +15,5 @@ export * from './getFeedService'
 export * from './createReviewService'
 export * from './createFeedService'
 export * from './updateFeedService'
-export * from './getFeedAllCountService'
+export * from './getIsLikeCountService'
 export * from './createLikeUserService'
