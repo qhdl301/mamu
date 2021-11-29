@@ -3,11 +3,11 @@ import { FeedList } from './Feed';
 
 export class RootStore {
   movieBoxoffice : MovieBoxOffice;
-  feed : FeedList;
+  feedList : FeedList;
 
   constructor() {
     this.movieBoxoffice = new MovieBoxOffice();
-    this.feed = new FeedList();
+    this.feedList = new FeedList();
   }
 }
 

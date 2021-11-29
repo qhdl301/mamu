@@ -6,10 +6,10 @@ export type FeedDialogProps = {
   open: boolean;
   movieName: string;
   feedData: string;
-  handleMovieNameChange : TextFieldProps['onChange'];
-  handleFeedContentChange : TextFieldProps['onChange'];
-  handleFormDialogSubmitClick : ButtonProps['onClick'];
-  handleFormDialogCloseClick : ButtonProps['onClick'];
+  onChangeMovieName : TextFieldProps['onChange'];
+  onChangeFeedContent : TextFieldProps['onChange'];
+  onClickSubmitButton : ButtonProps['onClick'];
+  onClickCloseButton : ButtonProps['onClick'];
 }
 
 const FeedDialog : FC<FeedDialogProps> = (props) => {
@@ -17,16 +17,16 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
       open,
       movieName,
       feedData,
-      handleMovieNameChange,
-      handleFeedContentChange,
-      handleFormDialogSubmitClick,
-      handleFormDialogCloseClick 
+      onChangeMovieName,
+      onChangeFeedContent,
+      onClickSubmitButton,
+      onClickCloseButton 
     } = props;
     
     return (
         <Dialog 
           open={open} 
-          onClose={handleFormDialogCloseClick} 
+          onClose={onClickCloseButton} 
           fullWidth
         > 
           <DialogTitle>당신에 피드를 남겨주세요</DialogTitle>
@@ -39,7 +39,7 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
               multiline
               fullWidth
               value={movieName}
-              onChange={handleMovieNameChange}
+              onChange={onChangeMovieName}
             />
             <TextField
               margin="dense"
@@ -48,18 +48,18 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
               multiline
               fullWidth
               value={feedData}
-              onChange={handleFeedContentChange}
+              onChange={onChangeFeedContent}
               />
             </DialogContent>
             <DialogActions>
                 <Button 
-                  onClick={handleFormDialogSubmitClick} 
+                  onClick={onClickSubmitButton} 
                   color="primary" 
                   type="submit">
                     완료
                 </Button>
                 <Button 
-                  onClick={handleFormDialogCloseClick} 
+                  onClick={onClickCloseButton} 
                   color="primary">
                     취소
                 </Button>

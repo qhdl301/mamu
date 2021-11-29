@@ -13,7 +13,7 @@ const FeedContainer : FC<FeedContainerProps> = (props) => {
         feedItem
     } = props;
 
-    const handleFavoriteButtonClick : FeedCardProps['handleFavoriteButtonClick'] = useCallback(()=>{ 
+    const handleLikeButtonClick : FeedCardProps['onClickLikeButton'] = useCallback(()=>{ 
         feedItem.putIsLike();
     },[feedItem.isLike]);
 
@@ -24,8 +24,8 @@ const FeedContainer : FC<FeedContainerProps> = (props) => {
             movieName={feedItem.feedInfo.movieName} 
             content={feedItem.feedInfo.postfeed}
             isLike={feedItem.isLike} 
-            writeTime={dateDiff(feedItem.feedInfo?.timeStamp)} 
-            handleFavoriteButtonClick={handleFavoriteButtonClick}
+            writeTime={dateDiff(feedItem.feedInfo.timeStamp)} 
+            onClickLikeButton={handleLikeButtonClick}
        />
     );
 }

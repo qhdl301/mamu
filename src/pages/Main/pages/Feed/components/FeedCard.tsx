@@ -9,7 +9,7 @@ export type FeedCardProps = {
     content: string,
     isLike : boolean,
     writeTime : number,
-    handleFavoriteButtonClick : IconButtonProps['onClick']
+    onClickLikeButton : IconButtonProps['onClick']
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
         content,
         isLike,
         writeTime,
-        handleFavoriteButtonClick,
+        onClickLikeButton,
     } = props;
     
     return (
@@ -73,7 +73,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton
-                    onClick={handleFavoriteButtonClick}
+                    onClick={onClickLikeButton}
                 >
                     <FavoriteIcon style={isLike ? {color : 'red'} : {color : ''}}/>
                 </IconButton>

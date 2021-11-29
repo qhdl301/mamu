@@ -24,7 +24,7 @@ const Feed:FC = () => {
   const classes = useStyles();
   const firebaseState = useFireBaseState();
   const userUid = firebaseState.user.uid;
-  const { feed } = useRootStore();
+  const { feedList } = useRootStore();
   const [isFeedLoading, setFeedLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [movieName, setMovieName] = useState<FeedDialogProps['movieName']>("");
@@ -35,10 +35,10 @@ const Feed:FC = () => {
         setMovieName(''); 
         setFeedContent(''); 
       }, []);
-  const handleMovieNameChange : FeedDialogProps['handleMovieNameChange'] = useCallback((e) => setMovieName(e.target.value), []);
-  const handleFeedContentChange : FeedDialogProps['handleFeedContentChange'] = useCallback((e) => setFeedContent(e.target.value) , []);
+  const handleMovieNameChange : FeedDialogProps['onChangeMovieName'] = useCallback((e) => setMovieName(e.target.value), []);
+  const handleFeedContentChange : FeedDialogProps['onChangeFeedContent'] = useCallback((e) => setFeedContent(e.target.value) , []);
   const handleSubmitButtonClick = useCallback(() => {
-    feed.insertFeedInfo({
+    feedList.insertFeedInfo({
       userName: '***',
       uid: userUid,
       feedId: `${userUid}-${date.getTime()}`,
@@ -50,10 +50,10 @@ const Feed:FC = () => {
   }, [movieName, feedContent]);
   
   useEffect(()=>{
-    feed.getFeedList(userUid).then(() => {
+    feedList.getFeedList(userUid).then(() => {
       setFeedLoading(false);
     });
-  }, [feed]);
+  }, [feedList]);
   
   if (isFeedLoading) {
     return  <CustmomCircleProgress />
@@ -61,7 +61,7 @@ const Feed:FC = () => {
 
   return (
     <Box className={classes.root} component="div">
-      {feed.feedInfos.map((item, index) =>
+      {feedList.feedInfos.map((item, index) =>
         <FeedContainer 
           key={index} 
           feedItem ={item}
@@ -79,10 +79,10 @@ const Feed:FC = () => {
           open={open} 
           movieName={movieName} 
           feedData={feedContent} 
-          handleMovieNameChange={handleMovieNameChange} 
-          handleFeedContentChange={handleFeedContentChange} 
-          handleFormDialogSubmitClick={handleSubmitButtonClick} 
-          handleFormDialogCloseClick={handleCloseButtonClick}
+          onChangeMovieName={handleMovieNameChange} 
+          onChangeFeedContent={handleFeedContentChange} 
+          onClickSubmitButton={handleSubmitButtonClick} 
+          onClickCloseButton={handleCloseButtonClick}
         />
       </div>  
     </Box>

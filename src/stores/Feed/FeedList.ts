@@ -21,11 +21,10 @@ export default class FeedList {
     }
 
     async getFeedList(userUid : FeedInfo['uid']) {
-        const response = await getFeedService();
-        this.clickUserUid = userUid;
-
+       
         try {
-            this.feedInfos = response.map(item => new FeedStore(item, this.clickUserUid));
+            const response = await getFeedService();
+            this.feedInfos = response.map(item => new FeedStore(item, userUid));
         } catch (error) {
             return console.log(error);
         }
