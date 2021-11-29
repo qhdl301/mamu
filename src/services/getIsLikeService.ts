@@ -2,16 +2,15 @@ import firebase from 'firebase';
 
 export type GetIsLikeRequestType = {
     feedId : string;
-    uid : string;
+    currentUserId : string;
 } 
 
 const getIsLikeService = (props : GetIsLikeRequestType) => {  
-    const {feedId, uid} = props;
+    const {feedId, currentUserId} = props;
 
     const query = firebase.firestore()
-    .collection('movie-mamu-feed')
-    .doc(feedId)
-    .collection('feed-like-users').doc(uid)
+    .collection('movie-mamu-feed').doc(feedId)
+    .collection('feed-like-users').doc(currentUserId)
 
     return query.get().then(res => res.data());
     

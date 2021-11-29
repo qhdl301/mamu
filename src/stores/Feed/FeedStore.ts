@@ -24,7 +24,7 @@ export default class FeedStore {
         const data = await getIsLikeService(
             {
                 feedId : this.feedInfo.feedId,
-                uid : this.currentUserId
+                currentUserId : this.currentUserId
             }
         );
         
