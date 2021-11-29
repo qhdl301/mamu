@@ -9,7 +9,6 @@ import { FeedContainer, FeedDialog, FeedDialogProps } from './components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100%',
     marginLeft : '32px',
     marginRight : '32px',
   },

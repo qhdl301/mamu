@@ -75,7 +75,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
                 <IconButton
                     onClick={handleFavoriteButtonClick}
                 >
-                <FavoriteIcon color={isLike ? 'primary' : 'inherit'}/>
+                    <FavoriteIcon style={isLike ? {color : 'red'} : {color : ''}}/>
                 </IconButton>
                 <IconButton>
                     <ShareIcon/>

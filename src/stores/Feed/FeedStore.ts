@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
-import { FeedInfo } from 'services';
+import { FeedInfo, createLikeUserService, deleteLikeUserService } from 'services';
 import getIsLikeService from 'services/getIsLikeService';
 
 export default class FeedStore {
@@ -31,12 +31,11 @@ export default class FeedStore {
         this.isLike = !!(data ?? false)
     }
 
-    // todo
     async putIsLike(){
         if(this.isLike){
-            // 현재는 클릭이 되어있던거니까 => 삭제하는 서비스 (await)
+            await deleteLikeUserService({currentUserId : this.currentUserId, feedId : this.feedInfo.feedId}); // 현재는 클릭이 되어있던거니까 => 삭제하는 서비스 (await)
         }else{
-            // 인서트하는 서비스 (await)
+            await createLikeUserService({currentUserId : this.currentUserId, feedId : this.feedInfo.feedId}); // 인서트하는 서비스 (await)
         }
         await this.getIsLike()
     }

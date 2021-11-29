@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Box, makeStyles, TextFieldProps } from "@material-ui/core";
 import { Rating, RatingProps } from '@material-ui/lab';
 
@@ -11,14 +11,6 @@ export type ReviewDialogProps = {
   onFormDialogSubmitClick: () => void;
   onFormDialogCloseClick: () => void;
 }
-
-const labels: { [index: string]: string } = {
-    1: 'Hated it',
-    2: 'Disliked it',
-    3: 'It was Ok',
-    4: 'Liked it',
-    5: 'Loved it',
-};
   
 const useStyles = makeStyles({
   rating : {
@@ -30,7 +22,6 @@ const useStyles = makeStyles({
 
 const ReviewDialog: FC<ReviewDialogProps> = (props) => {
     const classes = useStyles();
-    const [hover, setHover] = useState(-1);
     const {
       open,
       rating,
@@ -46,16 +37,14 @@ const ReviewDialog: FC<ReviewDialogProps> = (props) => {
             <DialogTitle>당신에 리뷰를 남겨주세요</DialogTitle>
             <DialogContent>
                 <Box className={classes.rating}>
-                  <Rating 
+                  <Rating
+                    name="simple-controlled"
                     value={rating}
                     size='large'
                     onChange={onRatingDataChange}
-                    onChangeActive={(event, newHover) => {setHover(newHover)}}
                   />
-                  {rating !== null && <Box ml={2}>{labels[hover !== -1 ? hover : rating]}</Box>}
                 </Box>
                 <TextField
-                    autoFocus
                     margin="dense"
                     label="당신에 리뷰를 적어주세요."
                     type="search"

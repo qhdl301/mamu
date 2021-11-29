@@ -43,7 +43,7 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
             setRating(0);
             setReviewDescribe('');
         }, []);
-    const onRatingDataChange : ReviewDialogProps['onRatingDataChange'] = useCallback((target,newValue) => setRating(newValue && 0), []);
+    const onRatingDataChange: ReviewDialogProps['onRatingDataChange'] = useCallback((e) => setRating(Number(e.target.value)), []);
     const onReviewDataChange : ReviewDialogProps['onReviewDataChange'] = useCallback((e) =>  setReviewDescribe(e.target.value), []);
     const handleSubmitButtonClick: ReviewDialogProps['onFormDialogSubmitClick'] = useCallback(() => {
         targetMovie.insertReviewInfo({

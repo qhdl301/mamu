@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button, makeStyles } from '@material-ui/core/';
+import { Button, makeStyles } from '@material-ui/core';
 
 export type ButtonProps = {
     onClick : () => void;
@@ -8,8 +8,7 @@ export type ButtonProps = {
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'absolute',
-        bottom: theme.spacing(1),
-        width : '95%'
+        bottom: theme.spacing(0.5),
     }
 }));
 

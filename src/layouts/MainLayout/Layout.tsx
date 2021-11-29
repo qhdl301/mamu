@@ -1,15 +1,16 @@
 import { FC } from "react";
 import { Footer } from ".";
 import { Header } from ".";
+import { Box } from "@material-ui/core";
 
 const Layout:FC = ({children}) => {
-  
+
   return (
-        <>
-          <Header />
-              {children}
-          <Footer/>
-        </>      
+    <Box>
+      <Header />
+        {children}
+      <Footer />
+    </Box>      
   )
 
 };
