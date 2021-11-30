@@ -1,6 +1,6 @@
 import { FC, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
-import { MainLayout } from "../../layouts";
+import { MainLayout } from "layouts";
 
 const DashBoard = lazy(() => import("./pages/DashBoard"));
 const MovieDetail = lazy(() => import("./pages/Detail"));

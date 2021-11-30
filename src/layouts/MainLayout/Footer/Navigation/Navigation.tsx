@@ -22,11 +22,11 @@ export type NavigationProps = {
     onChange?: (event: React.ChangeEvent<unknown>, newValue: number) => void
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
     top: "auto",
-    bottom : 0,
+    bottom : theme.spacing(0)
   },
 }));
 

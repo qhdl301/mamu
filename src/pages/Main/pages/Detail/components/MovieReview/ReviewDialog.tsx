@@ -1,24 +1,16 @@
-import { FC, useState } from "react";
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Box, makeStyles } from "@material-ui/core";
-import { Rating } from '@material-ui/lab';
+import { FC } from "react";
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Box, makeStyles, TextFieldProps } from "@material-ui/core";
+import { Rating, RatingProps } from '@material-ui/lab';
 
 export type ReviewDialogProps = {
   open: boolean;
   rating: number;
   reviewDescribe: string;
-  onRatingDataChange: (param : ReviewDialogProps['rating']) => void;
-  onReviewDataChange: (param : ReviewDialogProps['reviewDescribe']) => void;
+  onRatingDataChange: RatingProps['onChange'];
+  onReviewDataChange: TextFieldProps['onChange'];
   onFormDialogSubmitClick: () => void;
   onFormDialogCloseClick: () => void;
 }
-
-const labels: { [index: string]: string } = {
-    1: 'Hated it',
-    2: 'Disliked it',
-    3: 'It was Ok',
-    4: 'Liked it',
-    5: 'Loved it',
-};
   
 const useStyles = makeStyles({
   rating : {
@@ -30,7 +22,6 @@ const useStyles = makeStyles({
 
 const ReviewDialog: FC<ReviewDialogProps> = (props) => {
     const classes = useStyles();
-    const [hover, setHover] = useState(-1);
     const {
       open,
       rating,
@@ -38,31 +29,29 @@ const ReviewDialog: FC<ReviewDialogProps> = (props) => {
       onRatingDataChange,
       onReviewDataChange,
       onFormDialogSubmitClick,
-      onFormDialogCloseClick } = props;
+      onFormDialogCloseClick 
+    } = props;
     
     return (
         <Dialog open={open} onClose={onFormDialogCloseClick} aria-labelledby="form-dialog-title" fullWidth> 
             <DialogTitle>당신에 리뷰를 남겨주세요</DialogTitle>
             <DialogContent>
                 <Box className={classes.rating}>
-                  <Rating 
+                  <Rating
+                    name="simple-controlled"
                     value={rating}
                     size='large'
-                    onChange={(event, newValue) => {onRatingDataChange&&onRatingDataChange(newValue ?? 0)}}
-                    onChangeActive={(event, newHover) => {setHover(newHover)}}
+                    onChange={onRatingDataChange}
                   />
-                  {rating !== null && <Box ml={2}>{labels[hover !== -1 ? hover : rating]}</Box>}
                 </Box>
                 <TextField
-                    autoFocus
                     margin="dense"
-                    id="review_Dailog_textArea"
                     label="당신에 리뷰를 적어주세요."
                     type="search"
                     multiline
                     fullWidth
                     value = {reviewDescribe}
-                    onChange={(e) => (onReviewDataChange&&onReviewDataChange(e.target.value))}
+                    onChange={onReviewDataChange}
                 />
              </DialogContent>
             <DialogActions>

@@ -1,13 +1,15 @@
 import { FC } from "react";
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, makeStyles, Typography } from "@material-ui/core";
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, IconButtonProps, makeStyles, Typography } from "@material-ui/core";
 import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon} from '@material-ui/icons/';
 
 export type FeedCardProps = {
+    feedId : IconButtonProps['itemID'];
     userName: CardHeaderProps['title'],
     movieName : string;
-    greatCount: number;
     content: string,
+    isLike : boolean,
     writeTime : number,
+    onClickLikeButton : IconButtonProps['onClick']
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         marginTop : theme.spacing(1),
     }
-  }));
+}));
 
 const FeedCard : FC<FeedCardProps> = (props) => {
     const classes = useStyles();
@@ -25,38 +27,58 @@ const FeedCard : FC<FeedCardProps> = (props) => {
         userName,
         movieName,
         content,
-        writeTime } = props;
+        isLike,
+        writeTime,
+        onClickLikeButton,
+    } = props;
     
     return (
-        <Card className={classes.root} elevation={1}>
+        <Card 
+            className={classes.root} 
+            elevation={1}
+        >
              <CardHeader
                 avatar={
-                    <Avatar aria-label="recipe"></Avatar>
+                    <Avatar/>
                 }
                 action={
-                    <IconButton aria-label="settings">
+                    <IconButton>
                         <MoreVertIcon />
                     </IconButton>
                 }       
                 title={userName}
             />
             <CardContent>
-                <Typography variant="subtitle1" color="textPrimary" component="p">
+                <Typography 
+                    variant="subtitle1" 
+                    color="textPrimary" 
+                    component="p"
+                >
                     {movieName}
                 </Typography>
-                <Typography variant="body1" color="textSecondary" component="p">
+                <Typography 
+                    variant="body1" 
+                    color="textSecondary" 
+                    component="p"
+                >
                     {content}
                 </Typography>
-                <Typography variant="subtitle2" color="textSecondary" component="p">
+                <Typography 
+                    variant="subtitle2" 
+                    color="textSecondary" 
+                    component="p"
+                >
                     {writeTime+'일 전'}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                <IconButton
+                    onClick={onClickLikeButton}
+                >
+                    <FavoriteIcon style={isLike ? {color : 'red'} : {color : ''}}/>
                 </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
+                <IconButton>
+                    <ShareIcon/>
                 </IconButton>
             </CardActions>
         </Card>

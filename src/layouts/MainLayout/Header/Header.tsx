@@ -1,5 +1,5 @@
 
-import { Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Profile from './Profile';
 import { useFireBaseState } from '../../../contexts';
@@ -18,12 +18,12 @@ const Header = () => {
   const classes = useStyles();
 
   return (
-    <header>
+    <Box>
       <Typography variant="h4" className={classes.title}>
         이거 봄?
       </Typography>
       <Profile userImg={loginState.user.photoURL} userName={loginState.user.displayName} />
-    </header>  
+    </Box>  
   );
 };
 

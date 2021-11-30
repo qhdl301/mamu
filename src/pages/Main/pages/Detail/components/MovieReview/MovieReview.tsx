@@ -1,10 +1,10 @@
 import { FC, useState, useEffect } from "react";
 import { Box, makeStyles } from "@material-ui/core";
-import { ReviewCard } from "../../../../../../components";
-import { MovieDetail } from "../../../../../../stores";
-import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
+import { ReviewCard } from "components";
+import { MovieDetail } from "stores";
+import { CustmomCircleProgress } from "components/Progress/Circle";
 import { observer } from "mobx-react-lite";
-import { dateDiff } from "../../../../../../utils";
+import { dateDiff } from "utils";
 
 export type MaskingData = {
     userName : string;

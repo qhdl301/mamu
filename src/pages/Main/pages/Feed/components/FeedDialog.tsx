@@ -1,57 +1,68 @@
 import { FC } from "react";
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, TextFieldProps } from "@material-ui/core";
+import { ButtonProps } from "components/Button/Button";
 
 export type FeedDialogProps = {
   open: boolean;
   movieName: string;
   feedData: string;
-  onMovieNameChange: (param: FeedDialogProps['movieName']) => void;
-  onFeedChange: (param: FeedDialogProps['feedData']) => void;
-  onFormDialogSubmitClick : () => void;
-  onFormDialogCloseClick : () => void;
+  onChangeMovieName : TextFieldProps['onChange'];
+  onChangeFeedContent : TextFieldProps['onChange'];
+  onClickSubmitButton : ButtonProps['onClick'];
+  onClickCloseButton : ButtonProps['onClick'];
 }
 
 const FeedDialog : FC<FeedDialogProps> = (props) => {
-
     const {
       open,
       movieName,
       feedData,
-      onMovieNameChange,
-      onFeedChange,
-      onFormDialogSubmitClick,
-      onFormDialogCloseClick } = props;
+      onChangeMovieName,
+      onChangeFeedContent,
+      onClickSubmitButton,
+      onClickCloseButton 
+    } = props;
     
     return (
-        <Dialog open={open} onClose={onFormDialogCloseClick} aria-labelledby="form-dialog-title" fullWidth> 
-            <DialogTitle>당신에 피드를 남겨주세요</DialogTitle>
-            <DialogContent>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="movie_Dailog_textArea"
-                  label="어떤 영화를 보셨나요."
-                  type="search"
-                  multiline
-                  fullWidth
-                  value={movieName}
-                  onChange={(e) => (onMovieNameChange&&onMovieNameChange(e.target.value))}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="feed_Dailog_textArea"
-                  label="당신에 생각을 적어주세요."
-                  type="search"
-                  multiline
-                  fullWidth
-                  value={feedData}
-                  onChange={(e) => (onFeedChange&&onFeedChange(e.target.value))}
-                />
+        <Dialog 
+          open={open} 
+          onClose={onClickCloseButton} 
+          fullWidth
+        > 
+          <DialogTitle>당신에 피드를 남겨주세요</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="어떤 영화를 보셨나요."
+              type="search"
+              multiline
+              fullWidth
+              value={movieName}
+              onChange={onChangeMovieName}
+            />
+            <TextField
+              margin="dense"
+              label="당신에 생각을 적어주세요."
+              type="search"
+              multiline
+              fullWidth
+              value={feedData}
+              onChange={onChangeFeedContent}
+              />
             </DialogContent>
             <DialogActions>
-                <Button onClick={onFormDialogSubmitClick} color="primary" type="submit">완료</Button>
-                <Button onClick={onFormDialogCloseClick} color="primary">취소</Button>
+                <Button 
+                  onClick={onClickSubmitButton} 
+                  color="primary" 
+                  type="submit">
+                    완료
+                </Button>
+                <Button 
+                  onClick={onClickCloseButton} 
+                  color="primary">
+                    취소
+                </Button>
             </DialogActions>
         </Dialog>
     )

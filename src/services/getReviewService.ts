@@ -19,7 +19,7 @@ const getReviewService:(params: GetReviewInfoServiceRequestType) => Promise<GetR
  = (params) => {  
     const query = firebase.firestore()
     .collection('mamu-movie-review')
-    .where('movieCd','==',params.movieCd);
+    .where('movieCd','==',params.movieCd)
     
     return query.get().then(res=>{
         return res.docs.map(doc=>doc.data()) as GetReviewInfoServiceResponseType;

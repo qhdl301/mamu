@@ -1,27 +1,42 @@
 import { action, makeObservable, observable } from 'mobx';
-import { createFeedService, FeedInfo, getFeedService } from '../../services';
+import { FeedInfo, createLikeUserService, deleteLikeUserService } from 'services';
+import getIsLikeService from 'services/getIsLikeService';
 
-export default class Feed {
+export default class FeedStore {
+    isLike : boolean;
+    likeCount : number;
 
-    feedInfos : FeedInfo[] = [];
+    constructor(readonly feedInfo : FeedInfo, readonly currentUserId : string) {
+        this.isLike = false;
+        this.likeCount = 0;
 
-    constructor() {
-        
          makeObservable(this, {
-            feedInfos: observable,
-            getFeedInfos : action,
-            insertFeedInfo: action,
+            feedInfo : observable,
+            isLike: observable,
+            getIsLike : action,
+            putIsLike: action,
          });
+
+         this.getIsLike();
     }
 
-    async getFeedInfos() {
-        this.feedInfos = await getFeedService();
+    async getIsLike() {
+        const data = await getIsLikeService(
+            {
+                feedId : this.feedInfo.feedId,
+                currentUserId : this.currentUserId
+            }
+        );
+        
+        this.isLike = !!(data ?? false)
     }
 
-    insertFeedInfo(FeedInfoData: FeedInfo) {
-        createFeedService(FeedInfoData).then(() => {
-            this.getFeedInfos();
-        });
+    async putIsLike(){
+        if(this.isLike){
+            await deleteLikeUserService({currentUserId : this.currentUserId, feedId : this.feedInfo.feedId}); // 현재는 클릭이 되어있던거니까 => 삭제하는 서비스 (await)
+        }else{
+            await createLikeUserService({currentUserId : this.currentUserId, feedId : this.feedInfo.feedId}); // 인서트하는 서비스 (await)
+        }
+        await this.getIsLike()
     }
-
 }

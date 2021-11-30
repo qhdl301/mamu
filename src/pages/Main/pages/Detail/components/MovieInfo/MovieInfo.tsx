@@ -1,10 +1,10 @@
 import { FC, useState, useCallback } from "react";
 import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
 import { ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
-import { CustmomCircleProgress } from "../../../../../../components/Progress/Circle";
-import { MuiButton } from "../../../../../../components";
-import { MovieDetail } from "../../../../../../stores";
-import { useFireBaseState } from "../../../../../../contexts";
+import { CustmomCircleProgress } from "components/Progress/Circle";
+import { MuiButton } from "components";
+import { MovieDetail } from "stores";
+import { useFireBaseState } from "contexts";
 import { ReviewDialog, ReviewDialogProps } from "../MovieReview";
 
 const useStyles = makeStyles(() => ({
@@ -36,13 +36,16 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
     const [open, setOpen] = useState(false);
     const [rating, setRating] = useState<ReviewDialogProps['rating']>(0);
     const [reviewDescribe, setReviewDescribe] = useState<ReviewDialogProps['reviewDescribe']>("");
-    const handleFormDialogOpenClick = useCallback(() => { setOpen(true) }, []);
-    const handleCloseButtonClick = useCallback(() => { setOpen(false) }, []);
-    const onRatingDataChange = useCallback((ratingData: ReviewDialogProps['rating']) => {  console.log('ratingData :' + ratingData); setRating(ratingData) }, [rating]);
-    const onReviewDataChange = useCallback((reviewData: ReviewDialogProps['reviewDescribe']) => { console.log('reviewDescribe :' + reviewDescribe);  setReviewDescribe(reviewData) }, [reviewDescribe]);
+    const handleFormDialogOpenClick = useCallback(() => setOpen(true), []);
+    const handleCloseButtonClick = useCallback(() => 
+        {
+            setOpen(false);
+            setRating(0);
+            setReviewDescribe('');
+        }, []);
+    const onRatingDataChange: ReviewDialogProps['onRatingDataChange'] = useCallback((e) => setRating(Number(e.target.value)), []);
+    const onReviewDataChange : ReviewDialogProps['onReviewDataChange'] = useCallback((e) =>  setReviewDescribe(e.target.value), []);
     const handleSubmitButtonClick: ReviewDialogProps['onFormDialogSubmitClick'] = useCallback(() => {
-        console.log('submit Click rating : ' + rating);
-        console.log('submit Click reviewDescribe : ' + reviewDescribe);
         targetMovie.insertReviewInfo({
             userName: '***',
             uid: firebaseState.user.uid,
@@ -70,7 +73,6 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
                 <Accordion>
                     <AccordionSummary
                         expandIcon={<ArrowDropDownIcon />}
-                        id="panel1a-header"
                     >   
                         {isDetailInfoLoading ? (
                             <CustmomCircleProgress/>
@@ -90,10 +92,20 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
                     목포 영화 수 {30}/{30}
                 </Typography>
                 <div>
-                    <MuiButton onClick={handleFormDialogOpenClick}>본 영화로 등록하기</MuiButton>
-                    <div>
-                        <ReviewDialog open={open} onRatingDataChange={onRatingDataChange} onReviewDataChange={onReviewDataChange} rating={rating} reviewDescribe={reviewDescribe} onFormDialogSubmitClick={handleSubmitButtonClick} onFormDialogCloseClick={handleCloseButtonClick}></ReviewDialog>
-                    </div>
+                    <MuiButton 
+                        onClick={handleFormDialogOpenClick}
+                    >
+                        본 영화로 등록하기
+                    </MuiButton>
+                    <ReviewDialog 
+                        open={open} 
+                        rating={rating} 
+                        reviewDescribe={reviewDescribe}
+                        onRatingDataChange={onRatingDataChange} 
+                        onReviewDataChange={onReviewDataChange} 
+                        onFormDialogSubmitClick={handleSubmitButtonClick} 
+                        onFormDialogCloseClick={handleCloseButtonClick}
+                    />
                 </div>
             </CardContent>
         </Card>
