@@ -1,14 +1,14 @@
 import { action, makeObservable, observable } from 'mobx';
-import { FeedInfo, createLikeUserService, deleteLikeUserService, getFeedLikeCountService } from 'services';
+import { FeedInfo, createLikeUserService, deleteLikeUserService, getFeedLikeUserService } from 'services';
 import getIsLikeService from 'services/getIsLikeService';
 
 export default class FeedStore {
     isLike : boolean;
-    likeCount : string;
+    likeCount : number;
 
     constructor(readonly feedInfo : FeedInfo, readonly currentUserId : string) {
         this.isLike = false;
-        this.likeCount = '';
+        this.likeCount = 0;
 
         makeObservable(this, {
             feedInfo: observable,
@@ -44,7 +44,7 @@ export default class FeedStore {
     }
 
     async getLikeCount() {
-        this.likeCount = await getFeedLikeCountService(this.feedInfo.feedId);
+        this.likeCount = (await getFeedLikeUserService(this.feedInfo.feedId)).docs.length;
     }
 
 }

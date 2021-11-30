@@ -7,7 +7,7 @@ export type FeedCardProps = {
     userName: CardHeaderProps['title'],
     movieName : string;
     content: string,
-    likeCount: string,
+    likeCount: number,
     isLike: boolean,
     writeTime : number,
     onClickLikeButton : IconButtonProps['onClick']
