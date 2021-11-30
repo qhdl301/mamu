@@ -23,7 +23,8 @@ const FeedContainer : FC<FeedContainerProps> = (props) => {
             userName={feedItem.feedInfo.userName} 
             movieName={feedItem.feedInfo.movieName} 
             content={feedItem.feedInfo.postfeed}
-            isLike={feedItem.isLike} 
+            isLike={feedItem.isLike}
+            likeCount={feedItem.likeCount}
             writeTime={dateDiff(feedItem.feedInfo.timeStamp)} 
             onClickLikeButton={handleLikeButtonClick}
        />
