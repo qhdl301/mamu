@@ -25,11 +25,11 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
     
     return (
         <Dialog 
-          open={open} 
-          onClose={onClickCloseButton} 
-          fullWidth
+          open={open}
+          onClose={onClickCloseButton}
+          maxWidth="xl"
         > 
-          <DialogTitle>당신에 피드를 남겨주세요</DialogTitle>
+          <DialogTitle disableTypography>당신에 피드를 남겨주세요</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -38,6 +38,8 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
               type="search"
               multiline
               fullWidth
+              variant="outlined"
+              minRows="2"
               value={movieName}
               onChange={onChangeMovieName}
             />
@@ -47,6 +49,8 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
               type="search"
               multiline
               fullWidth
+              variant="outlined"
+              minRows="6"
               value={feedData}
               onChange={onChangeFeedContent}
               />

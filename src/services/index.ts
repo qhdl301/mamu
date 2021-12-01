@@ -6,6 +6,7 @@ export { default as createReviewService } from './createReviewService';
 export { default as createFeedService } from './createFeedService';
 export { default as deleteLikeUserService } from './deleteLikeUserService';
 export { default as createLikeUserService } from './createLikeUserService';
+export { default as getFeedLikeUserService } from './getFeedLikeUserService';
 
 export * from './getBoxofficeService'
 export * from './getMovieDetailService'
@@ -15,3 +16,4 @@ export * from './createReviewService'
 export * from './createFeedService'
 export * from './deleteLikeUserService'
 export * from './createLikeUserService'
+export * from './getFeedLikeUserService'

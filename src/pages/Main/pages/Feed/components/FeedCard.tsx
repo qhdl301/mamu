@@ -7,7 +7,8 @@ export type FeedCardProps = {
     userName: CardHeaderProps['title'],
     movieName : string;
     content: string,
-    isLike : boolean,
+    likeCount: number,
+    isLike: boolean,
     writeTime : number,
     onClickLikeButton : IconButtonProps['onClick']
 }
@@ -28,6 +29,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
         movieName,
         content,
         isLike,
+        likeCount,
         writeTime,
         onClickLikeButton,
     } = props;
@@ -50,7 +52,14 @@ const FeedCard : FC<FeedCardProps> = (props) => {
             />
             <CardContent>
                 <Typography 
-                    variant="subtitle1" 
+                    variant="subtitle2" 
+                    color="textPrimary" 
+                    component="p"
+                >
+                    좋아요 {likeCount} 개
+                </Typography>
+                <Typography 
+                    variant="h6" 
                     color="textPrimary" 
                     component="p"
                 >
