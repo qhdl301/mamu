@@ -44,7 +44,7 @@ export default class FeedStore {
     }
 
     async getLikeCount() {
-        this.likeCount = (await getFeedLikeUserService(this.feedInfo.feedId)).docs.length;
+        this.likeCount = (await getFeedLikeUserService(this.feedInfo.feedId)).length;
     }
 
 }

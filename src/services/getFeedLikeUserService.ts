@@ -10,7 +10,7 @@ const getFeedLikeUserService = (requestParam:GetFeedLikeCountRequestType['feedId
     .collection('feed-like-users');
     
     return query.get().then(res => {
-        return res;
+        return res.docs.map(doc => doc.data());
     });
 
   }
