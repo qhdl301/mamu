@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, IconButtonProps, makeStyles, Typography } from "@material-ui/core";
-import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon} from '@material-ui/icons/';
+import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon, Sms as SmsIcon } from '@material-ui/icons/';
 
 export type FeedCardProps = {
     feedId : IconButtonProps['itemID'];
@@ -87,6 +87,9 @@ const FeedCard : FC<FeedCardProps> = (props) => {
                     <FavoriteIcon style={isLike ? {color : 'red'} : {color : ''}}/>
                 </IconButton>
                 <IconButton>
+                    <SmsIcon/>
+                </IconButton>
+                 <IconButton>
                     <ShareIcon/>
                 </IconButton>
             </CardActions>
