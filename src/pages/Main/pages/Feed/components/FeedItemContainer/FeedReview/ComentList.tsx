@@ -1,39 +1,75 @@
 import { FC } from "react";
-import { Typography, Grid, makeStyles } from '@material-ui/core';
-
-export type ComentListProps = {}
+import { makeStyles, Typography, Card, CardContent, IconButton, Grid, Divider} from '@material-ui/core';
+import { MoreHoriz as MoreHorizIcon, Schedule as ScheduleIcon} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width : 'auto',
-        margin : theme.spacing(2)
+        border : 0,
+        outline : 0,
+        margin : theme.spacing(0.5),
     },
-    textGrid: {
-        display: 'flex',
-        flexDirection : 'row',
-        flexWrap: 'nowrap',
+    contentArea : {
+        margin : theme.spacing(0),
     },
-    
+    actionArea : {
+        alignItems : 'center',
+    },
+    scheduleIcon :{
+        margin : theme.spacing(0.5),
+        fontSize : 'small'
+    }
 }));
 
 const ComentList: FC = () => {
     const classes = useStyles();
 
     return (
-        <Grid
-            className={ classes.root }
-            container
-            direction="column"
-        >
-            <Grid
-                className= { classes.textGrid }
-                container
+        <>
+            <Divider />
+            <Card
+                className={classes.root}
+                elevation={0}
             >
-                <Typography>
-                    asdasdasdasd
-                </Typography>
-            </Grid>
-        </Grid>
+                <CardContent>
+                    <Typography 
+                        variant="body2" 
+                        color="textSecondary"
+                        component="p"
+                        gutterBottom
+                    >
+                        {'김XX'}
+                    </Typography>
+                    <Typography 
+                        variant="body1" 
+                        color="textPrimary"
+                        component="p"
+                        gutterBottom
+                    >
+                        {'세상은 아름답다?'}
+                    </Typography>
+                    <Grid
+                        className={classes.actionArea}
+                        container
+                        direction="row"
+                        justifyContent="space-between"
+                    >
+                        <Typography 
+                            variant="body2" 
+                            color="textSecondary"
+                            component="p"
+                        >
+                            <ScheduleIcon 
+                                className={classes.scheduleIcon}
+                            />
+                            {'1시간'}
+                        </Typography>
+                        <IconButton>
+                            <MoreHorizIcon/>
+                        </IconButton>
+                    </Grid>
+                </CardContent>
+            </Card>
+        </>
     )
 }
 

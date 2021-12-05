@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, IconButtonProps, makeStyles, Typography } from "@material-ui/core";
-import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon, Sms as SmsIcon } from '@material-ui/icons/';
+import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon, Sms as SmsIcon, Schedule as ScheduleIcon } from '@material-ui/icons/';
 import FeedReview  from "./FeedReview";
 
 export type FeedItemProps = {
@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: '100%',
         marginTop : theme.spacing(1),
+    },
+    scheduleIcon :{
+        margin : theme.spacing(0.5),
+        fontSize : 'small'
     }
 }));
 
@@ -41,10 +45,10 @@ const FeedItem : FC<FeedItemProps> = (props) => {
     
     return (
         <Card 
-            className={classes.root} 
-            elevation={1}
+            className={classes.root}
+            elevation={3}
         >
-             <CardHeader
+            <CardHeader
                 avatar={
                     <Avatar/>
                 }
@@ -82,6 +86,7 @@ const FeedItem : FC<FeedItemProps> = (props) => {
                     color="textSecondary" 
                     component="p"
                 >
+                    <ScheduleIcon className={classes.scheduleIcon}/>
                     {writeTime+'일 전'}
                 </Typography>
             </CardContent>
