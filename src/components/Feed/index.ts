@@ -1,1 +1,1 @@
-export { default } from './FeedArcodion';
+export { default as FeedArcodion} from './FeedArcodion';

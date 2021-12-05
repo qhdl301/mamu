@@ -1,7 +1,5 @@
-export { default as FeedContainer } from './FeedContainer';
-export { default as FeedCard } from './FeedCard';
-export { default as FeedDialog } from './FeedDialog';
+export { default as FeedItemContainer } from './FeedItemContainer';
+export { default as AddDialogContainer } from './AddDialogContainer';
 
-export * from './FeedContainer';
-export * from './FeedCard';
-export * from './FeedDialog';
+export * from './FeedItemContainer';
+export * from './AddDialogContainer';

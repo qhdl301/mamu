@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, TextFieldProps } from "@material-ui/core";
 import { ButtonProps } from "components/Button/Button";
 
-export type FeedDialogProps = {
+export type AddDialogProps = {
   open: boolean;
   movieName: string;
   feedData: string;
@@ -12,7 +12,7 @@ export type FeedDialogProps = {
   onClickCloseButton : ButtonProps['onClick'];
 }
 
-const FeedDialog : FC<FeedDialogProps> = (props) => {
+const AddDialog : FC<AddDialogProps> = (props) => {
     const {
       open,
       movieName,
@@ -72,4 +72,4 @@ const FeedDialog : FC<FeedDialogProps> = (props) => {
     )
 }
 
-export default FeedDialog;
+export default AddDialog;

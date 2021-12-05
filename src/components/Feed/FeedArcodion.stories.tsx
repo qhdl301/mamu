@@ -1,4 +1,4 @@
-import FeedArcodion from "./FeedArcodion"
+import { FeedArcodion } from "."
 
 export default {
     title:'components/FeedArcodion'
@@ -7,6 +7,6 @@ export default {
 export const Default = ()=>{
 
     return (
-        <FeedArcodion>안녕하세요 반가워요</FeedArcodion>
+        <FeedArcodion/>
     )
 }
