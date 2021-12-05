@@ -1,16 +1,19 @@
 import { FC } from "react";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, IconButtonProps, makeStyles, Typography } from "@material-ui/core";
-import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon} from '@material-ui/icons/';
+import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon, Sms as SmsIcon } from '@material-ui/icons/';
+import FeedReview  from "./FeedReview";
 
-export type FeedCardProps = {
-    feedId : IconButtonProps['itemID'];
+export type FeedItemProps = {
+    isOpenFeedArcodion : boolean,
+    feedId : IconButtonProps['itemID'],
     userName: CardHeaderProps['title'],
-    movieName : string;
+    movieName : string,
     content: string,
     likeCount: number,
     isLike: boolean,
     writeTime : number,
-    onClickLikeButton : IconButtonProps['onClick']
+    onClickLikeButton : IconButtonProps['onClick'],
+    onClickArcodionOpenButton : IconButtonProps['onClick'],
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -22,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const FeedCard : FC<FeedCardProps> = (props) => {
+const FeedItem : FC<FeedItemProps> = (props) => {
     const classes = useStyles();
     const {
+        isOpenFeedArcodion,
         userName,
         movieName,
         content,
@@ -32,6 +36,7 @@ const FeedCard : FC<FeedCardProps> = (props) => {
         likeCount,
         writeTime,
         onClickLikeButton,
+        onClickArcodionOpenButton
     } = props;
     
     return (
@@ -86,12 +91,18 @@ const FeedCard : FC<FeedCardProps> = (props) => {
                 >
                     <FavoriteIcon style={isLike ? {color : 'red'} : {color : ''}}/>
                 </IconButton>
-                <IconButton>
+                <IconButton
+                    onClick={onClickArcodionOpenButton}
+                >
+                    <SmsIcon/>
+                </IconButton>
+                 <IconButton>
                     <ShareIcon/>
                 </IconButton>
             </CardActions>
+            <FeedReview isOpen={isOpenFeedArcodion}/>
         </Card>
     );
 }
 
-export default FeedCard;
+export default FeedItem;

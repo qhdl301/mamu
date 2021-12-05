@@ -31,7 +31,7 @@ export default class FeedList {
     }
 
     insertFeedInfo(FeedInfoData: CreateFeedRequestType) {
-        createFeedService(FeedInfoData).then(() => {
+        return createFeedService(FeedInfoData).then(() => {
             this.getFeedList(this.clickUserUid);
         });
     }
