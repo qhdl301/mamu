@@ -1,2 +1,2 @@
 export * from './MovieBoxOffice';
-export * from './rootStore'
+export * from './MainStore';

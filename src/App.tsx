@@ -1,17 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
-import { FireBaseProvider, RootStoreProvider } from './contexts';
+import { FireBaseProvider } from './contexts';
 import Routes from './Routes';
 
 const App = () => {
   return (
-    <RootStoreProvider>
-      <FireBaseProvider>
+    <FireBaseProvider>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
-      </FireBaseProvider>
-    </RootStoreProvider>
+    </FireBaseProvider>
   );
 };
 

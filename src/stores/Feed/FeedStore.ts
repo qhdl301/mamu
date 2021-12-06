@@ -26,11 +26,9 @@ export default class FeedStore {
                 feedId: this.feedInfo.feedId,
                 currentUserId: this.currentUserId
             }
-        ).then(async (data) => {
+        ).then((data) => {
             this.isLike = !!(data ?? false);
-            await this.getLikeCount();
-        }).catch(() => {
-            this.isLike = false;
+            this.getLikeCount();
         });
     }
 
