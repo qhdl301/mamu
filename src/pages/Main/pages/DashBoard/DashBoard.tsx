@@ -3,7 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageList, Typography } from '@material-ui/core/';
 import { DailyMovieBoxOfficeList } from './components/List';
 import { observer } from 'mobx-react-lite';
-import { useRootStore } from '../../../../contexts';
+import { useMainStore } from '../../../../contexts';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const DashBoard: FC = observer(() => {
   const classes = useStyles();
-  const {movieBoxoffice} = useRootStore();
+  const {movieBoxoffice} = useMainStore();
   const [isMovieListIsLoading, setIsMovieListIsLoading] = useState(true);
   
   useEffect(()=>{

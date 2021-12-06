@@ -1,15 +1,12 @@
 import { action, makeObservable, observable } from 'mobx';
-import { createFeedService, getFeedService, CreateFeedRequestType, FeedInfo  } from 'services/Feed';
+import { createFeedService, getFeedService, CreateFeedRequestType } from 'services/Feed';
 import { FeedStore } from '.';
 
 export default class FeedList {
 
     feedInfos : FeedStore[] = [];
-    clickUserUid : string;
 
-    constructor() {
-
-        this.clickUserUid = '';
+    constructor(private readonly currentUserUid:string) {
 
          makeObservable(this, {
             feedInfos : observable,
@@ -18,19 +15,18 @@ export default class FeedList {
          }); 
     }
 
-    async getFeedList(userUid : FeedInfo['uid']) {
-       
+    async getFeedList() {
         try {
             const response = await getFeedService();
-            this.feedInfos = response.map(item => new FeedStore(item, userUid));
+            this.feedInfos = response.map(item => new FeedStore(item, this.currentUserUid));
         } catch (error) {
             return console.log(error);
         }
     }
 
     insertFeedInfo(FeedInfoData: CreateFeedRequestType) {
-        return createFeedService(FeedInfoData).then(async () => {
-            await this.getFeedList(this.clickUserUid);
+        return createFeedService(FeedInfoData).then(() => {
+            this.getFeedList();
         });
     }
 

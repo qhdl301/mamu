@@ -1,14 +1,11 @@
 import { FC, useEffect, useState, useCallback } from 'react';
-import { useRootStore } from 'contexts';
-import { useFireBaseState } from 'contexts';
+import { useMainStore } from 'contexts';
 import { observer } from 'mobx-react-lite';
 import { AddDialogContainer, FeedItemContainer } from './components';
 import FeedLayout from './components/FeedLayout';
 
 const Feed:FC = () => {
-  const firebaseState = useFireBaseState();
-  const userUid = firebaseState.user.uid;
-  const { feedList } = useRootStore();
+  const { feedList } = useMainStore();
   const [isFeedLoading, setFeedLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const handleFeedAddClick = useCallback(() => setOpen(true) , []);
@@ -16,7 +13,7 @@ const Feed:FC = () => {
   
   useEffect(()=>{
     setFeedLoading(true);
-    feedList.getFeedList(userUid).then(() => {
+    feedList.getFeedList().then(() => {
       setFeedLoading(false);
     });
   }, [feedList]);

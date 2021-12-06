@@ -1,4 +1,4 @@
-import { useFireBaseState, useRootStore } from "contexts";
+import { useFireBaseState, useMainStore } from "contexts";
 import { FC, useCallback, useState } from "react";
 import AddDialog, { AddDialogProps } from "./AddDialog";
 
@@ -10,7 +10,7 @@ export type AddDialogContainerProps = {
 
 const AddDialogContainer : FC<AddDialogContainerProps> = (props) => {
     const { open, onCancel, onSubmitComplete } = props;
-    const { feedList } = useRootStore();
+    const { feedList } = useMainStore();
     const firebaseState = useFireBaseState();
     const userUid = firebaseState.user.uid;
     const [movieName, setMovieName] = useState<AddDialogProps['movieName']>("");

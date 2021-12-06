@@ -1,2 +1,2 @@
 export * from './FireBase';
-export * from './RootStoreContext'
+export * from './MainStoreContext'
