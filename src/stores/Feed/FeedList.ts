@@ -8,7 +8,6 @@ export default class FeedList {
     clickUserUid : string;
 
     constructor() {
-
         this.clickUserUid = '';
 
          makeObservable(this, {
@@ -19,18 +18,18 @@ export default class FeedList {
     }
 
     async getFeedList(userUid : FeedInfo['uid']) {
-       
         try {
             const response = await getFeedService();
-            this.feedInfos = response.map(item => new FeedStore(item, userUid));
+            this.clickUserUid = userUid;
+            this.feedInfos = response.map(item => new FeedStore(item, this.clickUserUid));
         } catch (error) {
             return console.log(error);
         }
     }
 
     insertFeedInfo(FeedInfoData: CreateFeedRequestType) {
-        return createFeedService(FeedInfoData).then(async () => {
-            await this.getFeedList(this.clickUserUid);
+        return createFeedService(FeedInfoData).then(() => {
+            this.getFeedList(this.clickUserUid);
         });
     }
 

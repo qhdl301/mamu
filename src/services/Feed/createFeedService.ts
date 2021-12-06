@@ -11,7 +11,7 @@ export type CreateFeedRequestType = {
 
 const createFeedService = (requestParam:CreateFeedRequestType)=>{
     const collection = firebase.firestore()
-    .collection('movie-mamu-feed').doc(requestParam.feedId);
+    .collection('movie-mamu-feed').doc(requestParam.feedId)
     
     return collection.set(requestParam);
   }

@@ -20,17 +20,18 @@ export default class FeedStore {
         this.getIsLike();
     }
 
-
     async getIsLike() {
-        const data = await getIsLikeService(
+        await getIsLikeService(
             {
-                feedId : this.feedInfo.feedId,
-                currentUserId : this.currentUserId
+                feedId: this.feedInfo.feedId,
+                currentUserId: this.currentUserId
             }
-        );
-        
-        this.isLike = !!(data ?? false);
-        this.getLikeCount();
+        ).then(async (data) => {
+            this.isLike = !!(data ?? false);
+            await this.getLikeCount();
+        }).catch(() => {
+            this.isLike = false;
+        });
     }
 
     async putIsLike(){
