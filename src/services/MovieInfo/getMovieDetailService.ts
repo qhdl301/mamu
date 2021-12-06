@@ -1,5 +1,5 @@
-import { movieDetailMock } from "../mocks";
-import { httpFetcher } from "../utils";
+import { movieDetailMock } from "mocks";
+import { httpFetcher } from "utils";
 
 export type GetMovieDetailServiceRequestType = {
     movieCd: string

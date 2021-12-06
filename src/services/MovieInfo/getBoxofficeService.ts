@@ -1,5 +1,5 @@
-import { boxOfficeListMock } from "../mocks";
-import { httpFetcher } from "../utils";
+import { boxOfficeListMock } from "mocks";
+import { httpFetcher } from "utils";
 
 export type GetBoxOfficeListServiceRequestType = {
     key: string,

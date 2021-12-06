@@ -1,5 +1,6 @@
 import {observable, action, makeObservable} from 'mobx';
-import {getMovieDetailService, getReviewService, createReviewService} from '../../services';
+import { getMovieDetailService } from 'services/MovieInfo';
+import { getReviewService, createReviewService } from 'services/Review';
 
 export type BasicInfoType = {
     movieCd: string;

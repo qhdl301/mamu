@@ -1,4 +1,4 @@
-import { GetBoxOfficeListServiceResponseType } from "../services/getBoxofficeService";
+import { GetBoxOfficeListServiceResponseType } from "services/MovieInfo";
 
 const boxOfficeListMock : GetBoxOfficeListServiceResponseType =
 {

@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from 'mobx'
-import { getBoxOfficeListService } from '../../services';
+import { getBoxOfficeListService } from 'services/MovieInfo';
 import MovieDetail from './MovieDetail';
 
 export default class MovieBoxoffice {

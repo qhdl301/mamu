@@ -1,6 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
-import { FeedInfo, createLikeUserService, deleteLikeUserService, getFeedLikeUserService } from 'services';
-import getIsLikeService from 'services/getIsLikeService';
+import { FeedInfo, createLikeUserService, deleteLikeUserService, getFeedLikeUserService, getIsLikeService } from 'services/Feed';
 
 export default class FeedStore {
     isLike : boolean;
@@ -16,11 +15,11 @@ export default class FeedStore {
             isLike: observable,
             getIsLike : action,
             putIsLike: action,
-            getLikeCount : action,
-         });
-
+            getLikeCount: action,
+        });
         this.getIsLike();
     }
+
 
     async getIsLike() {
         const data = await getIsLikeService(
