@@ -9,11 +9,11 @@ export type CreateFeedContentRequestType = {
 }
 
 const createFeedContentService = (requestParam:CreateFeedContentRequestType)=>{
-    const collection = firebase.firestore()
+    const query = firebase.firestore()
     .collection('movie-mamu-feed').doc(requestParam.feedId)
     .collection('feed-coment')
     
-    return collection.add(requestParam);
+    return query.add(requestParam);
   }
 
   export default createFeedContentService;

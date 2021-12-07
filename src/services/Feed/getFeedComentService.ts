@@ -12,9 +12,8 @@ export type GetFeedComentServiceResponseType = Array<FeedComentInfo>
 
 const getFeedComentService = (feedId:string) => {  
     const query = firebase.firestore()
-    .collection('movie-mamu-feed')
-    .doc(feedId)
-    .collection('feed-content')
+    .collection('movie-mamu-feed').doc(feedId)
+    .collection('feed-coment')
     .orderBy('timeStamp');
     
     return (
@@ -23,7 +22,6 @@ const getFeedComentService = (feedId:string) => {
             return res.docs.map(
                 doc => doc.data()
             ) as GetFeedComentServiceResponseType;
-        
         })
     )
  }

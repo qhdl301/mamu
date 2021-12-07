@@ -1,10 +1,12 @@
 import { action, makeObservable, observable } from 'mobx';
-import { FeedInfo, createLikeUserService, deleteLikeUserService, getFeedLikeUserService, getIsLikeService } from 'services/Feed';
+import { FeedInfo, createLikeUserService, deleteLikeUserService, getFeedLikeUserService, getIsLikeService, getFeedComentService, FeedComentInfo, CreateFeedContentRequestType } from 'services/Feed';
+import createFeedContentService from 'services/Feed/createFeedComentService';
 
 export default class FeedStore {
     isLike : boolean;
     likeCount : number;
-
+    feedComent : FeedComentInfo[] = [];
+    
     constructor(readonly feedInfo : FeedInfo, readonly currentUserId : string) {
         this.isLike = false;
         this.likeCount = 0;
@@ -43,6 +45,21 @@ export default class FeedStore {
 
     async getLikeCount() {
         this.likeCount = (await getFeedLikeUserService(this.feedInfo.feedId)).length;
+    }
+
+    async getFeedComentList() {
+        try{
+            const response = await getFeedComentService(this.feedInfo.feedId);
+            this.feedComent = response.map(item => item);
+        } catch (error) {
+            return console.log(error);
+        }
+    }
+
+    insertFeedInfo(FeedInfoData: CreateFeedContentRequestType) {
+        return createFeedContentService(FeedInfoData).then(() => {
+            this.getFeedComentList();
+        });
     }
 
 }
