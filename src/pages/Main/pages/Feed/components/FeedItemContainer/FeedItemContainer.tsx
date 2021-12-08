@@ -27,6 +27,7 @@ const FeedItemContainer : FC<FeedItemContainerProps> = (props) => {
         <FeedItem
             isOpenFeedArcodion={isFeedArcodionOpen}
             feedId={feedItem.feedInfo.feedId}
+            feedComent={feedItem.feedComent}
             userName={feedItem.feedInfo.userName} 
             movieName={feedItem.feedInfo.movieName} 
             content={feedItem.feedInfo.postfeed}

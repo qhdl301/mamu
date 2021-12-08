@@ -13,6 +13,7 @@ export default class FeedStore {
 
         makeObservable(this, {
             feedInfo: observable,
+            feedComent : observable,
             likeCount : observable, 
             isLike: observable,
             getIsLike : action,

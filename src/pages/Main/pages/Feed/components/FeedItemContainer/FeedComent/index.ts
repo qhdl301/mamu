@@ -1,4 +1,5 @@
 export { default as ComentContainer} from './ComentContainer';
-export { default as Coment} from './Coment';
+export { default as ComentListContainer } from './ComentListContainer';
 
 export * from './ComentContainer';
+export * from './ComentListContainer';

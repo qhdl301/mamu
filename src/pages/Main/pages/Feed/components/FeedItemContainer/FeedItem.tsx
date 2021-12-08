@@ -1,10 +1,12 @@
 import { FC } from "react";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, IconButtonProps, makeStyles, Typography } from "@material-ui/core";
 import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon, Sms as SmsIcon, Schedule as ScheduleIcon } from '@material-ui/icons/';
-import FeedReview  from "./FeedReview";
+import { ComentContainer }  from "./FeedComent";
+import { FeedComentInfo } from "services/Feed";
 
 export type FeedItemProps = {
     isOpenFeedArcodion : boolean,
+    feedComent : FeedComentInfo[],
     feedId : IconButtonProps['itemID'],
     userName: CardHeaderProps['title'],
     movieName : string,
@@ -33,6 +35,7 @@ const FeedItem : FC<FeedItemProps> = (props) => {
     const classes = useStyles();
     const {
         isOpenFeedArcodion,
+        feedComent,
         userName,
         movieName,
         content,
@@ -105,7 +108,7 @@ const FeedItem : FC<FeedItemProps> = (props) => {
                     <ShareIcon/>
                 </IconButton>
             </CardActions>
-            <FeedReview isOpen={isOpenFeedArcodion}/>
+            <ComentContainer isOpen={isOpenFeedArcodion} feedComent={feedComent}/>
         </Card>
     );
 }

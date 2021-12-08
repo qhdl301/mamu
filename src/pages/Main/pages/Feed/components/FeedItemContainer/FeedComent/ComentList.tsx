@@ -2,11 +2,11 @@ import { FC } from "react";
 import { makeStyles, Typography, Card, CardContent, IconButton, Grid, Divider} from '@material-ui/core';
 import { MoreHoriz as MoreHorizIcon, Schedule as ScheduleIcon} from '@material-ui/icons';
 
-export type ComentItemProps = {
-    name: string;
-    coment: string;
-    timeStamp: string;
-};
+export type ComentListLayoutProps ={
+    userName : string;
+    coment : string;
+    timeStamp : string;
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ComentList: FC<ComentItemProps> = (props) => {
-    const classes = useStyles();
-    const { name, coment, timeStamp } = props;
+const ComentListLayout: FC<ComentListLayoutProps> = (props) => {
+    const classes = useStyles();  
+    const {coment, timeStamp, userName} = props;
 
     return (
         <>
@@ -44,7 +44,7 @@ const ComentList: FC<ComentItemProps> = (props) => {
                         component="p"
                         gutterBottom
                     >
-                        {name}
+                        {userName}
                     </Typography>
                     <Typography 
                         variant="body1" 
@@ -68,7 +68,7 @@ const ComentList: FC<ComentItemProps> = (props) => {
                             <ScheduleIcon 
                                 className={classes.scheduleIcon}
                             />
-                            {timeStamp} 일 전
+                            {timeStamp} 시간
                         </Typography>
                         <IconButton>
                             <MoreHorizIcon/>
@@ -80,4 +80,4 @@ const ComentList: FC<ComentItemProps> = (props) => {
     )
 }
 
-export default ComentList;
+export default ComentListLayout;

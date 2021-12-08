@@ -1,18 +1,28 @@
 import { FC } from "react";
-import ComentList from "./ComentList";
+import { FeedComentInfo } from "services/Feed";
+import ComentListLayout from "./ComentList";
 
+export type ComentListProps = {
+    feedComentList : FeedComentInfo[];
+}
 
-const ComentListContainer: FC = (props) => {
-
+const ComentList: FC<ComentListProps> = (props) => {
+    const { feedComentList } = props;
+    
     return (
-
-            <ComentList
-                name='xxx'
-                coment='안녕하세요'
-                timeStamp='1'
-            />
-              
+        <>
+            {
+                feedComentList.map((item,index) => 
+                    <ComentListLayout
+                        key={index}
+                        userName={item.userName}
+                        coment={item.coment}
+                        timeStamp={item.timeStamp}
+                    />
+                )
+            }
+        </>
     )
 }
 
-export default ComentListContainer;
+export default ComentList;

@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { Button, TextField, Grid, makeStyles, ButtonProps } from '@material-ui/core';
-import ComentListContainer from "./ComentListContainer";
+import { Button, TextField, Grid, makeStyles } from '@material-ui/core';
+import ComentList, { ComentListProps } from "./ComentListContainer";
 
-export type ComentProps = {
-    onSubmitComplete: ButtonProps['onClick'];
+export type ComentLayoutProps = {
+    feedComent : ComentListProps['feedComentList'];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Coment: FC<ComentProps> = (props) => {
+const ComentLayout: FC<ComentLayoutProps> = (props) => {
     const classes = useStyles();
-    const { onSubmitComplete } = props;
+    const { feedComent } = props;
 
     return (
         <>
@@ -58,17 +58,16 @@ const Coment: FC<ComentProps> = (props) => {
                 >
                     <Button
                         className={classes.button}
-                        onClick={onSubmitComplete}
                         variant="outlined"
                         color="primary"
                         type="submit">
                         등록
                     </Button>
                 </Grid>
-                <ComentListContainer/>
+                <ComentList feedComentList={feedComent}/>
             </Grid>
         </>
     )
 }
 
-export default Coment;
+export default ComentLayout;

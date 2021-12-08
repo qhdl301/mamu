@@ -1,18 +1,20 @@
 import { FC } from "react";
-import Coment from "./Coment";
+import ComentLayout from "./Coment";
+import { ComentListProps } from './ComentListContainer'
 
 export type ComentProps = {
-    isOpen: boolean;
+    isOpen : boolean;
+    feedComent : ComentListProps['feedComentList'];
 }
 
-const ComentContainer : FC<ComentProps> = (props) => {
-    const isOpen = { props };
+const Coment : FC<ComentProps> = (props) => {
+    const { isOpen, feedComent } = props;
 
     return (
         <>
-            {isOpen ? <Coment onSubmitComplete={() => { console.log() }}/> : null}
+            {isOpen ? <ComentLayout feedComent={feedComent}/> : null}
         </>
     );
 }
 
-export default ComentContainer;
+export default Coment;
