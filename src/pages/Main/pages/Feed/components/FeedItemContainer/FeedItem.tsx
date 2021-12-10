@@ -1,11 +1,8 @@
 import { FC } from "react";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardHeaderProps, IconButton, IconButtonProps, makeStyles, Typography } from "@material-ui/core";
 import { Favorite as FavoriteIcon, MoreVert as MoreVertIcon, Share as ShareIcon, Sms as SmsIcon, Schedule as ScheduleIcon } from '@material-ui/icons/';
-import FeedReview  from "./FeedReview";
 
 export type FeedItemProps = {
-    isOpenFeedArcodion : boolean,
-    feedId : IconButtonProps['itemID'],
     userName: CardHeaderProps['title'],
     movieName : string,
     content: string,
@@ -13,7 +10,7 @@ export type FeedItemProps = {
     isLike: boolean,
     writeTime : number,
     onClickLikeButton : IconButtonProps['onClick'],
-    onClickArcodionOpenButton : IconButtonProps['onClick'],
+    onClickComentOpenButton : IconButtonProps['onClick'],
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const FeedItem : FC<FeedItemProps> = (props) => {
     const classes = useStyles();
     const {
-        isOpenFeedArcodion,
+        children,
         userName,
         movieName,
         content,
@@ -40,7 +37,7 @@ const FeedItem : FC<FeedItemProps> = (props) => {
         likeCount,
         writeTime,
         onClickLikeButton,
-        onClickArcodionOpenButton
+        onClickComentOpenButton
     } = props;
     
     return (
@@ -97,7 +94,7 @@ const FeedItem : FC<FeedItemProps> = (props) => {
                     <FavoriteIcon style={isLike ? {color : 'red'} : {color : ''}}/>
                 </IconButton>
                 <IconButton
-                    onClick={onClickArcodionOpenButton}
+                    onClick={onClickComentOpenButton}
                 >
                     <SmsIcon/>
                 </IconButton>
@@ -105,7 +102,7 @@ const FeedItem : FC<FeedItemProps> = (props) => {
                     <ShareIcon/>
                 </IconButton>
             </CardActions>
-            <FeedReview isOpen={isOpenFeedArcodion}/>
+            { children }
         </Card>
     );
 }

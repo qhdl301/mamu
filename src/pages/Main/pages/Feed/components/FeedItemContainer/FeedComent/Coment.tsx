@@ -1,6 +1,12 @@
 import { FC } from "react";
-import { Button, TextField, Grid, makeStyles } from '@material-ui/core';
-import ComentList from "./ComentList";
+import { Button, TextField, Grid, makeStyles, ButtonProps, TextFieldProps } from '@material-ui/core';
+import ComentListContainer, { ComentListContainerProps } from "./ComentListContainer";
+
+export type ComentProps = {
+    comentItems : ComentListContainerProps['comentListItem'];
+    onComentChange : TextFieldProps['onChange'];
+    onSuccessClick : ButtonProps['onClick'];
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,8 +26,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ComentLayout: FC = () => {
+const Coment: FC<ComentProps> = (props) => {
     const classes = useStyles();
+    const { 
+        comentItems,
+        onComentChange,
+        onSuccessClick
+    } = props;
 
     return (
         <>
@@ -42,6 +53,7 @@ const ComentLayout: FC = () => {
                         multiline
                         fullWidth
                         variant="outlined"
+                        onChange={onComentChange}
                         minRows="2"
                     /> 
                 </Grid>
@@ -55,14 +67,18 @@ const ComentLayout: FC = () => {
                         className={classes.button}
                         variant="outlined"
                         color="primary"
-                        type="submit">
+                        type="submit"
+                        onClick={onSuccessClick}
+                    >
                         등록
                     </Button>
                 </Grid>
-                <ComentList/>
+                <ComentListContainer 
+                    comentListItem={comentItems}
+                />
             </Grid>
         </>
     )
 }
 
-export default ComentLayout;
+export default Coment;

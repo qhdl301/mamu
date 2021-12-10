@@ -2,6 +2,12 @@ import { FC } from "react";
 import { makeStyles, Typography, Card, CardContent, IconButton, Grid, Divider} from '@material-ui/core';
 import { MoreHoriz as MoreHorizIcon, Schedule as ScheduleIcon} from '@material-ui/icons';
 
+export type ComentListProps ={
+    userName : string;
+    coment : string;
+    timeStamp : number;
+}
+
 const useStyles = makeStyles((theme) => ({
     root: {
         border : 0,
@@ -20,8 +26,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ComentList: FC = () => {
-    const classes = useStyles();
+const ComentList: FC<ComentListProps> = (props) => {
+    const classes = useStyles();  
+    const {
+        coment, 
+        timeStamp, 
+        userName
+    } = props;
 
     return (
         <>
@@ -37,7 +48,7 @@ const ComentList: FC = () => {
                         component="p"
                         gutterBottom
                     >
-                        {'김XX'}
+                        {userName}
                     </Typography>
                     <Typography 
                         variant="body1" 
@@ -45,7 +56,7 @@ const ComentList: FC = () => {
                         component="p"
                         gutterBottom
                     >
-                        {'세상은 아름답다?'}
+                        {coment}
                     </Typography>
                     <Grid
                         className={classes.actionArea}
@@ -61,7 +72,7 @@ const ComentList: FC = () => {
                             <ScheduleIcon 
                                 className={classes.scheduleIcon}
                             />
-                            {'1시간'}
+                            {timeStamp} 시간
                         </Typography>
                         <IconButton>
                             <MoreHorizIcon/>

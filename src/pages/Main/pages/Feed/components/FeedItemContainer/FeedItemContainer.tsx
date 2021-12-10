@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import { FC, useCallback, useState } from "react";
 import { FeedStore } from "stores/Feed";
 import { dateDiff } from "utils";
+import { ComentContainer } from "./FeedComent";
 import FeedItem, { FeedItemProps } from "./FeedItem";
 
 export type FeedItemContainerProps = {
@@ -13,20 +14,18 @@ const FeedItemContainer : FC<FeedItemContainerProps> = (props) => {
         feedItem
     } = props;
 
-    const [isFeedArcodionOpen, setIsFeedArcodionOpen] = useState(false);
+    const [isFeedComentOpen, setIsFeedComentOpen] = useState(false);
 
     const handleLikeButtonClick : FeedItemProps['onClickLikeButton'] = useCallback(()=>{ 
         feedItem.putIsLike();
     },[feedItem.isLike]);
 
-    const handleArcodionOpenClick = useCallback(() => {
-        setIsFeedArcodionOpen((prev) => !prev); // 현재 상태에 대한 prev
+    const handleComentOpenClick = useCallback(() => {
+        setIsFeedComentOpen((prev) => !prev); // 현재 상태에 대한 prev
     },[]);
 
     return (
         <FeedItem
-            isOpenFeedArcodion={isFeedArcodionOpen}
-            feedId={feedItem.feedInfo.feedId}
             userName={feedItem.feedInfo.userName} 
             movieName={feedItem.feedInfo.movieName} 
             content={feedItem.feedInfo.postfeed}
@@ -34,8 +33,13 @@ const FeedItemContainer : FC<FeedItemContainerProps> = (props) => {
             likeCount={feedItem.likeCount}
             writeTime={dateDiff(feedItem.feedInfo.timeStamp)} 
             onClickLikeButton={handleLikeButtonClick}
-            onClickArcodionOpenButton={handleArcodionOpenClick}
-       />
+            onClickComentOpenButton={handleComentOpenClick}
+       >
+            <ComentContainer 
+                isOpen={isFeedComentOpen} 
+                feedItems={feedItem}
+            />
+        </FeedItem>
     );
 }
 
