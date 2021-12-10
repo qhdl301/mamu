@@ -1,3 +1,3 @@
-export {default as MovieDetail} from './MovieDetail';
-export {default as MovieBoxOffice} from './MovieBoxoffice';
-export * from './MovieDetail';
+export {default as MovieDetail} from './MovieDetailStore';
+export {default as MovieBoxOfficeStore} from './MovieBoxOfficeStore';
+export * from './MovieDetailStore';

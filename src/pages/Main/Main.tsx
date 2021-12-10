@@ -2,6 +2,7 @@ import { FC, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 import { MainLayout } from "layouts";
 import { MainStoreProvider } from "contexts";
+import { observer } from "mobx-react-lite";
 
 const DashBoard = lazy(() => import("./pages/DashBoard"));
 const MovieDetail = lazy(() => import("./pages/Detail"));
@@ -24,4 +25,4 @@ const Main:FC = () => {
     )
 }
 
-export default Main;
+export default observer(Main);

@@ -1,9 +1,9 @@
 import { action, makeObservable, observable } from 'mobx'
 import { getBoxOfficeListService } from 'services/MovieInfo';
-import MovieDetail from './MovieDetail';
+import MovieDetailStore from './MovieDetailStore';
 
 export default class MovieBoxoffice {
-    movieItems : MovieDetail[] = [];
+    movieItems : MovieDetailStore[] = [];
 
     constructor(){
         makeObservable(this,{
@@ -14,9 +14,9 @@ export default class MovieBoxoffice {
 
     async getMovieItemsData() {
         const response = await getBoxOfficeListService("", { key: "", targetDt: "" });
-        
+
         try {
-            this.movieItems = response.moviesData.map(item => new MovieDetail(item));
+            this.movieItems = response.moviesData.map(item => new MovieDetailStore(item));
         } catch (error) {
             return console.log(error);
         }

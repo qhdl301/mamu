@@ -3,7 +3,6 @@ import { createFeedService, getFeedService, CreateFeedRequestType } from 'servic
 import { FeedStore } from '.';
 
 export default class FeedList {
-
     feedInfos : FeedStore[] = [];
 
     constructor(private readonly currentUserUid:string) {
@@ -19,6 +18,7 @@ export default class FeedList {
         try {
             const response = await getFeedService();
             this.feedInfos = response.map(item => new FeedStore(item, this.currentUserUid));
+            console.log("feedInfos      ",this.feedInfos);
         } catch (error) {
             return console.log(error);
         }

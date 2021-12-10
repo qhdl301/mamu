@@ -1,25 +1,20 @@
 import { FC, useState, useCallback } from "react";
-import { Accordion, AccordionSummary, Card, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
+import { Accordion, AccordionSummary, Box, Button, Card, CardContent, CardMedia, Grid, makeStyles, Typography } from "@material-ui/core";
 import { ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
 import { CustmomCircleProgress } from "components/Progress/Circle";
-import { MuiButton } from "components";
 import { MovieDetail } from "stores";
 import { useFireBaseState } from "contexts";
 import { ReviewDialog, ReviewDialogProps } from "../MovieReview";
 
-const useStyles = makeStyles(() => ({
-    root: {
-        display : 'flex',
-        width: '100%',
-        height: '60%',
-    },
+const useStyles = makeStyles((theme) => ({
     img: {
         position: 'relative',
-        width: '30%',
     },
     info: {
         position: 'relative',
-        width: '70%',
+    },
+    button: {
+        bottom: theme.spacing(0.5),
     }
 }));
 
@@ -56,57 +51,66 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
     }, [rating, reviewDescribe]);
   
     return (
-        <Card className={classes.root}>
-            <CardMedia
-                className = {classes.img}
-                component = "img"
-                alt = "movie image"
-                image = {targetMovie.basicInfo.imgUrl}
-            />
-            <CardContent
-                className = {classes.info}
-            >
-                <Typography noWrap gutterBottom variant="h5" component="div">
-                    {targetMovie.basicInfo.title}
-                </Typography>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ArrowDropDownIcon />}
-                    >   
-                        {isDetailInfoLoading ? (
-                            <CustmomCircleProgress/>
-                        )
-                        : (
-                            <Typography variant="body2"> 
-                                {targetMovie.detailInfo?.description}
-                            </Typography>
-                        )}
-                    </AccordionSummary>
-                </Accordion>
-                <br/>
-                <Typography noWrap gutterBottom variant="subtitle2" component="div">
-                    목표 영화 수 {30}/{30}
-                </Typography>
-                <Typography noWrap gutterBottom variant="subtitle2" component="div">
-                    목포 영화 수 {30}/{30}
-                </Typography>
-                <div>
-                    <MuiButton 
-                        onClick={handleFormDialogOpenClick}
-                    >
-                        본 영화로 등록하기
-                    </MuiButton>
-                    <ReviewDialog 
-                        open={open} 
-                        rating={rating} 
-                        reviewDescribe={reviewDescribe}
-                        onRatingDataChange={onRatingDataChange} 
-                        onReviewDataChange={onReviewDataChange} 
-                        onFormDialogSubmitClick={handleSubmitButtonClick} 
-                        onFormDialogCloseClick={handleCloseButtonClick}
+        <Card>
+            <Grid container >
+                <Grid item sm={5}>
+                    <CardMedia
+                        className = {classes.img}
+                        component = "img"
+                        alt = "movie image"
+                        image = {targetMovie.basicInfo.imgUrl}
                     />
-                </div>
-            </CardContent>
+                </Grid>
+                <Grid item sm={7}>
+                    <CardContent
+                        className = {classes.info}
+                    >
+                        <Typography noWrap gutterBottom variant="h5" component="div">
+                            {targetMovie.basicInfo.title}
+                        </Typography>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ArrowDropDownIcon />}
+                            >   
+                                {isDetailInfoLoading ? (
+                                    <CustmomCircleProgress/>
+                                )
+                                : (
+                                    <Typography variant="body2"> 
+                                        {targetMovie.detailInfo?.description}
+                                    </Typography>
+                                )}
+                            </AccordionSummary>
+                        </Accordion>
+                        <br/>
+                        <Typography noWrap gutterBottom variant="subtitle2" component="div">
+                            목표 영화 수 {30}/{30}
+                        </Typography>
+                        <Typography noWrap gutterBottom variant="subtitle2" component="div">
+                            목포 영화 수 {30}/{30}
+                        </Typography>
+                        <Box>
+                            <Button
+                                className={classes.button}
+                                variant="contained" 
+                                color="primary" 
+                                onClick={handleFormDialogOpenClick}
+                            >
+                                본 영화로 등록하기
+                            </Button>
+                            <ReviewDialog 
+                                open={open} 
+                                rating={rating} 
+                                reviewDescribe={reviewDescribe}
+                                onRatingDataChange={onRatingDataChange} 
+                                onReviewDataChange={onReviewDataChange} 
+                                onFormDialogSubmitClick={handleSubmitButtonClick} 
+                                onFormDialogCloseClick={handleCloseButtonClick}
+                            />
+                        </Box>
+                    </CardContent>
+                </Grid>
+            </Grid>
         </Card>
     )
 }

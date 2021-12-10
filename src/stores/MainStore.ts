@@ -1,13 +1,13 @@
-import { MovieBoxOffice } from './MovieBoxOffice';
-import { FeedList } from './Feed';
+import { MovieBoxOfficeStore } from './MovieBoxOffice';
+import { FeedListStore } from './Feed';
 
 class MainStore {
-  movieBoxoffice : MovieBoxOffice;
-  feedList : FeedList;
+  movieBoxoffice : MovieBoxOfficeStore;
+  feedList : FeedListStore;
 
   constructor(readonly currentUserUid:string) {
-    this.movieBoxoffice = new MovieBoxOffice();
-    this.feedList = new FeedList(this.currentUserUid);
+    this.movieBoxoffice = new MovieBoxOfficeStore();
+    this.feedList = new FeedListStore(this.currentUserUid);
   }
 }
 

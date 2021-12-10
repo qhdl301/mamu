@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {
     makeStyles,
     AppBar,
+    Slide,
     BottomNavigation,
     BottomNavigationAction,
 } from '@material-ui/core';
@@ -13,6 +14,7 @@ import {
     Favorite as FavoriteIcon,
     ImportContacts as ImportContactsIcon
 } from '@material-ui/icons/'; 
+import useScrollDetect from './useScrollDetect';
 
 export type NavigationProps = {
     classes? : { 
@@ -32,21 +34,25 @@ const useStyles = makeStyles((theme) => ({
 
 const Navigation:FC<NavigationProps> = (props) => {
     const { classes:overrideClasses, value, onChange } = props;
-    const classes = useStyles();                            
+    const classes = useStyles();
+
+    const {isUpBefore} = useScrollDetect();
 
     return (
-        <AppBar className={classes.root}>
-            <BottomNavigation
-                className={overrideClasses?.bottomNavigation}
-                value={value}
-                showLabels
-                onChange={onChange}
-            >
-                <BottomNavigationAction label="대쉬보드" icon={<HomeIcon />} component={Link} to={'/'}/>
-                <BottomNavigationAction label="개인성과" icon={<ImportContactsIcon/>} component={Link} to={'/mission'}/>
-                <BottomNavigationAction label="Feed" icon={<FavoriteIcon />} component={Link} to={'/Feed'}/>
-            </BottomNavigation>
-        </AppBar>    
+        <Slide direction="up" in={isUpBefore} >
+            <AppBar className={classes.root}>
+                <BottomNavigation
+                    className={overrideClasses?.bottomNavigation}
+                    value={value}
+                    showLabels
+                    onChange={onChange}
+                >
+                    <BottomNavigationAction label="대쉬보드" icon={<HomeIcon />} component={Link} to={'/'}/>
+                    <BottomNavigationAction label="개인성과" icon={<ImportContactsIcon/>} component={Link} to={'/mission'}/>
+                    <BottomNavigationAction label="Feed" icon={<FavoriteIcon />} component={Link} to={'/Feed'}/>
+                </BottomNavigation>
+            </AppBar>    
+        </Slide>
     )
 }
 

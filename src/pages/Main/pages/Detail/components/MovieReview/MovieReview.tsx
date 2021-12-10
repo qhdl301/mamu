@@ -13,9 +13,7 @@ export type MaskingData = {
 const useStyles = makeStyles((theme)=>(
     {
         root: {
-            marginTop: theme.spacing(1),
-            width : '100%',
-            height: '40%',
+            margin: theme.spacing(1,1),
             overflowY : 'scroll',
         },
       }

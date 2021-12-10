@@ -7,7 +7,6 @@ export type ButtonProps = {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        position: 'absolute',
         bottom: theme.spacing(0.5),
     }
 }));

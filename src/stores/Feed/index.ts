@@ -1,5 +1,5 @@
-export { default as FeedList} from './FeedList';
+export { default as FeedListStore} from './FeedListStore';
 export { default as FeedStore} from './FeedStore';
 
-export * from './FeedList';
+export * from './FeedListStore';
 export * from './FeedStore';
