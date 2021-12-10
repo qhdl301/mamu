@@ -37,12 +37,11 @@ const MovieInfo: FC<MovieInfoProps> = (props) => {
     const [rating, setRating] = useState<ReviewDialogProps['rating']>(0);
     const [reviewDescribe, setReviewDescribe] = useState<ReviewDialogProps['reviewDescribe']>("");
     const handleFormDialogOpenClick = useCallback(() => setOpen(true), []);
-    const handleCloseButtonClick = useCallback(() => 
-        {
+    const handleCloseButtonClick = useCallback(() => {
             setOpen(false);
             setRating(0);
             setReviewDescribe('');
-        }, []);
+    }, []);
     const onRatingDataChange: ReviewDialogProps['onRatingDataChange'] = useCallback((e) => setRating(Number(e.target.value)), []);
     const onReviewDataChange : ReviewDialogProps['onReviewDataChange'] = useCallback((e) =>  setReviewDescribe(e.target.value), []);
     const handleSubmitButtonClick: ReviewDialogProps['onFormDialogSubmitClick'] = useCallback(() => {

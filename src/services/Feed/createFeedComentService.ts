@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export type CreateFeedContentRequestType = {
+export type CreateFeedComentRequestType = {
     uid : string;
     feedId : string;
     userName: string;
@@ -8,7 +8,7 @@ export type CreateFeedContentRequestType = {
     coment: string;
 }
 
-const createFeedContentService = (requestParam:CreateFeedContentRequestType)=>{
+const createFeedComentService = (requestParam:CreateFeedComentRequestType)=>{
     const query = firebase.firestore()
     .collection('movie-mamu-feed').doc(requestParam.feedId)
     .collection('feed-coment')
@@ -16,4 +16,4 @@ const createFeedContentService = (requestParam:CreateFeedContentRequestType)=>{
     return query.add(requestParam);
   }
 
-  export default createFeedContentService;
+  export default createFeedComentService;

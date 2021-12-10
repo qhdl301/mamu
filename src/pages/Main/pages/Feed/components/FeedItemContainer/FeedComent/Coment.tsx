@@ -1,9 +1,11 @@
 import { FC } from "react";
-import { Button, TextField, Grid, makeStyles } from '@material-ui/core';
-import ComentList, { ComentListProps } from "./ComentListContainer";
+import { Button, TextField, Grid, makeStyles, ButtonProps, TextFieldProps } from '@material-ui/core';
+import ComentList, { ComentListContainerProps } from "./ComentListContainer";
 
-export type ComentLayoutProps = {
-    feedComent : ComentListProps['feedComentList'];
+export type ComentProps = {
+    feedComent : ComentListContainerProps['feedComentList'];
+    onComentChange : TextFieldProps['onChange'];
+    onSuccessClick : ButtonProps['onClick'];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,9 +26,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ComentLayout: FC<ComentLayoutProps> = (props) => {
+const Coment: FC<ComentProps> = (props) => {
     const classes = useStyles();
-    const { feedComent } = props;
+    const { 
+        feedComent,
+        onComentChange,
+        onSuccessClick
+    } = props;
 
     return (
         <>
@@ -47,6 +53,7 @@ const ComentLayout: FC<ComentLayoutProps> = (props) => {
                         multiline
                         fullWidth
                         variant="outlined"
+                        onChange={onComentChange}
                         minRows="2"
                     /> 
                 </Grid>
@@ -60,14 +67,18 @@ const ComentLayout: FC<ComentLayoutProps> = (props) => {
                         className={classes.button}
                         variant="outlined"
                         color="primary"
-                        type="submit">
+                        type="submit"
+                        onClick={onSuccessClick}
+                    >
                         등록
                     </Button>
                 </Grid>
-                <ComentList feedComentList={feedComent}/>
+                <ComentList 
+                    feedComentList={feedComent}
+                />
             </Grid>
         </>
     )
 }
 
-export default ComentLayout;
+export default Coment;

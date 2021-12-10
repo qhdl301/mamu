@@ -1,13 +1,16 @@
 import { FC } from "react";
 import { FeedComentInfo } from "services/Feed";
+import { dateDiff } from "utils";
 import ComentListLayout from "./ComentList";
 
-export type ComentListProps = {
+export type ComentListContainerProps = {
     feedComentList : FeedComentInfo[];
 }
 
-const ComentList: FC<ComentListProps> = (props) => {
-    const { feedComentList } = props;
+const ComentListContainer: FC<ComentListContainerProps> = (props) => {
+    const { 
+        feedComentList 
+    } = props;
     
     return (
         <>
@@ -17,7 +20,7 @@ const ComentList: FC<ComentListProps> = (props) => {
                         key={index}
                         userName={item.userName}
                         coment={item.coment}
-                        timeStamp={item.timeStamp}
+                        timeStamp={dateDiff(item.timeStamp)}
                     />
                 )
             }
@@ -25,4 +28,4 @@ const ComentList: FC<ComentListProps> = (props) => {
     )
 }
 
-export default ComentList;
+export default ComentListContainer;

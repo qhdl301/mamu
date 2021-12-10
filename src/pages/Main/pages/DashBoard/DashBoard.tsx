@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const DashBoard: FC = observer(() => {
+const DashBoard: FC = () => {
   const classes = useStyles();
   const {movieBoxoffice} = useMainStore();
   const [isMovieListIsLoading, setIsMovieListIsLoading] = useState(true);
@@ -44,6 +44,6 @@ const DashBoard: FC = observer(() => {
         </ImageList>
       </div>
     );
-})
+}
 
-export default DashBoard;
+export default observer(DashBoard);
