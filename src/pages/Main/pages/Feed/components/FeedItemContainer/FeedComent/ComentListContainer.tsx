@@ -4,18 +4,18 @@ import { dateDiff } from "utils";
 import ComentListLayout from "./ComentList";
 
 export type ComentListContainerProps = {
-    feedComentList : FeedComentInfo[];
+    comentListItem : FeedComentInfo[];
 }
 
 const ComentListContainer: FC<ComentListContainerProps> = (props) => {
     const { 
-        feedComentList 
+        comentListItem 
     } = props;
     
     return (
         <>
             {
-                feedComentList.map((item,index) => 
+                comentListItem.map((item,index) => 
                     <ComentListLayout
                         key={index}
                         userName={item.userName}

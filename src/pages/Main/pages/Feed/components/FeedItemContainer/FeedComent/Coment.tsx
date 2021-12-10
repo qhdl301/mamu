@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Button, TextField, Grid, makeStyles, ButtonProps, TextFieldProps } from '@material-ui/core';
-import ComentList, { ComentListContainerProps } from "./ComentListContainer";
+import ComentListContainer, { ComentListContainerProps } from "./ComentListContainer";
 
 export type ComentProps = {
-    feedComent : ComentListContainerProps['feedComentList'];
+    comentItems : ComentListContainerProps['comentListItem'];
     onComentChange : TextFieldProps['onChange'];
     onSuccessClick : ButtonProps['onClick'];
 }
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const Coment: FC<ComentProps> = (props) => {
     const classes = useStyles();
     const { 
-        feedComent,
+        comentItems,
         onComentChange,
         onSuccessClick
     } = props;
@@ -73,8 +73,8 @@ const Coment: FC<ComentProps> = (props) => {
                         등록
                     </Button>
                 </Grid>
-                <ComentList 
-                    feedComentList={feedComent}
+                <ComentListContainer 
+                    comentListItem={comentItems}
                 />
             </Grid>
         </>

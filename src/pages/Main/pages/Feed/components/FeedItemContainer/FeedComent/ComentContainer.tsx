@@ -5,13 +5,13 @@ import Coment,{ ComentProps } from "./Coment";
 
 export type ComentContainerProps = {
     isOpen : boolean;
-    feedItem : FeedStore;
+    feedItems : FeedStore;
 }
 
 const ComentContainer : FC<ComentContainerProps> = (props) => {
     const { 
         isOpen, 
-        feedItem 
+        feedItems 
     } = props;
     const [coment, setComent] = useState('');
     const handleComentChange : ComentProps['onComentChange'] = useCallback((e)=>{
@@ -20,9 +20,9 @@ const ComentContainer : FC<ComentContainerProps> = (props) => {
     const handleSuccessButton = useCallback(()=>{
         const date = new Date();
 
-        feedItem.insertFeedComent({
-            feedId : feedItem.feedInfo.feedId,
-            userName: feedItem.feedInfo.userName,
+        feedItems.insertFeedComent({
+            feedId : feedItems.feedInfo.feedId,
+            userName: feedItems.feedInfo.userName,
             timeStamp : `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
             coment: coment
         });
@@ -30,14 +30,14 @@ const ComentContainer : FC<ComentContainerProps> = (props) => {
 
     useEffect(()=>{
         if(isOpen){
-            feedItem.getFeedComentList();
+            feedItems.getFeedComentList();
         }
-    },[isOpen, feedItem])
+    },[isOpen, feedItems])
 
     if(isOpen){
         return (
                 <Coment 
-                    feedComent={feedItem.feedComent}
+                    comentItems={feedItems.feedComent}
                     onSuccessClick={handleSuccessButton}
                     onComentChange={handleComentChange}
                 /> 

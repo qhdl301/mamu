@@ -37,7 +37,7 @@ const FeedItemContainer : FC<FeedItemContainerProps> = (props) => {
        >
             <ComentContainer 
                 isOpen={isFeedComentOpen} 
-                feedItem={feedItem}
+                feedItems={feedItem}
             />
         </FeedItem>
     );
