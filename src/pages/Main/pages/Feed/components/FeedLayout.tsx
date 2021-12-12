@@ -10,8 +10,7 @@ export type FeedLayoutProps = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft : '32px',
-    marginRight : '32px',
+    margin:theme.spacing(0,1)
   },
   fab: {
     position: 'fixed',
